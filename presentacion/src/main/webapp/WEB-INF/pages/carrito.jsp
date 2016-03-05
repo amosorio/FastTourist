@@ -65,6 +65,7 @@
 				</div>
 			</section>	
 			<section class="header_text sub">
+			<img class="pageBanner" src="${pageContext.request.contextPath}/resources/themes/images/pageBanner.png" alt="New products" >
 			<h4><span>Carrito de Compras</span></h4>
 			</section>
 			<section class="main-content">				
