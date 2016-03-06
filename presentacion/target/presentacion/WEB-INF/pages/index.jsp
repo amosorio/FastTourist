@@ -27,6 +27,6 @@
 	</head>
  
 <body>
-	<a href="/presentacion/verPaquete/1/">Ver Paquete</a> 
+	<a href="/presentacion/producto/get/1/">Ver Producto</a> 
     </body>
 </html>

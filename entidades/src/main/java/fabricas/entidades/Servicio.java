@@ -1,7 +1,11 @@
 package fabricas.entidades;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -13,14 +17,19 @@ import java.util.List;
  */
 @Entity
 @Table(name="servicios")
-@NamedQuery(name="Servicio.findAll", query="SELECT s FROM Servicio s")
+@NamedQueries({
+	@NamedQuery(name="Servicio.findAll", query="SELECT s FROM Servicio s"),
+	@NamedQuery(name="Servicio.findById", query="SELECT s FROM Servicio s where s.idservicios = :id"),
+}) 
+
+
 public class Servicio implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	private int idservicios;
 
-	private byte activo;
+	private boolean activo;
 
 	private String descripcion;
 
@@ -39,16 +48,19 @@ public class Servicio implements Serializable {
 
 	//bi-directional many-to-one association to Calificaciones
 	@OneToMany(mappedBy="servicioBean")
+	@JsonManagedReference
 	private List<Calificaciones> calificaciones;
 
 	//bi-directional many-to-one association to Categoria
 	@ManyToOne
 	@JoinColumn(name="categoria")
+	@JsonManagedReference
 	private Categoria categoriaBean;
 
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne
 	@JoinColumn(name="proveedor")
+	
 	private Usuario usuario;
 
 	//bi-directional many-to-many association to Paquete
@@ -62,6 +74,7 @@ public class Servicio implements Serializable {
 			@JoinColumn(name="paquete")
 			}
 		)
+	@JsonManagedReference
 	private List<Paquete> paquetes;
 
 	public Servicio() {
@@ -75,11 +88,11 @@ public class Servicio implements Serializable {
 		this.idservicios = idservicios;
 	}
 
-	public byte getActivo() {
+	public boolean getActivo() {
 		return this.activo;
 	}
 
-	public void setActivo(byte activo) {
+	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
 

@@ -1,7 +1,11 @@
 package fabricas.entidades;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.List;
 
 
@@ -25,6 +29,7 @@ public class EstadoTransaccion implements Serializable {
 
 	//bi-directional many-to-one association to Transaccione
 	@OneToMany(mappedBy="estadoTransaccion")
+	
 	private List<Transacciones> transacciones;
 
 	public EstadoTransaccion() {

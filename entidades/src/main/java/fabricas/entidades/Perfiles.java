@@ -1,7 +1,12 @@
 package fabricas.entidades;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.List;
 
 
@@ -11,7 +16,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="perfiles")
-@NamedQuery(name="Perfile.findAll", query="SELECT p FROM Perfile p")
+@NamedQuery(name="Perfiles.findAll", query="SELECT p FROM Perfiles p")
 public class Perfiles implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -24,6 +29,7 @@ public class Perfiles implements Serializable {
 
 	//bi-directional many-to-one association to Usuario
 	@OneToMany(mappedBy="perfile")
+	@JsonBackReference
 	private List<Usuario> usuarios;
 
 	public Perfiles() {

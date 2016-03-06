@@ -1,7 +1,11 @@
 package fabricas.entidades;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.Date;
 import java.util.List;
 
@@ -19,7 +23,7 @@ public class Usuario implements Serializable {
 	@Id
 	private int idusuario;
 
-	private byte activo;
+	private boolean activo;
 
 	private String apellido;
 
@@ -38,26 +42,31 @@ public class Usuario implements Serializable {
 	private String password;
 
 	private String telefono;
-
+	
 	//bi-directional many-to-one association to Calificaciones
 	@OneToMany(mappedBy="usuario")
+	
 	private List<Calificaciones> Calificacioness;
 
 	//bi-directional many-to-one association to Log
 	@OneToMany(mappedBy="usuarioBean")
+	
 	private List<Log> logs;
 
 	//bi-directional many-to-one association to Servicio
 	@OneToMany(mappedBy="usuario")
+	
 	private List<Servicio> servicios;
 
 	//bi-directional many-to-one association to Transaccione
 	@OneToMany(mappedBy="usuario")
+	
 	private List<Transacciones> transacciones;
 
 	//bi-directional many-to-one association to Perfile
 	@ManyToOne
 	@JoinColumn(name="perfil")
+	@JsonManagedReference
 	private Perfiles perfile;
 
 	public Usuario() {
@@ -71,11 +80,11 @@ public class Usuario implements Serializable {
 		this.idusuario = idusuario;
 	}
 
-	public byte getActivo() {
+	public boolean getActivo() {
 		return this.activo;
 	}
 
-	public void setActivo(byte activo) {
+	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
 
@@ -187,15 +196,15 @@ public class Usuario implements Serializable {
 		return log;
 	}
 
-	public List<Servicio> getServicios() {
+	/*public List<Servicio> getServicios() {
 		return this.servicios;
 	}
 
 	public void setServicios(List<Servicio> servicios) {
 		this.servicios = servicios;
-	}
+	}*/
 
-	public Servicio addServicio(Servicio servicio) {
+	/*public Servicio addServicio(Servicio servicio) {
 		getServicios().add(servicio);
 		servicio.setUsuario(this);
 
@@ -207,7 +216,7 @@ public class Usuario implements Serializable {
 		servicio.setUsuario(null);
 
 		return servicio;
-	}
+	}*/
 
 	public List<Transacciones> getTransacciones() {
 		return this.transacciones;

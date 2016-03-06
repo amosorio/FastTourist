@@ -1,7 +1,12 @@
 package fabricas.entidades;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.Date;
 
 
@@ -11,7 +16,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name="calificaciones")
-@NamedQuery(name="Calificacione.findAll", query="SELECT c FROM Calificacione c")
+@NamedQuery(name="Calificaciones.findAll", query="SELECT c FROM Calificaciones c")
 public class Calificaciones implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -28,11 +33,13 @@ public class Calificaciones implements Serializable {
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne
 	@JoinColumn(name="cliente")
+	
 	private Usuario usuario;
 
 	//bi-directional many-to-one association to Servicio
 	@ManyToOne
 	@JoinColumn(name="servicio")
+	@JsonBackReference
 	private Servicio servicioBean;
 
 	public Calificaciones() {
