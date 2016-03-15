@@ -28,7 +28,7 @@ public class Perfiles implements Serializable {
 	private String nombre;
 
 	//bi-directional many-to-one association to Usuario
-	@OneToMany(mappedBy="perfile")
+	@OneToMany(mappedBy="perfil")
 	@JsonBackReference
 	private List<Usuario> usuarios;
 
@@ -69,14 +69,14 @@ public class Perfiles implements Serializable {
 
 	public Usuario addUsuario(Usuario usuario) {
 		getUsuarios().add(usuario);
-		usuario.setPerfile(this);
+		usuario.setPerfil(this);
 
 		return usuario;
 	}
 
 	public Usuario removeUsuario(Usuario usuario) {
 		getUsuarios().remove(usuario);
-		usuario.setPerfile(null);
+		usuario.setPerfil(null);
 
 		return usuario;
 	}

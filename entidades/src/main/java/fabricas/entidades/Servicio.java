@@ -55,7 +55,7 @@ public class Servicio implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="categoria")
 	@JsonManagedReference
-	private Categoria categoriaBean;
+	private Categoria categoria;
 
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne
@@ -166,12 +166,12 @@ public class Servicio implements Serializable {
 		return calificacione;
 	}
 
-	public Categoria getCategoriaBean() {
-		return this.categoriaBean;
+	public Categoria getCategoria() {
+		return this.categoria;
 	}
 
-	public void setCategoriaBean(Categoria categoriaBean) {
-		this.categoriaBean = categoriaBean;
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 	public Usuario getUsuario() {

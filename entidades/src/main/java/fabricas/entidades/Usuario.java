@@ -67,7 +67,7 @@ public class Usuario implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="perfil")
 	@JsonManagedReference
-	private Perfiles perfile;
+	private Perfiles perfil;
 
 	public Usuario() {
 	}
@@ -240,12 +240,12 @@ public class Usuario implements Serializable {
 		return transaccione;
 	}
 
-	public Perfiles getPerfile() {
-		return this.perfile;
+	public Perfiles getPerfil() {
+		return this.perfil;
 	}
 
-	public void setPerfile(Perfiles perfile) {
-		this.perfile = perfile;
+	public void setPerfil(Perfiles perfil) {
+		this.perfil = perfil;
 	}
 
 }
