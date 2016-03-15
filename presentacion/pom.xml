@@ -87,12 +87,12 @@
 		</dependency>
 
 		<!-- Entidades -->
-		<dependency>
+		<!-- dependency>
 			<groupId>fabricas</groupId>
 			<artifactId>entidades</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>compile</scope>
-		</dependency>
+		</dependency-->
 	</dependencies>
 	<build>
 		<finalName>presentacion</finalName>

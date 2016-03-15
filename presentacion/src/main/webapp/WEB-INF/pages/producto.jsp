@@ -77,7 +77,7 @@
 		</section>
 		<section class="header_text sub">
 		<img class="pageBanner" src="${pageContext.request.contextPath}/resources/themes/images/pageBanner.png" alt="New products" >
-			<h4><span>${nombre}</span></h4>
+			<h3><span>${servicio.nombre}</span></h3>
 		</section>
 		<section class="main-content">				
 			<div class="row">						
@@ -102,19 +102,13 @@
 						</div>
 						<div class="span3">
 							<address>
-								<strong>Proveedor:</strong> <span>${proveedor}</span><br>
-								<strong>Categoría:</strong> <span>${categoria}</span><br>
-								<strong>Fecha Creación:</strong> <span>${fecha_creacion}</span><br>							
+								<strong>Proveedor:</strong> <span>${servicio.usuario.nombre} ${servicio.usuario.apellido}</span><br>
+								<strong>Categoría:</strong> <span>${servicio.categoria.nombre}</span><br>
+								<strong>Fecha Creación:</strong> <span>${servicio.fechaCreacion}</span><br>							
 							</address>	
 							<strong>Descripcion:</strong>
 							<br>
-							<span>Sed ut perspiciatis unde omnis iste natus error sit voluptatem 
-							accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore 
-							veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem 
-							quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui 
-							ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit 
-							amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore 
-							et dolore magnam aliquam quaerat voluptatem</span>
+							<span>${servicio.descripcion}</span>
 																
 						</div>					
 					</div>
@@ -154,8 +148,8 @@
 				</div>
 				<div class="span3 col">
 					<div class="block">	
-						<h2><strong>Precio: $ ${precio}</strong></h2>	
-						<h4><strong>Descuento: ${descuento}</strong></h4>
+						<h2><strong>Precio: $ ${servicio.precio}</strong></h2>	
+						<h4><strong>Descuento: ${servicio.descuento}</strong></h4>
 						<h4><strong>Comprados: ${cantidad_comprados}</strong></h4>				
 						<br/>
 						<form class="form-inline">

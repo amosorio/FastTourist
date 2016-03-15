@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import fabricas.entidades.Paquete;
-import fabricas.entidades.Servicio;
+import fabricas.presentacion.VOs.PaqueteVO;
+import fabricas.presentacion.VOs.ServicioVO;
+
+
 
 @Controller
 public class PaqueteControlador {
@@ -22,11 +24,11 @@ public class PaqueteControlador {
 	@RequestMapping(value = "/paquete", method = RequestMethod.GET)
 	public ModelAndView getPackages(){
 		ModelAndView model = new ModelAndView();
-		Paquete paq = new Paquete();
+		PaqueteVO paq = new PaqueteVO();
 		paq.setDescripcion("Desc paquete1");
 		paq.setFechaCreacion(new Date("2016-02-10"));
 		paq.setNombre("Paquete1");
-		Servicio servicio = new Servicio();
+		ServicioVO servicio = new ServicioVO();
 		servicio.setPrecio(new BigDecimal(1000));
 		paq.setServicios(Arrays.asList(servicio));
 		
