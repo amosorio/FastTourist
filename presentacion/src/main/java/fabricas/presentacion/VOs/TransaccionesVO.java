@@ -13,7 +13,7 @@ public class TransaccionesVO implements Serializable {
 	
 	private UsuarioVO usuario;
 
-	private EstadoTransaccion estadoTransaccion;
+	private EstadoTransaccionVO estadoTransaccion;
 
 	
 	private PaqueteVO paqueteBean;
@@ -45,11 +45,11 @@ public class TransaccionesVO implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public EstadoTransaccion getEstadoTransaccion() {
+	public EstadoTransaccionVO getEstadoTransaccion() {
 		return this.estadoTransaccion;
 	}
 
-	public void setEstadoTransaccion(EstadoTransaccion estadoTransaccion) {
+	public void setEstadoTransaccion(EstadoTransaccionVO estadoTransaccion) {
 		this.estadoTransaccion = estadoTransaccion;
 	}
 

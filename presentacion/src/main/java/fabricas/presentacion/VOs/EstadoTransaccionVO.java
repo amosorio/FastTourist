@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import java.util.List;
 
-public class EstadoTransaccion implements Serializable {
+public class EstadoTransaccionVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	
@@ -16,7 +16,7 @@ public class EstadoTransaccion implements Serializable {
 
 	private List<TransaccionesVO> transacciones;
 
-	public EstadoTransaccion() {
+	public EstadoTransaccionVO() {
 	}
 
 	public int getIdestadoTransaccion() {

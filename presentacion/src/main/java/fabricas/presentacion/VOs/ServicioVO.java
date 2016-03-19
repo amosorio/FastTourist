@@ -1,11 +1,9 @@
 package fabricas.presentacion.VOs;
 
 import java.io.Serializable;
-
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-
 
 /**
  * The persistent class for the servicios database table.
@@ -26,6 +24,10 @@ public class ServicioVO implements Serializable {
 	private CategoriaVO categoria;	
 	private UsuarioVO usuario;
 	private List<PaqueteVO> paquetes;
+	private AlimentacionVO alimentacion;
+	private AlojamientoVO alojamiento;
+	private PaseosecologicoVO paseosecologico;
+	private TransporteVO transporte;
 
 	public ServicioVO() {
 	}
@@ -130,6 +132,42 @@ public class ServicioVO implements Serializable {
 
 	public void setPaquetes(List<PaqueteVO> paquetes) {
 		this.paquetes = paquetes;
+	}
+
+	public AlimentacionVO getAlimentacion() {
+		return alimentacion;
+	}
+
+	public void setAlimentacion(AlimentacionVO alimentacion) {
+		this.alimentacion = alimentacion;
+	}
+
+	public AlojamientoVO getAlojamiento() {
+		return alojamiento;
+	}
+
+	public void setAlojamiento(AlojamientoVO alojamiento) {
+		this.alojamiento = alojamiento;
+	}
+
+	public PaseosecologicoVO getPaseosecologico() {
+		return paseosecologico;
+	}
+
+	public void setPaseosecologico(PaseosecologicoVO paseosecologico) {
+		this.paseosecologico = paseosecologico;
+	}
+
+	public TransporteVO getTransporte() {
+		return transporte;
+	}
+
+	public void setTransporte(TransporteVO transporte) {
+		this.transporte = transporte;
+	}
+
+	public void setCategoria(CategoriaVO categoria) {
+		this.categoria = categoria;
 	}
 
 	
