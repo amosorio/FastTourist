@@ -1,12 +1,7 @@
 package fabricas.entidades;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import java.util.Date;
 import java.util.List;
 
@@ -17,11 +12,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="paquetes")
-@NamedQueries({
-	@NamedQuery(name="Paquete.findAll", query="SELECT p FROM Paquete p"),
-	@NamedQuery(name="Paquete.findById", query="SELECT p FROM Paquete p where p.idpaquetes = :id"),
-}) 
-
+@NamedQuery(name="Paquete.findAll", query="SELECT p FROM Paquete p")
 public class Paquete implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -32,24 +23,20 @@ public class Paquete implements Serializable {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="fecha_creacion")
-	
 	private Date fechaCreacion;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="fecha_expiracion")
-	
 	private Date fechaExpiracion;
 
 	private String nombre;
 
 	//bi-directional many-to-many association to Servicio
 	@ManyToMany(mappedBy="paquetes")
-	@JsonBackReference
 	private List<Servicio> servicios;
 
 	//bi-directional many-to-one association to Transaccione
-	@OneToMany(mappedBy="paqueteBean")
-	
+	@OneToMany(mappedBy="paquete")
 	private List<Transacciones> transacciones;
 
 	public Paquete() {
@@ -111,18 +98,18 @@ public class Paquete implements Serializable {
 		this.transacciones = transacciones;
 	}
 
-	public Transacciones addTransaccione(Transacciones transaccione) {
-		getTransacciones().add(transaccione);
-		transaccione.setPaqueteBean(this);
+	public Transacciones addTransaccione(Transacciones transacciones) {
+		getTransacciones().add(transacciones);
+		transacciones.setPaquete(this);
 
-		return transaccione;
+		return transacciones;
 	}
 
-	public Transacciones removeTransaccione(Transacciones transaccione) {
-		getTransacciones().remove(transaccione);
-		transaccione.setPaqueteBean(null);
+	public Transacciones removeTransaccione(Transacciones transacciones) {
+		getTransacciones().remove(transacciones);
+		transacciones.setPaquete(null);
 
-		return transaccione;
+		return transacciones;
 	}
 
 }

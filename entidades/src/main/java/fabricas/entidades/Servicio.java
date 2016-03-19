@@ -1,11 +1,7 @@
 package fabricas.entidades;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -21,7 +17,6 @@ import java.util.List;
 	@NamedQuery(name="Servicio.findAll", query="SELECT s FROM Servicio s"),
 	@NamedQuery(name="Servicio.findById", query="SELECT s FROM Servicio s where s.idservicios = :id"),
 }) 
-
 
 public class Servicio implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -46,22 +41,14 @@ public class Servicio implements Serializable {
 	@Column(name="ruta_galeria")
 	private String rutaGaleria;
 
-	//bi-directional many-to-one association to Calificaciones
-	@OneToMany(mappedBy="servicioBean")
-	@JsonManagedReference
+	//bi-directional many-to-one association to Calificacione
+	@OneToMany(mappedBy="servicio")
 	private List<Calificaciones> calificaciones;
 
 	//bi-directional many-to-one association to Categoria
 	@ManyToOne
 	@JoinColumn(name="categoria")
-	@JsonManagedReference
 	private Categoria categoria;
-
-	//bi-directional many-to-one association to Usuario
-	@ManyToOne
-	@JoinColumn(name="proveedor")
-	
-	private Usuario usuario;
 
 	//bi-directional many-to-many association to Paquete
 	@ManyToMany
@@ -74,8 +61,32 @@ public class Servicio implements Serializable {
 			@JoinColumn(name="paquete")
 			}
 		)
-	@JsonManagedReference
 	private List<Paquete> paquetes;
+
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="proveedor")
+	private Usuario usuario;
+
+	//bi-directional many-to-one association to Alimentacion
+	@ManyToOne
+	@JoinColumn(name="alimentacion")
+	private Alimentacion alimentacion;
+
+	//bi-directional many-to-one association to Alojamiento
+	@ManyToOne
+	@JoinColumn(name="alojamiento")
+	private Alojamiento alojamiento;
+
+	//bi-directional many-to-one association to Paseosecologico
+	@ManyToOne
+	@JoinColumn(name="paseo_eco")
+	private Paseosecologico paseosecologico;
+
+	//bi-directional many-to-one association to Transporte
+	@ManyToOne
+	@JoinColumn(name="transporte")
+	private Transporte transporte;
 
 	public Servicio() {
 	}
@@ -88,11 +99,11 @@ public class Servicio implements Serializable {
 		this.idservicios = idservicios;
 	}
 
-	public boolean getActivo() {
+	public boolean  getActivo() {
 		return this.activo;
 	}
 
-	public void setActivo(boolean activo) {
+	public void setActivo(boolean  activo) {
 		this.activo = activo;
 	}
 
@@ -152,18 +163,18 @@ public class Servicio implements Serializable {
 		this.calificaciones = calificaciones;
 	}
 
-	public Calificaciones addCalificacione(Calificaciones calificacione) {
-		getCalificaciones().add(calificacione);
-		calificacione.setServicioBean(this);
+	public Calificaciones addCalificacione(Calificaciones calificaciones) {
+		getCalificaciones().add(calificaciones);
+		calificaciones.setServicio(this);
 
-		return calificacione;
+		return calificaciones;
 	}
 
-	public Calificaciones removeCalificacione(Calificaciones calificacione) {
-		getCalificaciones().remove(calificacione);
-		calificacione.setServicioBean(null);
+	public Calificaciones removeCalificacione(Calificaciones calificaciones) {
+		getCalificaciones().remove(calificaciones);
+		calificaciones.setServicio(null);
 
-		return calificacione;
+		return calificaciones;
 	}
 
 	public Categoria getCategoria() {
@@ -174,6 +185,14 @@ public class Servicio implements Serializable {
 		this.categoria = categoria;
 	}
 
+	public List<Paquete> getPaquetes() {
+		return this.paquetes;
+	}
+
+	public void setPaquetes(List<Paquete> paquetes) {
+		this.paquetes = paquetes;
+	}
+
 	public Usuario getUsuario() {
 		return this.usuario;
 	}
@@ -182,12 +201,36 @@ public class Servicio implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public List<Paquete> getPaquetes() {
-		return this.paquetes;
+	public Alimentacion getAlimentacion() {
+		return this.alimentacion;
 	}
 
-	public void setPaquetes(List<Paquete> paquetes) {
-		this.paquetes = paquetes;
+	public void setAlimentacion(Alimentacion alimentacion) {
+		this.alimentacion = alimentacion;
+	}
+
+	public Alojamiento getAlojamiento() {
+		return this.alojamiento;
+	}
+
+	public void setAlojamiento(Alojamiento alojamiento) {
+		this.alojamiento = alojamiento;
+	}
+
+	public Paseosecologico getPaseosecologico() {
+		return this.paseosecologico;
+	}
+
+	public void setPaseosecologico(Paseosecologico paseosecologico) {
+		this.paseosecologico = paseosecologico;
+	}
+
+	public Transporte getTransporte() {
+		return this.transporte;
+	}
+
+	public void setTransporte(Transporte transporte) {
+		this.transporte = transporte;
 	}
 
 }

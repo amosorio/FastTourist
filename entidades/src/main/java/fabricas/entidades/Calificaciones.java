@@ -38,7 +38,7 @@ public class Calificaciones implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="servicio")
 	@JsonBackReference
-	private Servicio servicioBean;
+	private Servicio servicio;
 
 	public Calificaciones() {
 	}
@@ -83,12 +83,12 @@ public class Calificaciones implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public Servicio getServicioBean() {
-		return this.servicioBean;
+	public Servicio getServicio() {
+		return this.servicio;
 	}
 
-	public void setServicioBean(Servicio servicioBean) {
-		this.servicioBean = servicioBean;
+	public void setServicio(Servicio servicio) {
+		this.servicio = servicio;
 	}
 
 }

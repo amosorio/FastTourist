@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 
 /**
  * The persistent class for the transacciones database table.
@@ -38,7 +36,7 @@ public class Transacciones implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="paquete")
 	
-	private Paquete paqueteBean;
+	private Paquete paquete;
 
 	public Transacciones() {
 	}
@@ -75,12 +73,12 @@ public class Transacciones implements Serializable {
 		this.estadoTransaccion = estadoTransaccion;
 	}
 
-	public Paquete getPaqueteBean() {
-		return this.paqueteBean;
+	public Paquete getPaquete() {
+		return this.paquete;
 	}
 
-	public void setPaqueteBean(Paquete paqueteBean) {
-		this.paqueteBean = paqueteBean;
+	public void setPaquete(Paquete paquete) {
+		this.paquete = paquete;
 	}
 
 }

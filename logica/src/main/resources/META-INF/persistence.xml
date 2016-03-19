@@ -15,6 +15,12 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
 		<class>fabricas.entidades.Servicio</class>
 		<class>fabricas.entidades.Transacciones</class>
 		<class>fabricas.entidades.Usuario</class>
+		<class>fabricas.entidades.Alimentacion</class>
+		<class>fabricas.entidades.Alojamiento</class>
+		<class>fabricas.entidades.Paseosecologico</class>
+		<class>fabricas.entidades.Tipoalimentacion</class>
+		<class>fabricas.entidades.Tipotransporte</class>
+		<class>fabricas.entidades.Transporte</class>
 		
 		<properties>
 			<property name="javax.persistence.jdbc.url"
