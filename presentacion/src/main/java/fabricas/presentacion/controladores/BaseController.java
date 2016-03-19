@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class BaseController {
 
-	private static final String VIEW_INDEX = "index";
+	private static final String VIEW_INDEX = "indexAlojamiento";
 	private static final String CONTACTENOS = "contactenos";
 	private static final String REGISTRO = "registro";
 	private static final String CARRITO = "carrito";	
