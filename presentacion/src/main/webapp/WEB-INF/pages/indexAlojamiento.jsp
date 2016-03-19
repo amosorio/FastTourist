@@ -1,89 +1,93 @@
 <%@include file="header.jsp"%>
+		<section class="navbar main-menu">
+			<div class="navbar-inner main-menu">				
+				<nav id="menu" class="pull-left">
+					<ul>
+						<li><a href="/presentacion/" class="paginaActiva">Alojamiento</a></li>
+						<li><a href="./products.html">Transporte</a>
+						<li><a href="./products.html">Alimentacion</a></li>	
+						<li><a href="./products.html">Paseos Turisticos</a></li>
+						<li><a href="./products.html">Paquetes</a></li>																					
+					</ul>
+				</nav>
+			</div>
+		</section>
 		<section class="header_text sub">
-		<img class="pageBanner" src="${pageContext.request.contextPath}/resources/themes/images/pageBanner.png" alt="New products" >
-		<a href="/presentacion/producto/get/1/">Ver Producto</a> 
-			<h3><span>${servicio.nombre}</span></h3>
+		
+		<section class="span4 col">				
+				<div class="row">
+					<div class="block" style="text-align:left !important">					
+						<h4 class="title"><span class="text"><strong>Alojamiento</strong></span></h4>
+						<form action="#" method="post" class="form-stacked">
+							
+								<div class="control-group">
+									<label class="control-label">¿Donde quieres ir?</label>
+									<div class="controls">
+										<input type="text" placeholder="Ingresa una cuidad u hotel" class="input-xlarge">
+									</div>
+								</div>
+								<div class="control-group">
+									<label class="control-label">¿En qué fecha?</label>
+									<div class="controls">
+										<div class="input-append date" id="dp1" data-date="01-04-2016" data-date-format="dd-mm-yyyy">
+											<input class="input-small" size="16" type="text" placeholder="Entrada" readonly="">
+											<span class="add-on"><i class="icon-calendar"></i></span>
+										</div>
+										&nbsp;
+										<div class="input-append date" id="dp2" data-date="01-04-2016" data-date-format="dd-mm-yyyy">
+											<input class="input-small" size="16" type="text" placeholder="Salida" readonly="">
+											<span class="add-on"><i class="icon-calendar"></i></span>
+										</div>
+									</div>
+								</div>
+		
+								<div class="control-group">
+									<table>
+										<tr>
+											<td width="100px"><label class="control-label">Habitaciones</label></td>
+											<td width="100px"><label class="control-label">Personas</label></td>
+										</tr>
+										<tr>
+											<td>
+												<select class="input-mini">
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+												</select>
+										</td>
+											<td>
+												<select class="input-mini">
+													<option value="1">1</option>
+													<option value="2">2</option>
+													<option value="3">3</option>
+													<option value="4">4</option>
+													<option value="4">5</option>
+													<option value="4">6</option>
+												</select>
+											</td>
+										</tr>
+									</table>
+								</div>
+								<hr>
+								<div class="actions"><input tabindex="9" class="btn btn-inverse large" type="submit" value="Buscar.."></div>
+							
+						</form>					
+					</div>				
+				</div>
+			</section>			
+				
+		
 		</section>
 		<section class="main-content">				
 			<div class="row">						
 				<div class="span9">
 					<div class="row">
 						<div class="span4">
-							<a href="${pageContext.request.contextPath}/resources/themes/images/ladies/1.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 1"><img alt="" src="${pageContext.request.contextPath}/resources/themes/images/ladies/1.jpg"></a>												
-							<ul class="thumbnails small">								
-								<li class="span1">
-									<a href="${pageContext.request.contextPath}/resources/themes/images/ladies/2.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 2"><img src="${pageContext.request.contextPath}/resources/themes/images/ladies/2.jpg" alt=""></a>
-								</li>								
-								<li class="span1">
-									<a href="${pageContext.request.contextPath}/resources/themes/images/ladies/3.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 3"><img src="${pageContext.request.contextPath}/resources/themes/images/ladies/3.jpg" alt=""></a>
-								</li>													
-								<li class="span1">
-									<a href="${pageContext.request.contextPath}/resources/themes/images/ladies/4.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 4"><img src="${pageContext.request.contextPath}/resources/themes/images/ladies/4.jpg" alt=""></a>
-								</li>
-								<li class="span1">
-									<a href="${pageContext.request.contextPath}/resources/themes/images/ladies/5.jpg" class="thumbnail" data-fancybox-group="group1" title="Description 5"><img src="${pageContext.request.contextPath}/resources/themes/images/ladies/5.jpg" alt=""></a>
-								</li>
-							</ul>
-						</div>
-						<div class="span3">
-							<address>
-								<strong>Proveedor:</strong> <span>${servicio.usuario.nombre} ${servicio.usuario.apellido}</span><br>
-								<strong>Categoría:</strong> <span>${servicio.categoria.nombre}</span><br>
-								<strong>Fecha Creación:</strong> <span>${servicio.fechaCreacion}</span><br>							
-							</address>	
-							<strong>Descripcion:</strong>
-							<br>
-							<span>${servicio.descripcion}</span>
+							<a href="/presentacion/producto/get/1/">Ver Producto</a> 
+							<h3><span>${servicio.nombre}</span></h3>
 																
 						</div>					
-					</div>
-					<div class="row">
-						<div class="span9">
-							<ul class="nav nav-tabs" id="myTab">
-								<li class="active"><a href="#home">Preguntas</a></li>
-								<li class=""><a href="#profile">Calificación</a></li>
-							</ul>							 
-							<div class="tab-content">
-								<div class="tab-pane active" id="home">Sed ut perspiciatis unde omnis iste natus error sit 
-								voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo 
-								inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. 
-								Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, 
-								sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
-								 Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
-								  adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et 
-								  dolore magnam aliquam quaerat voluptatem</div>
-								<div class="tab-pane" id="profile">
-									<table class="table table-striped shop_attributes">	
-										<tbody>
-											<tr class="">
-												<th>Size</th>
-												<td>Large, Medium, Small, X-Large</td>
-											</tr>		
-											<tr class="alt">
-												<th>Colour</th>
-												<td>Orange, Yellow</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
-							</div>							
-						</div>						
-						
-					</div>
-				</div>
-				<div class="span3 col">
-					<div class="block">	
-						<h2><strong>Precio: $ ${servicio.precio}</strong></h2>	
-						<h4><strong>Descuento: ${servicio.descuento}</strong></h4>
-						<h4><strong>Comprados: ${cantidad_comprados}</strong></h4>				
-						<br/>
-						<form class="form-inline">
-								<label>Cantidad:</label>
-								<input type="text" class="span1" placeholder="1"><br>
-								<button class="btn btn-inverse" type="submit">Agregar al carrito</button>
-								
-						</form>
-						
 					</div>
 				</div>
 			</div>

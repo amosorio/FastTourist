@@ -776,3 +776,8 @@ section.our_client .row{
 		border-bottom:1px solid #eee;
 	}
 }
+
+.paginaActiva{
+	background-color:#eb4800;
+	color:#fff !important;
+}

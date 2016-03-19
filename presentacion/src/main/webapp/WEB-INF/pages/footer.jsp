@@ -35,7 +35,7 @@
 			<span>Copyright 2016 FastFactory All right reserved.</span>
 		</section>
 	</div>
-	<script src="themes/js/common.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/themes/js/common.js"></script>
 	<script>
 		$(function () {
 			$('#myTab a:first').tab('show');

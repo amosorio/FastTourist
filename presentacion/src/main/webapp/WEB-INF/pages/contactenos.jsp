@@ -1,4 +1,17 @@
-<%@include file="header.jsp"%>				
+<%@include file="header.jsp"%>		
+			<section class="navbar main-menu">
+			<div class="navbar-inner main-menu">				
+				<nav id="menu" class="pull-left">
+					<ul>
+						<li><a href="/presentacion/">Alojamiento</a></li>
+						<li><a href="./products.html">Transporte</a>
+						<li><a href="./products.html">Alimentacion</a></li>	
+						<li><a href="./products.html">Paseos Turisticos</a></li>
+						<li><a href="./products.html">Paquetes</a></li>																					
+					</ul>
+				</nav>
+			</div>
+			</section>		
 			<section class="google_map">
 				<iframe width="100%" height="300" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" 
 				src="https://www.google.com/maps/embed/v1/place?q=Bogotá,+Colombia&key=AIzaSyAN0om9mFmy1QN6Wf54tXAowK4eT0ZUPrU">

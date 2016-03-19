@@ -1,4 +1,17 @@
 <%@include file="header.jsp"%>
+			<section class="navbar main-menu">
+				<div class="navbar-inner main-menu">				
+					<nav id="menu" class="pull-left">
+						<ul>
+							<li><a href="/presentacion/">Alojamiento</a></li>
+							<li><a href="./products.html">Transporte</a>
+							<li><a href="./products.html">Alimentacion</a></li>	
+							<li><a href="./products.html">Paseos Turisticos</a></li>
+							<li><a href="./products.html">Paquetes</a></li>																					
+						</ul>
+					</nav>
+				</div>
+			</section>
 			<section class="header_text sub">
 			<img class="pageBanner" src="themes/images/pageBanner.png" alt="New products" >
 				<h4><span>New products</span></h4>

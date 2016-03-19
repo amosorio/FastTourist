@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html>
 <head>
 		<meta charset="utf-8">
@@ -6,48 +7,53 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
-		<!-- bootstrap -->
-		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">      
-		<link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">		
-		<link href="themes/css/bootstrappage.css" rel="stylesheet"/>
-
+	
 		<!--[if lt IE 9]>			
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 			<script src="js/respond.min.js"></script>
 		<![endif]-->
 		<!-- bootstrap -->
+		<link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.css" rel="stylesheet">  
 		<link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">      
 		<link href="${pageContext.request.contextPath}/resources/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">		
 		<link href="${pageContext.request.contextPath}/resources/themes/css/bootstrappage.css" rel="stylesheet"/>
 		
 		<!-- global styles -->
 		<link href="${pageContext.request.contextPath}/resources/themes/css/jquery.fancybox.css" rel="stylesheet"/>
+		<link href="${pageContext.request.contextPath}/resources/themes/css/flexslider.css" rel="stylesheet"/>
 		<link href="${pageContext.request.contextPath}/resources/themes/css/main.css" rel="stylesheet"/>
+		<link href="${pageContext.request.contextPath}/resources/themes/css/datepicker.css" rel="stylesheet"/>
 
 		<!-- scripts -->
 		<script src="${pageContext.request.contextPath}/resources/themes/js/jquery-1.7.2.min.js"></script>
+		<script src="${pageContext.request.contextPath}/resources/themes/js/bootstrap-datepicker.js"></script>
 		<script src="${pageContext.request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>				
 		<script src="${pageContext.request.contextPath}/resources/themes/js/superfish.js"></script>	
 		<script src="${pageContext.request.contextPath}/resources/themes/js/jquery.scrolltotop.js"></script>
 		<script src="${pageContext.request.contextPath}/resources/themes/js/jquery.fancybox.js"></script>
+
+		<script>
+		$(function(){
+			$('#dp1').datepicker();
+			$('#dp2').datepicker();
+		});
+		</script>
+
 		<!--[if lt IE 9]>			
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 			<script src="js/respond.min.js"></script>
-		<![endif]-->
+		<![endif]-->		
 	</head>
 <body>
 
 	<div id="top-bar" class="container">
 		<div class="row">
 			<div class="span4">
-				<form method="POST" class="search_form">
-					<input type="text" class="input-block-level search-query" Placeholder="eg. San Andres">
-				</form>
+				<a href="index.html" class="logo pull-left"><img src="${pageContext.request.contextPath}/resources/themes/images/logo.png" class="site_logo" alt="" height="37px"></a>
 			</div>
 			<div class="span8">
 				<div class="account pull-right">
 					<ul class="user-menu">				
-						<li><a href="#">Mi Cuenta</a></li>
 						<li><a href="/presentacion/carrito">Mi Carrito</a></li>
 						<li><a href="/presentacion/ingresar">Ingresar</a></li>					
 						<li><a href="/presentacion/registro">Registrarse</a></li>		
@@ -57,21 +63,3 @@
 		</div>
 	</div>
 	<div id="wrapper" class="container">
-		<section class="navbar main-menu">
-			<div class="navbar-inner main-menu">				
-				<a href="index.html" class="logo pull-left"><img src="${pageContext.request.contextPath}/resources/themes/images/logo.png" class="site_logo" alt="" height="37px"></a>
-				<nav id="menu" class="pull-right">
-					<ul>
-						<li><a href="/presentacion/">Inicio</a></li>
-						<li><a href="./products.html">Enviar Mensajes</a>					
-							<ul>
-								<li><a href="./products.html">Lacinia nibh</a></li>									
-								<li><a href="./products.html">Eget molestie</a></li>
-								<li><a href="./products.html">Varius purus</a></li>									
-							</ul>
-						</li>															
-						<li><a href="./products.html">Mis transacciones</a></li>					
-					</ul>
-				</nav>
-			</div>
-		</section>
