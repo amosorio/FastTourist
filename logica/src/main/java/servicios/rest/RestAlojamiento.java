@@ -1,10 +1,6 @@
 package servicios.rest;
 
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -14,17 +10,33 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import fabricas.entidades.Servicio;
+import fabricas.entidades.Usuario;
 
 
 @RestController
 @RequestMapping("/alojamiento")
 public class RestAlojamiento {
 
+	/**
+	 * Metodo encargado de recuperar la lista de proveedores de servicios de alojamiento
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/getproveedores", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity <List<Usuario>> getListaProveedores() {
+		EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
+		em.getTransaction().begin();
+
+		List<Usuario> proveedores = (List<Usuario>) em.createNamedQuery("Servicio.findProveedoresByAlojamiento").getResultList();
+
+		return new ResponseEntity <List<Usuario>> (proveedores, HttpStatus.OK);
+
+	}
+	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity <List<Servicio>> getAlojamiento() {
@@ -48,6 +60,22 @@ public class RestAlojamiento {
 		EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
 		em.getTransaction().begin();
 
+		String query= queryAlojamientoByFilter(filtros);	
+
+		List<Servicio> alojamientos  = em.createQuery(query).getResultList();
+
+		return new ResponseEntity <List<Servicio>> (alojamientos, HttpStatus.OK);
+
+	}
+
+	/**
+	 * Metodo encargado de generar el query a partir 
+	 * de la lista de parametros recibidos
+	 * @param filtros
+	 * @return
+	 */
+	private String queryAlojamientoByFilter(String filtros){
+
 		//Se recuperan los filtros de busqueda
 		String ciudad="";
 		String proveedor="";
@@ -68,47 +96,39 @@ public class RestAlojamiento {
 				}else if(values[0].equals("personas")){
 					personas=values[1];
 				}else if(values[0].equals("fechaEntrada")){
-					fechaEntrada=values[1];//format.parse(values[1]);
+					fechaEntrada=values[1];
 				}else if(values[0].equals("fechaSalida")){
-					fechaSalida=values[1];//format.parse(values[1]);
+					fechaSalida=values[1];
 				}
 			}
 		}
-
-
-		List<Servicio> alojamientos = null;
 		
 		String query = "SELECT s FROM Servicio s WHERE s.activo=1 AND s.categoria=1 ";
+
 		if (!ciudad.isEmpty()){
-			query = query + "AND UPPER(s.alojamiento.ciudad) like UPPER('" + ciudad +"') ";
+			query = query + "AND (UPPER(s.alojamiento.ciudad) like UPPER('%" + ciudad +"%') ";
+			query = query + "OR UPPER(s.alojamiento.nombre) like UPPER('%" + ciudad +"%') ";
+			query = query + "OR UPPER(s.nombre) like UPPER('%" + ciudad +"%')) ";
 		}
 		if(!proveedor.isEmpty()){
 			query = query + "AND s.usuario="+proveedor+" ";
 		}
-		
 		if(!habitaciones.isEmpty()){
 			query = query + "AND s.alojamiento.habitaciones > "+habitaciones+" ";
 		}
-		
 		if(!personas.isEmpty()){
 			query = query + "AND s.alojamiento.cantPersonas > "+personas+" ";
 		}
-		
 		if(!fechaEntrada.isEmpty()){
 			query = query + "AND s.alojamiento.fechaEntrada <= '"+fechaEntrada+"' ";
 		}
-		
 		if(!fechaSalida.isEmpty()){
 			query = query +" AND s.alojamiento.fechaSalida >= '"+fechaSalida+"' ";
 		}
-		
-		//Se agrega ordenamiento
+
+		//Se agrega ordenamiento predefinido
 		query = query + "ORDER BY s.alojamiento.fechaEntrada desc";
-		
-		alojamientos = em.createQuery(query).getResultList();
 
-
-		return new ResponseEntity <List<Servicio>> (alojamientos, HttpStatus.OK);
-
+		return query;
 	}
 }
