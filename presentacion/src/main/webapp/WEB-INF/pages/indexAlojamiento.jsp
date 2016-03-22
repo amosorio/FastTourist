@@ -27,18 +27,17 @@
 						<label class="control-label">¿Donde quieres ir?</label>
 						<div class="controls">
 							<input type="text" name="ciudad"
-								placeholder="Ingresa una cuidad u hotel" class="input-xlarge">
+								placeholder="Ingresa una cuidad, hotel o descripción" class="input-xlarge">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">¿Proveedor?</label>
 						<div class="controls">
-							<select class="input-medium" name="proveedor">
+							<select class="input-large" name="proveedor">
 								<option value="">Seleccione..</option>
-								<option value="1">Proveedor1</option>
-								<option value="2">Proveedor2</option>
-								<option value="3">Proveedor3</option>
-								<option value="4">Proveedor4</option>
+								<c:forEach items="${proveedores}" var="proveedor"> 
+								<option value="${proveedor.idusuario}">${proveedor.nombre}  ${proveedor.apellido}</option>
+								</c:forEach>
 							</select>
 						</div>
 
@@ -88,9 +87,12 @@
 						</table>
 					</div>
 					<hr>
+					
 					<div class="actions">
-						<input type="submit" value="Buscar.." tabindex="9"
-							class="btn btn-inverse large">
+						<p class="buttons center">
+							<input type="submit" value="Buscar.." tabindex="9"
+								class="btn btn-inverse large">
+						</p>
 					</div>
 
 				</form>
@@ -107,26 +109,29 @@
 					<li class="span4">
 						<div class="product-box">
 							<span class="sale_tag"></span> 
-							<a href="product_detail.html">
-								<img alt="${servicio.nombre}" src="${pageContext.request.contextPath}${servicio.rutaGaleria}" style="height:230px; max-with:342px">
+							<a href="/presentacion/getAlojamiento/${servicio.idservicios}/">
+								<img alt="${servicio.nombre}" src="${servicio.rutaGaleria}" style="height:230px; max-with:342px">
 							</a>
 							<br /> 
-							<a href="product_detail.html" class="title">${servicio.nombre}</a>
-							<br /> 
+							<a href="/presentacion/getAlojamiento/${servicio.idservicios}/" class="title">${servicio.nombre}</a>
 							<p class="name">${servicio.alojamiento.nombre}</p>
-							<a href="product_detail.html" class="title">$${servicio.precio}</a>
+							<p class="title">$${servicio.precio}</p>
 							<p><b>Descuento $${servicio.descuento}</b></p>
 							<c:if test="${servicio.alojamiento.wifi}">
-								<a href="product_detail.html" class="title" title="Wifi"><span><i class="icon-signal"></i></span></a>
+								<span class="title" title="Wifi"><i class="icon-signal"></i></span>
 							</c:if>
 							<c:if test="${servicio.alojamiento.piscina}">
-								<a href="product_detail.html" class="title" title="Piscina"><span><i class="icon-heart"></i></span></a>
+								<span class="title" title="Piscina"><i class="icon-heart"></i></span>
 							</c:if>
 							<c:if test="${servicio.alojamiento.aire_acondicionado}">
-							   <a href="product_detail.html" class="title" title="Aire Acondicionado"><span><i class="icon-cog"></i></span></a>
+							   <span class="title" title="Aire Acondicionado"><i class="icon-cog"></i></span>
 							</c:if>
-							<br/>
-							<a href="product_detail.html" class="category">${servicio.alojamiento.ciudad}</a>
+							<p class="category">${servicio.alojamiento.ciudad}</p>
+							<p class="buttons center">	
+								<a href="/presentacion/getAlojamiento/${servicio.idservicios}/">			
+									<button class="btn" type="button" >Ver Detalle</button>
+								</a>
+							</p>
 						</div>
 					</li>
 				</c:forEach>
@@ -144,26 +149,29 @@
 					<li class="span4">
 						<div class="product-box">
 							<span class="sale_tag"></span> 
-							<a href="product_detail.html">
-								<img alt="${servicio.nombre}" src="${pageContext.request.contextPath}${servicio.rutaGaleria}" style="height:230px; max-with:342px">
+							<a href="/presentacion/getAlojamiento/${servicio.idservicios}/">
+								<img alt="${servicio.nombre}" src="${servicio.rutaGaleria}" style="height:230px; max-with:342px">
 							</a>
 							<br /> 
-							<a href="product_detail.html" class="title">${servicio.nombre}</a>
-							<br /> 
-							<p class="price">${servicio.alojamiento.nombre}</p>
-							<a href="product_detail.html" class="title">$${servicio.precio}</a>
+							<a href="/presentacion/getAlojamiento/${servicio.idservicios}/" class="title">${servicio.nombre}</a> 
+							<p class="name">${servicio.alojamiento.nombre}</p>
+							<p class="title">$${servicio.precio}</p>
 							<p><b>Descuento $${servicio.descuento}</b></p>
 							<c:if test="${servicio.alojamiento.wifi}">
-								<a href="product_detail.html" class="title" title="Wifi"><span><i class="icon-signal"></i></span></a>
+								<span class="title" title="Wifi"><i class="icon-signal"></i></span>
 							</c:if>
 							<c:if test="${servicio.alojamiento.piscina}">
-								<a href="product_detail.html" class="title" title="Piscina"><span><i class="icon-heart"></i></span></a>
+								<span class="title" title="Piscina"><i class="icon-heart"></i></span>
 							</c:if>
 							<c:if test="${servicio.alojamiento.aire_acondicionado}">
-							   <a href="product_detail.html" class="title" title="Aire Acondicionado"><span><i class="icon-cog"></i></span></a>
+							   <span class="title" title="Aire Acondicionado"><i class="icon-cog"></i></span>
 							</c:if>
-							<br/>
-							<a href="product_detail.html" class="category">${servicio.alojamiento.ciudad}</a>
+							<p class="category">${servicio.alojamiento.ciudad}</p>
+							<p class="buttons center">	
+								<a href="/presentacion/getAlojamiento/${servicio.idservicios}/">			
+									<button class="btn" type="button" >Ver Detalle</button>
+								</a>
+							</p>
 						</div>
 					</li>
 				</c:forEach>

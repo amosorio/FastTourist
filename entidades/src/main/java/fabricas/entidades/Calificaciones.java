@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.util.Date;
 
 
@@ -31,7 +33,7 @@ public class Calificaciones implements Serializable {
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne
 	@JoinColumn(name="cliente")
-	
+	@JsonBackReference
 	private Usuario usuario;
 
 	//bi-directional many-to-one association to Servicio

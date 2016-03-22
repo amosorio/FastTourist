@@ -455,6 +455,15 @@ section.navbar{
 }
 .product-box p.category{
 	color:#eb4800;
+	font-size:12px;
+}
+.product-box:hover p.category{
+	color:#fff !important;
+	font-size:12px;
+}
+
+.product-box:hover p.title{
+	color:#fff !important;
 }
 .product-box p.title{
 	text-transform:uppercase;
@@ -473,9 +482,8 @@ section.navbar{
 	padding:10px 0;
 }
 .product-box p.name{
-	font-size:16px;
+	font-size:14px;
 	font-weight:300;
-	padding:2px 0;
 }
 /* end product box */
 
