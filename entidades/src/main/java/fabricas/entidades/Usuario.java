@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.Date;
@@ -45,7 +46,7 @@ public class Usuario implements Serializable {
 	
 	//bi-directional many-to-one association to Calificaciones
 	@OneToMany(mappedBy="usuario")
-	
+	@JsonManagedReference
 	private List<Calificaciones> Calificacioness;
 
 	//bi-directional many-to-one association to Log
