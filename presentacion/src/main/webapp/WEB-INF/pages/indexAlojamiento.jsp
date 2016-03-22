@@ -27,18 +27,17 @@
 						<label class="control-label">¿Donde quieres ir?</label>
 						<div class="controls">
 							<input type="text" name="ciudad"
-								placeholder="Ingresa una cuidad u hotel" class="input-xlarge">
+								placeholder="Ingresa una cuidad, hotel o descripción" class="input-xlarge">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">¿Proveedor?</label>
 						<div class="controls">
-							<select class="input-medium" name="proveedor">
+							<select class="input-large" name="proveedor">
 								<option value="">Seleccione..</option>
-								<option value="1">Proveedor1</option>
-								<option value="2">Proveedor2</option>
-								<option value="3">Proveedor3</option>
-								<option value="4">Proveedor4</option>
+								<c:forEach items="${proveedores}" var="proveedor"> 
+								<option value="${proveedor.idusuario}">${proveedor.nombre}  ${proveedor.apellido}</option>
+								</c:forEach>
 							</select>
 						</div>
 
