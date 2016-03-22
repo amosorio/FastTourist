@@ -13,7 +13,7 @@ import java.util.List;
 public class ServicioVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int idservicios;
-	private boolean activo;
+	private Boolean activo;
 	private String descripcion;
 	private BigDecimal descuento;
 	private Date fechaCreacion;
@@ -46,11 +46,11 @@ public class ServicioVO implements Serializable {
 		this.idservicios = idservicios;
 	}
 
-	public boolean isActivo() {
+	public Boolean isActivo() {
 		return activo;
 	}
 
-	public void setActivo(boolean activo) {
+	public void setActivo(Boolean activo) {
 		this.activo = activo;
 	}
 

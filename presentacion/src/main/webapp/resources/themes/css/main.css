@@ -450,16 +450,32 @@ section.navbar{
 	color:#111111;
 	display:inline-block;
 	font-weight:bold;
-	font-size:11px;
+	font-size:15px;
+	margin:15px 0 0px 0;
+}
+.product-box p.category{
+	color:#eb4800;
+}
+.product-box p.title{
+	text-transform:uppercase;
+	color:#111111;
+	display:inline-block;
+	font-weight:bold;
+	font-size:15px;
 	margin:15px 0 0px 0;
 }
 .product-box a.category{
 	color:#eb4800;
 }
 .product-box p.price{
-	font-size:20px;
+	font-size:16px;
 	font-weight:300;
 	padding:10px 0;
+}
+.product-box p.name{
+	font-size:16px;
+	font-weight:300;
+	padding:2px 0;
 }
 /* end product box */
 

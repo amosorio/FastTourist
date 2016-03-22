@@ -26,6 +26,12 @@ public class AlojamientoVO implements Serializable {
 
 	private String telefono;
 
+	private Boolean piscina;
+	
+	private Boolean wifi;
+	
+	private Boolean aire_acondicionado;
+	
 	private List<ServicioVO> servicioVO;
 
 	public AlojamientoVO() {
@@ -109,6 +115,30 @@ public class AlojamientoVO implements Serializable {
 
 	public void setServicioVO(List<ServicioVO> servicioVO) {
 		this.servicioVO = servicioVO;
+	}
+
+	public Boolean getPiscina() {
+		return piscina;
+	}
+
+	public void setPiscina(Boolean piscina) {
+		this.piscina = piscina;
+	}
+
+	public Boolean getWifi() {
+		return wifi;
+	}
+
+	public void setWifi(Boolean wifi) {
+		this.wifi = wifi;
+	}
+
+	public Boolean getAire_acondicionado() {
+		return aire_acondicionado;
+	}
+
+	public void setAire_acondicionado(Boolean aire_acondicionado) {
+		this.aire_acondicionado = aire_acondicionado;
 	}
 
 }

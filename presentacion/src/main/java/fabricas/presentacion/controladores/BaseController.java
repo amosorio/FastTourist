@@ -9,17 +9,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class BaseController {
 
-	private static final String VIEW_INDEX = "indexAlojamiento";
+
 	private static final String CONTACTENOS = "contactenos";
 	private static final String REGISTRO = "registro";
 	private static final String CARRITO = "carrito";	
 	private final static org.slf4j.Logger logger = LoggerFactory.getLogger(BaseController.class);
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String welcome(ModelMap model) {
-		return VIEW_INDEX;
-
-	}
+	
 	/**
 	 * Controlador de la pantalla Contactenos
 	 * @param model
