@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.List;
 
 
@@ -29,6 +31,7 @@ public class Alimentacion implements Serializable {
 
 	//bi-directional many-to-one association to Servicio
 	@OneToMany(mappedBy="alimentacion")
+	@JsonBackReference
 	private List<Servicio> servicios;
 
 	public Alimentacion() {

@@ -1,7 +1,11 @@
 package fabricas.entidades;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +20,8 @@ import java.util.List;
 @NamedQueries({
 	@NamedQuery(name="Servicio.findAll", query="SELECT s FROM Servicio s"),
 	@NamedQuery(name="Servicio.findById", query="SELECT s FROM Servicio s where s.idservicios = :id"),
+	@NamedQuery(name="Servicio.findAlojamiento", query="SELECT s FROM Servicio s WHERE s.activo=1 AND s.categoria=1 ORDER BY s.alojamiento.fechaEntrada desc")
+
 }) 
 
 public class Servicio implements Serializable {
@@ -24,7 +30,7 @@ public class Servicio implements Serializable {
 	@Id
 	private int idservicios;
 
-	private boolean activo;
+	private Boolean activo;
 
 	private String descripcion;
 
@@ -71,21 +77,25 @@ public class Servicio implements Serializable {
 	//bi-directional many-to-one association to Alimentacion
 	@ManyToOne
 	@JoinColumn(name="alimentacion")
+	@JsonManagedReference
 	private Alimentacion alimentacion;
 
 	//bi-directional many-to-one association to Alojamiento
 	@ManyToOne
 	@JoinColumn(name="alojamiento")
+	@JsonManagedReference
 	private Alojamiento alojamiento;
 
 	//bi-directional many-to-one association to Paseosecologico
 	@ManyToOne
 	@JoinColumn(name="paseo_eco")
+	@JsonManagedReference
 	private Paseosecologico paseosecologico;
 
 	//bi-directional many-to-one association to Transporte
 	@ManyToOne
 	@JoinColumn(name="transporte")
+	@JsonManagedReference
 	private Transporte transporte;
 
 	public Servicio() {
@@ -99,11 +109,11 @@ public class Servicio implements Serializable {
 		this.idservicios = idservicios;
 	}
 
-	public boolean  getActivo() {
+	public Boolean getActivo() {
 		return this.activo;
 	}
 
-	public void setActivo(boolean  activo) {
+	public void setActivo(Boolean  activo) {
 		this.activo = activo;
 	}
 

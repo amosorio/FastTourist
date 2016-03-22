@@ -1,7 +1,11 @@
 package fabricas.entidades;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.List;
 
 
@@ -24,6 +28,7 @@ public class Paseosecologico implements Serializable {
 
 	//bi-directional many-to-one association to Servicio
 	@OneToMany(mappedBy="paseosecologico")
+	@JsonBackReference
 	private List<Servicio> servicios;
 
 	public Paseosecologico() {
