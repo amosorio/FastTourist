@@ -68,6 +68,19 @@ public class RestAlojamiento {
 
 	}
 
+	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces={MediaType.APPLICATION_JSON_VALUE +"; charset=UTF-8"})
+	public ResponseEntity<Servicio> getProducto(@PathVariable int id) {
+
+		EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
+		em.getTransaction().begin();
+		
+		Servicio alojamiento = (Servicio) em.createNamedQuery("Servicio.findById")
+				.setParameter("id", id)
+				.getSingleResult();
+
+		return new ResponseEntity<Servicio>(alojamiento, HttpStatus.OK);
+	}
+	
 	/**
 	 * Metodo encargado de generar el query a partir 
 	 * de la lista de parametros recibidos
