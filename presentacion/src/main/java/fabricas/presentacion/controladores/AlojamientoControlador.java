@@ -18,7 +18,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import fabricas.entidades.Calificaciones;
 import fabricas.presentacion.VOs.CalificacionesVO;
 import fabricas.presentacion.VOs.ServicioVO;
 import fabricas.presentacion.VOs.UsuarioVO;

@@ -4,7 +4,7 @@
 		<nav id="menu" class="pull-left">
 			<ul>
 				<li><a href="/presentacion/" class="paginaActiva">Alojamiento</a></li>
-				<li><a href="./products.html">Transporte</a>
+				<li><a href="/presentacion/transporte/">Transporte</a>
 				<li><a href="./products.html">Alimentacion</a></li>
 				<li><a href="./products.html">Paseos Turisticos</a></li>
 				<li><a href="./products.html">Paquetes</a></li>
@@ -117,14 +117,16 @@
 							<p class="name">${servicio.alojamiento.nombre}</p>
 							<p class="title">$${servicio.precio}</p>
 							<p><b>Descuento $${servicio.descuento}</b></p>
+												
+							
 							<c:if test="${servicio.alojamiento.wifi}">
-								<span class="title" title="Wifi"><i class="icon-signal"></i></span>
+								<span class="title" title="Wifi"><img src="${pageContext.request.contextPath}/resources/themes/images/wifi.png" title="Internet Gratis" width="16px"/></span>
 							</c:if>
 							<c:if test="${servicio.alojamiento.piscina}">
-								<span class="title" title="Piscina"><i class="icon-heart"></i></span>
+								<span class="title" title="Piscina"><img src="${pageContext.request.contextPath}/resources/themes/images/pool.png" title="Piscina" width="16px"/></span>
 							</c:if>
 							<c:if test="${servicio.alojamiento.aire_acondicionado}">
-							   <span class="title" title="Aire Acondicionado"><i class="icon-cog"></i></span>
+							   <span class="title" title="Aire Acondicionado"><img src="${pageContext.request.contextPath}/resources/themes/images/winter.png" title="Aire Acondicionado"  width="16px"/></span>
 							</c:if>
 							<p class="category">${servicio.alojamiento.ciudad}</p>
 							<p class="buttons center">	
@@ -158,13 +160,13 @@
 							<p class="title">$${servicio.precio}</p>
 							<p><b>Descuento $${servicio.descuento}</b></p>
 							<c:if test="${servicio.alojamiento.wifi}">
-								<span class="title" title="Wifi"><i class="icon-signal"></i></span>
+								<span class="title" title="Wifi"><img src="${pageContext.request.contextPath}/resources/themes/images/wifi.png" title="Internet Gratis" width="16px"/></span>
 							</c:if>
 							<c:if test="${servicio.alojamiento.piscina}">
-								<span class="title" title="Piscina"><i class="icon-heart"></i></span>
+								<span class="title" title="Piscina"><img src="${pageContext.request.contextPath}/resources/themes/images/pool.png" title="Piscina" width="16px"/></span>
 							</c:if>
 							<c:if test="${servicio.alojamiento.aire_acondicionado}">
-							   <span class="title" title="Aire Acondicionado"><i class="icon-cog"></i></span>
+							   <span class="title" title="Aire Acondicionado"><img src="${pageContext.request.contextPath}/resources/themes/images/winter.png" title="Aire Acondicionado"  width="16px"/></span>
 							</c:if>
 							<p class="category">${servicio.alojamiento.ciudad}</p>
 							<p class="buttons center">	
