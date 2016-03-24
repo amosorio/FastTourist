@@ -19,7 +19,8 @@
 		<section class="main-content">				
 			<div class="row">						
 				<div class="span9">
-					<div class="row">						
+					<div class="row">			
+						<br/>			
 						<table class="table table-striped" style="width:95% !important; margin-left:40px">
 							<thead>
 								<tr>
@@ -28,6 +29,7 @@
 									<th>Origen</th>
 									<th>Destino</th>
 									<th>Descripcion</th>
+									<th>Detalles</th>
 									<th>Proveedor</th>
 									<th>Categoria</th>
 									<th>Tipo</th>
@@ -39,7 +41,8 @@
 									<td><fmt:formatDate type="both" value="${servicio.transporte.fechaSalida}"/></td>
 									<td><span>${servicio.transporte.origen}</span></td>
 									<td><span>${servicio.transporte.destino}</span></td>
-									<td><span>${servicio.transporte.nombre}</span></td>
+									<td><span>${servicio.transporte.nombre} - ${servicio.nombre}</span></td>
+									<td><span>${servicio.descripcion}</span></td>
 									<td><span>${servicio.usuario.nombre}</span></td>
 									<td><span>${servicio.categoria.nombre}</span></td>
 									<td><span>${servicio.transporte.tipotransporte.nombre}</span></td>
@@ -90,8 +93,6 @@
 						<br/>
 						<h4 class="title">Precio:<strong> $${servicio.precio}</strong></h4>	
 						<h4 class="title">Descuento:<strong> $${servicio.descuento}</strong></h4>
-						<h4 class="title">Puestos Disponibles:<strong> $${servicio.transporte.cantPersonas}</strong></h4>
-						<br/>
 						<form class="form-inline">
 								<p class="buttons center">
 								<label>Cantidad:</label>
@@ -100,7 +101,7 @@
 								<button class="btn btn-inverse" type="submit">Agregar Al Carrito</button>
 								</p>
 						</form>
-						
+						<h5 class="title">Puestos Disponibles:<strong> ${servicio.transporte.cantPersonas}</strong></h5>
 					</div>
 				</div>
 			</div>
