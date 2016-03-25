@@ -56,6 +56,12 @@ public class Servicio implements Serializable {
 	@OneToMany(mappedBy="servicio")
 	private List<Calificaciones> calificaciones;
 
+
+	//bi-directional many-to-one association to Pregunta
+	@OneToMany(mappedBy="servicio")
+	@JsonManagedReference
+	private List<Preguntas> preguntas;
+
 	//bi-directional many-to-one association to Categoria
 	@ManyToOne
 	@JoinColumn(name="categoria")
@@ -64,14 +70,14 @@ public class Servicio implements Serializable {
 	//bi-directional many-to-many association to Paquete
 	@ManyToMany
 	@JoinTable(
-		name="servicios_por_paquete"
-		, joinColumns={
-			@JoinColumn(name="servicio")
+			name="servicios_por_paquete"
+			, joinColumns={
+					@JoinColumn(name="servicio")
 			}
-		, inverseJoinColumns={
-			@JoinColumn(name="paquete")
+			, inverseJoinColumns={
+					@JoinColumn(name="paquete")
 			}
-		)
+			)
 	private List<Paquete> paquetes;
 
 	//bi-directional many-to-one association to Usuario
@@ -192,6 +198,28 @@ public class Servicio implements Serializable {
 		return calificaciones;
 	}
 
+
+	public List<Preguntas> getPreguntas() {
+		return this.preguntas;
+	}
+
+	public void setPreguntas(List<Preguntas> preguntas) {
+		this.preguntas = preguntas;
+	}
+
+	public Preguntas addPreguntas(Preguntas preguntas) {
+		getPreguntas().add(preguntas);
+		preguntas.setServicio(this);
+
+		return preguntas;
+	}
+
+	public Preguntas removePreguntas(Preguntas preguntas) {
+		getPreguntas().remove(preguntas);
+		preguntas.setServicio(null);
+
+		return preguntas;
+	}
 	public Categoria getCategoria() {
 		return this.categoria;
 	}

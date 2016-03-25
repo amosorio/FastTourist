@@ -48,6 +48,12 @@ public class Usuario implements Serializable {
 	@OneToMany(mappedBy="usuario")
 	@JsonManagedReference
 	private List<Calificaciones> Calificacioness;
+	
+
+	//bi-directional many-to-one association to Pregunta
+	@OneToMany(mappedBy="usuario")
+	@JsonBackReference
+	private List<Preguntas> preguntas;
 
 	//bi-directional many-to-one association to Log
 	@OneToMany(mappedBy="usuarioBean")
@@ -241,6 +247,27 @@ public class Usuario implements Serializable {
 		return transaccione;
 	}
 
+	public List<Preguntas> getPreguntas() {
+		return this.preguntas;
+	}
+
+	public void setPreguntas(List<Preguntas> preguntas) {
+		this.preguntas = preguntas;
+	}
+
+	public Preguntas addPreguntas(Preguntas preguntas) {
+		getPreguntas().add(preguntas);
+		preguntas.setUsuario(this);
+
+		return preguntas;
+	}
+
+	public Preguntas removePreguntas(Preguntas preguntas) {
+		getPreguntas().remove(preguntas);
+		preguntas.setUsuario(null);
+
+		return preguntas;
+	}
 	public Perfiles getPerfil() {
 		return this.perfil;
 	}

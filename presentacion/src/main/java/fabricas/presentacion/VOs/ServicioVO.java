@@ -28,6 +28,7 @@ public class ServicioVO implements Serializable {
 	private AlojamientoVO alojamiento;
 	private PaseosecologicoVO paseosecologico;
 	private TransporteVO transporte;
+	private List<PreguntasVO> preguntas;
 
 	public ServicioVO() {
 	}
@@ -168,6 +169,20 @@ public class ServicioVO implements Serializable {
 
 	public void setCategoria(CategoriaVO categoria) {
 		this.categoria = categoria;
+	}
+
+	/**
+	 * @return the preguntas
+	 */
+	public List<PreguntasVO> getPreguntas() {
+		return preguntas;
+	}
+
+	/**
+	 * @param preguntas the preguntas to set
+	 */
+	public void setPreguntas(List<PreguntasVO> preguntas) {
+		this.preguntas = preguntas;
 	}
 
 	
