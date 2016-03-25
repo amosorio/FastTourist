@@ -1,7 +1,6 @@
 package fabricas.presentacion.VOs;
 
 import java.io.Serializable;
-
 import java.util.Date;
 import java.util.List;
 
@@ -45,6 +44,8 @@ public class UsuarioVO implements Serializable {
 	private List<TransaccionesVO> transacciones;
 
 	private PerfilesVO perfil;
+	
+	private List<PreguntasVO> preguntas;
 
 	public UsuarioVO() {
 	}
@@ -167,5 +168,19 @@ public class UsuarioVO implements Serializable {
 
 	public void setPerfil(PerfilesVO perfile) {
 		this.perfil = perfile;
+	}
+
+	/**
+	 * @return the preguntas
+	 */
+	public List<PreguntasVO> getPreguntas() {
+		return preguntas;
+	}
+
+	/**
+	 * @param preguntas the preguntas to set
+	 */
+	public void setPreguntas(List<PreguntasVO> preguntas) {
+		this.preguntas = preguntas;
 	}
 }

@@ -194,4 +194,60 @@ public class TransporteControlador {
 		return modelAndView;
 
 	}
+	
+	
+	
+	/**
+	 * Controlador de la pantalla de ver informacion detallada de servicio de transporte
+	 * @param id
+	 * @param model
+	 * @return
+	 * @throws IOException 
+	 * @throws RestClientException 
+	 * @throws JsonMappingException 
+	 * @throws JsonParseException 
+	 */
+	@RequestMapping(value = "/getTransporte/{id}/", method = RequestMethod.POST)
+	public ModelAndView getTransporte(@PathVariable("id")int id,@RequestParam(value="inputPregunta", required=false) String pregunta){
+
+		ServicioVO servicio=null;
+		ObjectMapper mapper = new ObjectMapper();
+		RestTemplate restTemplate = new RestTemplate();
+
+		String result="";
+		// Se almacena la pregunta relacionada al servicio
+		if (pregunta != null && !pregunta.isEmpty()) {
+			pregunta = pregunta.replace("?", "");
+			result = restTemplate.getForObject(
+					"http://localhost:8080/logica/preguntas/set/" + pregunta
+							+ "/" + id, String.class);
+		}
+		
+		result = restTemplate.getForObject("http://localhost:8080/logica/transporte/get/" + id, String.class);
+		try {
+			servicio = mapper.readValue(result, ServicioVO.class);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		//Calculan las estrellas de calificacion
+		int promCalificacion = 0;
+		int cont = 0;
+		for (CalificacionesVO calificacion : servicio.getCalificaciones()) {
+			cont++;
+			promCalificacion = promCalificacion + calificacion.getValor();
+		}
+
+
+		//Se envian los objetos a la pantalla
+		ModelAndView modelAndView = new ModelAndView(VIEW_VER_TRANSPORTE);
+		modelAndView.addObject("servicio", servicio);
+		if(cont >0){
+			promCalificacion = (int) Math.ceil(promCalificacion/cont);
+			modelAndView.addObject("promCalificacion", promCalificacion);
+		}
+
+		return modelAndView;
+
+	}
 }

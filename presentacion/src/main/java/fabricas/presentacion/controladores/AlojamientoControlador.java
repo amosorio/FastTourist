@@ -1,6 +1,7 @@
 package fabricas.presentacion.controladores;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -19,6 +20,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fabricas.presentacion.VOs.CalificacionesVO;
+import fabricas.presentacion.VOs.PreguntasVO;
 import fabricas.presentacion.VOs.ServicioVO;
 import fabricas.presentacion.VOs.UsuarioVO;
 
@@ -149,6 +151,48 @@ public class AlojamientoControlador {
 			System.out.println(e.getMessage());
 		}
 
+		//Calculan las estrellas de calificacion
+		int promCalificacion = 0;
+		int cont = 0;
+		for (CalificacionesVO calificacion : servicio.getCalificaciones()) {
+			cont++;
+			promCalificacion = promCalificacion + calificacion.getValor();
+		}
+
+
+		//Se envian los objetos a la pantalla
+		ModelAndView modelAndView = new ModelAndView(VIEW_VER_ALOJAMIENTO);
+		modelAndView.addObject("servicio", servicio);
+		if(cont >0){
+			promCalificacion = (int) Math.ceil(promCalificacion/cont);
+			modelAndView.addObject("promCalificacion", promCalificacion);
+		}
+
+		return modelAndView;
+
+	}
+	
+	@RequestMapping(value = "/getAlojamiento/{id}/", method = RequestMethod.POST)
+	public ModelAndView getAlojamiento(@PathVariable("id")int id,@RequestParam(value="inputPregunta", required=false) String pregunta ){
+
+		ServicioVO servicio=null;
+		ObjectMapper mapper = new ObjectMapper();
+		RestTemplate restTemplate = new RestTemplate();
+		String result = "";
+		//Se almacena la pregunta relacionada al servicio
+		if(pregunta != null && !pregunta.isEmpty()){
+			pregunta = pregunta.replace("?", "");
+			result = restTemplate.getForObject("http://localhost:8080/logica/preguntas/set/" + pregunta + "/" + id, String.class);
+		}
+		
+		//Se consulta el servicio, para que recupere la nueva pregunta
+		result = restTemplate.getForObject("http://localhost:8080/logica/alojamiento/get/" + id, String.class);
+		try {
+			servicio = mapper.readValue(result, ServicioVO.class);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
 		//Calculan las estrellas de calificacion
 		int promCalificacion = 0;
 		int cont = 0;
