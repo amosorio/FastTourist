@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.math.BigDecimal;
@@ -61,6 +62,11 @@ public class Servicio implements Serializable {
 	@OneToMany(mappedBy="servicio")
 	@JsonManagedReference
 	private List<Preguntas> preguntas;
+	
+	//bi-directional many-to-one association to Carrito
+	@OneToMany(mappedBy="servicio")
+	@JsonBackReference
+	private List<Carrito> carrito;
 
 	//bi-directional many-to-one association to Categoria
 	@ManyToOne
@@ -109,6 +115,11 @@ public class Servicio implements Serializable {
 	@JsonManagedReference
 	private Transporte transporte;
 
+	//bi-directional many-to-one association to Transacciones
+	@OneToMany(mappedBy="servicio")
+	@JsonBackReference
+	private List<Transacciones> transacciones;
+	
 	public Servicio() {
 	}
 
@@ -203,6 +214,14 @@ public class Servicio implements Serializable {
 		return this.preguntas;
 	}
 
+	public List<Carrito> getCarrito() {
+		return carrito;
+	}
+
+	public void setCarrito(List<Carrito> carrito) {
+		this.carrito = carrito;
+	}
+
 	public void setPreguntas(List<Preguntas> preguntas) {
 		this.preguntas = preguntas;
 	}
@@ -274,6 +293,14 @@ public class Servicio implements Serializable {
 
 	public void setTransporte(Transporte transporte) {
 		this.transporte = transporte;
+	}
+
+	public List<Transacciones> getTransacciones() {
+		return transacciones;
+	}
+
+	public void setTransacciones(List<Transacciones> transacciones) {
+		this.transacciones = transacciones;
 	}
 
 }
