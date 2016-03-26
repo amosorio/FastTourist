@@ -12,7 +12,6 @@ public class BaseController {
 
 	private static final String CONTACTENOS = "contactenos";
 	private static final String REGISTRO = "registro";
-	private static final String CARRITO = "carrito";	
 	private final static org.slf4j.Logger logger = LoggerFactory.getLogger(BaseController.class);
 
 	
@@ -34,17 +33,6 @@ public class BaseController {
 	@RequestMapping(value = "/registro", method = RequestMethod.GET)
 	public String registrarse(ModelMap model) {
 		return REGISTRO;
-
-	}
-	
-	/**
-	 * Controlador de la pantalla de el carrito de compras
-	 * @param model
-	 * @return
-	 */
-	@RequestMapping(value = "/carrito", method = RequestMethod.GET)
-	public String verCarrito(ModelMap model) {
-		return CARRITO;
 
 	}
 }

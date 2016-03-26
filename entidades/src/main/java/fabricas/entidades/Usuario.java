@@ -55,6 +55,16 @@ public class Usuario implements Serializable {
 	@JsonBackReference
 	private List<Preguntas> preguntas;
 
+	//bi-directional many-to-one association to Carrito
+	@OneToMany(mappedBy="usuario")
+	@JsonBackReference
+	private List<Carrito> carrito;
+	
+	//bi-directional many-to-one association to Transacciones
+	@OneToMany(mappedBy="usuario")
+	@JsonBackReference
+	private List<Transacciones> transacciones;
+	
 	//bi-directional many-to-one association to Log
 	@OneToMany(mappedBy="usuarioBean")
 	
@@ -64,11 +74,6 @@ public class Usuario implements Serializable {
 	@OneToMany(mappedBy="usuario")
 	
 	private List<Servicio> servicios;
-
-	//bi-directional many-to-one association to Transaccione
-	@OneToMany(mappedBy="usuario")
-	
-	private List<Transacciones> transacciones;
 
 	//bi-directional many-to-one association to Perfile
 	@ManyToOne
@@ -181,6 +186,14 @@ public class Usuario implements Serializable {
 		return Calificaciones;
 	}
 
+	public List<Carrito> getCarrito() {
+		return carrito;
+	}
+
+	public void setCarrito(List<Carrito> carrito) {
+		this.carrito = carrito;
+	}
+
 	public List<Log> getLogs() {
 		return this.logs;
 	}
@@ -233,18 +246,18 @@ public class Usuario implements Serializable {
 		this.transacciones = transacciones;
 	}
 
-	public Transacciones addTransaccione(Transacciones transaccione) {
-		getTransacciones().add(transaccione);
-		transaccione.setUsuario(this);
+	public Transacciones addTransaccione(Transacciones transacciones) {
+		getTransacciones().add(transacciones);
+		transacciones.setUsuario(this);
 
-		return transaccione;
+		return transacciones;
 	}
 
-	public Transacciones removeTransaccione(Transacciones transaccione) {
-		getTransacciones().remove(transaccione);
-		transaccione.setUsuario(null);
+	public Transacciones removeTransaccione(Transacciones transacciones) {
+		getTransacciones().remove(transacciones);
+		transacciones.setUsuario(null);
 
-		return transaccione;
+		return transacciones;
 	}
 
 	public List<Preguntas> getPreguntas() {
