@@ -22,6 +22,7 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
 		<class>fabricas.entidades.Tipotransporte</class>
 		<class>fabricas.entidades.Transporte</class>
 		<class>fabricas.entidades.Preguntas</class>
+		<class>fabricas.entidades.Carrito</class>
 		
 		<properties>
 			<property name="javax.persistence.jdbc.url"
