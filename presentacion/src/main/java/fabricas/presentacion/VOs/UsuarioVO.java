@@ -46,6 +46,8 @@ public class UsuarioVO implements Serializable {
 	private PerfilesVO perfil;
 	
 	private List<PreguntasVO> preguntas;
+	
+	private List<CarritoVO> carrito;
 
 	public UsuarioVO() {
 	}
@@ -182,5 +184,19 @@ public class UsuarioVO implements Serializable {
 	 */
 	public void setPreguntas(List<PreguntasVO> preguntas) {
 		this.preguntas = preguntas;
+	}
+
+	/**
+	 * @return the carrito
+	 */
+	public List<CarritoVO> getCarrito() {
+		return carrito;
+	}
+
+	/**
+	 * @param carrito the carrito to set
+	 */
+	public void setCarrito(List<CarritoVO> carrito) {
+		this.carrito = carrito;
 	}
 }

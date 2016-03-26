@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+
 /**
  * The persistent class for the servicios database table.
  * 
@@ -29,6 +30,8 @@ public class ServicioVO implements Serializable {
 	private PaseosecologicoVO paseosecologico;
 	private TransporteVO transporte;
 	private List<PreguntasVO> preguntas;
+	private List<CarritoVO> carrito;
+	private List<TransaccionesVO> transacciones;
 
 	public ServicioVO() {
 	}
@@ -183,6 +186,28 @@ public class ServicioVO implements Serializable {
 	 */
 	public void setPreguntas(List<PreguntasVO> preguntas) {
 		this.preguntas = preguntas;
+	}
+
+	/**
+	 * @return the carrito
+	 */
+	public List<CarritoVO> getCarrito() {
+		return carrito;
+	}
+
+	/**
+	 * @param carrito the carrito to set
+	 */
+	public void setCarrito(List<CarritoVO> carrito) {
+		this.carrito = carrito;
+	}
+
+	public List<TransaccionesVO> getTransacciones() {
+		return transacciones;
+	}
+
+	public void setTransacciones(List<TransaccionesVO> transacciones) {
+		this.transacciones = transacciones;
 	}
 
 	
