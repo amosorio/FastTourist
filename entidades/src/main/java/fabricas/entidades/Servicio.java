@@ -55,6 +55,7 @@ public class Servicio implements Serializable {
 
 	//bi-directional many-to-one association to Calificacione
 	@OneToMany(mappedBy="servicio")
+	@JsonManagedReference
 	private List<Calificaciones> calificaciones;
 
 
@@ -89,6 +90,7 @@ public class Servicio implements Serializable {
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne
 	@JoinColumn(name="proveedor")
+	@JsonManagedReference
 	private Usuario usuario;
 
 	//bi-directional many-to-one association to Alimentacion
