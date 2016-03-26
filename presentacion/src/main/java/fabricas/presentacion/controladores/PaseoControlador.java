@@ -65,6 +65,12 @@ public class PaseoControlador {
 			promCalificacion = (int) Math.ceil(promCalificacion / cont);
 			modelAndView.addObject("promCalificacion", promCalificacion);
 		}
+		
+		//Se debe revisar si hay usuario autenticado y tiene ha comprado el producto para habilitar el boton calificar
+		//Por ahora se quema que si
+		//TODO
+		String permisos = "ok";
+		modelAndView.addObject("permisos", permisos);
 
 		return modelAndView;
 
@@ -80,46 +86,31 @@ public class PaseoControlador {
 	 */
 	@RequestMapping(value = "/getPaseo/{id}/", method = RequestMethod.POST)
 	public ModelAndView getPaseo(
-			@PathVariable("id") int id,
-			@RequestParam(value = "inputPregunta", required = false) String pregunta) {
-
-		ServicioVO servicio = null;
-		ObjectMapper mapper = new ObjectMapper();
+			@PathVariable("id")int id,
+			@RequestParam(value="inputPregunta", required=false) String pregunta,
+			@RequestParam(value="inputComentario", required=false) String inputComentario,
+			@RequestParam(value="valor", required=false) String valor){
+		
 		RestTemplate restTemplate = new RestTemplate();
-		String result="";
-		// Se almacena la pregunta relacionada al servicio
-		if (pregunta != null && !pregunta.isEmpty()) {
+		String result = "";
+		
+		//TODO:Recuperar el id del usuario autenticado
+				//Temporal se carga por defecto Pedro Perez
+		int idUsuario =4;
+		
+		//Se almacena la pregunta relacionada al servicio
+		if(pregunta != null && !pregunta.isEmpty()){
 			pregunta = pregunta.replace("?", "");
-			result = restTemplate.getForObject(
-					"http://localhost:8080/logica/preguntas/set/" + pregunta
-							+ "/" + id, String.class);
+			result = restTemplate.getForObject("http://localhost:8080/logica/preguntas/set/" + pregunta + "/" + id, String.class);
+		}else if(valor != null && !valor.isEmpty()){
+			String comentario = (inputComentario.isEmpty() ? "Sin comentarios":inputComentario);
+			result = restTemplate.getForObject("http://localhost:8080/logica/calificaciones/set/"+ valor +"/" +comentario +"/" +id +"/" +idUsuario, String.class); 
 		}
-
-		result = restTemplate.getForObject(
-				"http://localhost:8080/logica/paseo/get/" + id, String.class);
-		try {
-			servicio = mapper.readValue(result, ServicioVO.class);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-
-		// Calculan las estrellas de calificacion
-		int promCalificacion = 0;
-		int cont = 0;
-		for (CalificacionesVO calificacion : servicio.getCalificaciones()) {
-			cont++;
-			promCalificacion = promCalificacion + calificacion.getValor();
-		}
-
-		// Se envian los objetos a la pantalla
-		ModelAndView modelAndView = new ModelAndView(VIEW_VER_PASEO);
-		modelAndView.addObject("servicio", servicio);
-		if (cont > 0) {
-			promCalificacion = (int) Math.ceil(promCalificacion / cont);
-			modelAndView.addObject("promCalificacion", promCalificacion);
-		}
-
-		return modelAndView;
+		
+		
+		
+		ModelAndView view=new ModelAndView("redirect:/paseo/getPaseo/"+id+"/");
+		return view;
 
 	}
 }

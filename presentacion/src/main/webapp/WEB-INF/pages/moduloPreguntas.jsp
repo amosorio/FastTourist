@@ -44,18 +44,7 @@
 				</c:forEach>
 			</div>
 			<div class="tab-pane" id="calificaciones">
-				<table class="table table-striped shop_attributes">
-					<tbody>
-						<tr class="">
-							<th>Size</th>
-							<td>Large, Medium, Small, X-Large</td>
-						</tr>
-						<tr class="alt">
-							<th>Colour</th>
-							<td>Orange, Yellow</td>
-						</tr>
-					</tbody>
-				</table>
+				<%@include file="moduloCalificaciones.jsp"%>
 			</div>
 		</div>
 	</div>

@@ -35,7 +35,7 @@ public class UsuarioVO implements Serializable {
 	private String telefono;
 	
 	
-	private List<CalificacionesVO> Calificacioness;
+	private List<CalificacionesVO> Calificaciones;
 
 	private List<LogVO> logs;
 	
@@ -132,12 +132,12 @@ public class UsuarioVO implements Serializable {
 		this.telefono = telefono;
 	}
 
-	public List<CalificacionesVO> getCalificacioness() {
-		return Calificacioness;
+	public List<CalificacionesVO> getCalificaciones() {
+		return Calificaciones;
 	}
 
-	public void setCalificacioness(List<CalificacionesVO> calificacioness) {
-		Calificacioness = calificacioness;
+	public void setCalificaciones(List<CalificacionesVO> calificaciones) {
+		Calificaciones = calificaciones;
 	}
 
 	public List<LogVO> getLogs() {
