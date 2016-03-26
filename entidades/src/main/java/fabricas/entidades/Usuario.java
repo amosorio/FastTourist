@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.Date;
@@ -17,7 +18,10 @@ import java.util.List;
  */
 @Entity
 @Table(name="usuarios")
-@NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u")
+@NamedQueries({
+	@NamedQuery(name="Usuario.findAll", query="SELECT u FROM Usuario u"),
+	@NamedQuery(name="Usuario.findById", query="SELECT u FROM Usuario u where u.idusuario = :id")
+	})
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -46,8 +50,8 @@ public class Usuario implements Serializable {
 	
 	//bi-directional many-to-one association to Calificaciones
 	@OneToMany(mappedBy="usuario")
-	@JsonManagedReference
-	private List<Calificaciones> Calificacioness;
+	@JsonIgnore
+	private List<Calificaciones> Calificaciones;
 	
 
 	//bi-directional many-to-one association to Pregunta
@@ -72,7 +76,7 @@ public class Usuario implements Serializable {
 
 	//bi-directional many-to-one association to Servicio
 	@OneToMany(mappedBy="usuario")
-	
+	@JsonBackReference
 	private List<Servicio> servicios;
 
 	//bi-directional many-to-one association to Perfile
@@ -163,28 +167,15 @@ public class Usuario implements Serializable {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-
-	public List<Calificaciones> getCalificacioness() {
-		return this.Calificacioness;
+	@JsonIgnore
+	public List<Calificaciones> getCalificaciones() {
+		return this.Calificaciones;
+	}
+	@JsonIgnore
+	public void setCalificaciones(List<Calificaciones> Calificaciones) {
+		this.Calificaciones = Calificaciones;
 	}
 
-	public void setCalificacioness(List<Calificaciones> Calificacioness) {
-		this.Calificacioness = Calificacioness;
-	}
-
-	public Calificaciones addCalificaciones(Calificaciones Calificaciones) {
-		getCalificacioness().add(Calificaciones);
-		Calificaciones.setUsuario(this);
-
-		return Calificaciones;
-	}
-
-	public Calificaciones removeCalificaciones(Calificaciones Calificaciones) {
-		getCalificacioness().remove(Calificaciones);
-		Calificaciones.setUsuario(null);
-
-		return Calificaciones;
-	}
 
 	public List<Carrito> getCarrito() {
 		return carrito;
@@ -216,27 +207,14 @@ public class Usuario implements Serializable {
 		return log;
 	}
 
-	/*public List<Servicio> getServicios() {
+	public List<Servicio> getServicios() {
 		return this.servicios;
 	}
 
 	public void setServicios(List<Servicio> servicios) {
 		this.servicios = servicios;
-	}*/
-
-	/*public Servicio addServicio(Servicio servicio) {
-		getServicios().add(servicio);
-		servicio.setUsuario(this);
-
-		return servicio;
 	}
 
-	public Servicio removeServicio(Servicio servicio) {
-		getServicios().remove(servicio);
-		servicio.setUsuario(null);
-
-		return servicio;
-	}*/
 
 	public List<Transacciones> getTransacciones() {
 		return this.transacciones;
@@ -246,19 +224,7 @@ public class Usuario implements Serializable {
 		this.transacciones = transacciones;
 	}
 
-	public Transacciones addTransaccione(Transacciones transacciones) {
-		getTransacciones().add(transacciones);
-		transacciones.setUsuario(this);
-
-		return transacciones;
-	}
-
-	public Transacciones removeTransaccione(Transacciones transacciones) {
-		getTransacciones().remove(transacciones);
-		transacciones.setUsuario(null);
-
-		return transacciones;
-	}
+	
 
 	public List<Preguntas> getPreguntas() {
 		return this.preguntas;
@@ -268,19 +234,7 @@ public class Usuario implements Serializable {
 		this.preguntas = preguntas;
 	}
 
-	public Preguntas addPreguntas(Preguntas preguntas) {
-		getPreguntas().add(preguntas);
-		preguntas.setUsuario(this);
 
-		return preguntas;
-	}
-
-	public Preguntas removePreguntas(Preguntas preguntas) {
-		getPreguntas().remove(preguntas);
-		preguntas.setUsuario(null);
-
-		return preguntas;
-	}
 	public Perfiles getPerfil() {
 		return this.perfil;
 	}
