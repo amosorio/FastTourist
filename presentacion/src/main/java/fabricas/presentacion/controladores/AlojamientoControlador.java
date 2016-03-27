@@ -1,7 +1,6 @@
 package fabricas.presentacion.controladores;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Controller;
@@ -20,7 +19,6 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fabricas.presentacion.VOs.CalificacionesVO;
-import fabricas.presentacion.VOs.PreguntasVO;
 import fabricas.presentacion.VOs.ServicioVO;
 import fabricas.presentacion.VOs.UsuarioVO;
 
