@@ -24,9 +24,8 @@ import java.util.List;
 	@NamedQuery(name="Servicio.findAlojamiento", query="SELECT s FROM Servicio s WHERE s.activo=1 AND s.categoria=1 ORDER BY s.alojamiento.fechaEntrada desc"),
 	@NamedQuery(name="Servicio.findTransporte", query="SELECT s FROM Servicio s WHERE s.activo=1 AND s.categoria=3 ORDER BY s.transporte.fechaSalida desc"),
 	@NamedQuery(name="Servicio.findProveedoresByAlojamiento", query="SELECT DISTINCT(s.usuario)FROM Servicio s WHERE UPPER(s.categoria.nombre) LIKE UPPER('%alojamiento%')"),
-	@NamedQuery(name="Servicio.findProveedoresByTransporte", query="SELECT DISTINCT(s.usuario)FROM Servicio s WHERE UPPER(s.categoria.nombre) LIKE UPPER('%transporte%')")
-
-
+	@NamedQuery(name="Servicio.findProveedoresByTransporte", query="SELECT DISTINCT(s.usuario)FROM Servicio s WHERE UPPER(s.categoria.nombre) LIKE UPPER('%transporte%')"),
+	@NamedQuery(name="Servicio.findServicioPaseos",query="SELECT s FROM Servicio s WHERE s.categoria=4")
 
 }) 
 
