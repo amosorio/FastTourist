@@ -4,9 +4,9 @@
 				<nav id="menu" class="pull-left">
 					<ul>
 						<li><a href="/presentacion/">Alojamiento</a></li>
-						<li><a href="./products.html">Transporte</a>
+						<li><a href="/presentacion/transporte/">Transporte</a>
 						<li><a href="./products.html">Alimentacion</a></li>	
-						<li><a href="./" class="paginaActiva">Paseos Turisticos</a></li>
+						<li><a href="/presentacion/paseos/paseos" class="paginaActiva">Paseos Turisticos</a></li>
 						<li><a href="./products.html">Paquetes</a></li>																					
 					</ul>
 				</nav>
