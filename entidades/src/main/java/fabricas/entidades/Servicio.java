@@ -84,6 +84,7 @@ public class Servicio implements Serializable {
 					@JoinColumn(name="paquete")
 			}
 			)
+	@JsonManagedReference
 	private List<Paquete> paquetes;
 
 	//bi-directional many-to-one association to Usuario

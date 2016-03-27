@@ -91,16 +91,14 @@
 						</c:if>
 					</div>
 					<br />
-					<form class="form-inline">
-						<p class="buttons center">
-							<label>Cantidad:</label> <input type="number" class="input-mini"
-								placeholder="1"> <br />
-							<br />
-							<button class="btn btn-inverse" type="submit">Agregar Al
-								Carrito</button>
-						</p>
-					</form>
-
+					<form action="#" method="post" class="form-inline">
+								<p class="buttons center">
+								<label>Cantidad:</label>
+								<input type="number" class="input-mini" placeholder="" name="carrito" max="1" min="1" required="required">
+								<br/><br/>
+								<button class="btn btn-inverse" type="submit">Agregar Al Carrito</button>
+								</p>
+						</form>
 				</div>
 			</div>
 		</div>

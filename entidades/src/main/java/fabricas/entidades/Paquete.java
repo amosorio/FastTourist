@@ -1,7 +1,11 @@
 package fabricas.entidades;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +37,7 @@ public class Paquete implements Serializable {
 
 	//bi-directional many-to-many association to Servicio
 	@ManyToMany(mappedBy="paquetes")
+	@JsonBackReference
 	private List<Servicio> servicios;
 
 	public Paquete() {
