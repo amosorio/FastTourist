@@ -54,7 +54,10 @@
 			</div>
 			<div class="span8">
 				<div class="account pull-right">
-					<ul class="user-menu">				
+					<ul class="user-menu">	
+						<c:if test="${not empty usuarioAutenticado}">
+						<li>Bienvenido <span style="color:#eb4800">${usuarioAutenticado}</span></li>
+						</c:if>		
 						<li><a href="/presentacion/pagar/carrito">Mi Carrito</a></li>
 						<li><a href="/presentacion/ingresar">Ingresar</a></li>					
 						<li><a href="/presentacion/registro">Registrarse</a></li>		

@@ -3,6 +3,8 @@ package fabricas.presentacion.controladores;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -64,7 +68,8 @@ public class AlojamientoControlador {
 		ModelAndView modelAndView = new ModelAndView(VIEW_BUSCAR_ALOJAMIENTO);
 		modelAndView.addObject("servicios", servicios);
 		modelAndView.addObject("proveedores", proveedores);
-
+		//Pasar a pantalla el usuario autenticado		
+		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
 		return modelAndView;
 	}
 
@@ -121,6 +126,7 @@ public class AlojamientoControlador {
 		ModelAndView modelAndView = new ModelAndView(VIEW_BUSCAR_ALOJAMIENTO);
 		modelAndView.addObject("servicios", servicios);
 		modelAndView.addObject("proveedores", proveedores);
+		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
 		return modelAndView;
 	}
 
@@ -167,12 +173,9 @@ public class AlojamientoControlador {
 			modelAndView.addObject("promCalificacion", promCalificacion);
 		}
 
-		//Se debe revisar si hay usuario autenticado y tiene ha comprado el producto para habilitar el boton calificar
-		//Por ahora se quema que si
-		//TODO
-		String permisos = "ok";
-		modelAndView.addObject("permisos", permisos);
-		
+		//Se verrifica si se debe habilitar el boton para calificar
+		modelAndView.addObject("permisos", utilidades.getPermisos(id));
+		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
 		return modelAndView;
 
 	}
@@ -187,10 +190,9 @@ public class AlojamientoControlador {
 		RestTemplate restTemplate = new RestTemplate();
 		String result = "";
 		
-		//TODO:Recuperar el id del usuario autenticado
-				//Temporal se carga por defecto Pedro Perez
-		int idUsuario =4;
-		
+		//Se recupera el id del usuario autenticado
+		Integer idUsuario = utilidades.getSessionIdUser();
+
 		//Si se envió a almacenar una pregunta
 		if(pregunta != null && !pregunta.isEmpty()){
 			pregunta = pregunta.replace("?", "");

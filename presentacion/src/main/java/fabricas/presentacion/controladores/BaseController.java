@@ -22,8 +22,10 @@ public class BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/contactenos", method = RequestMethod.GET)
-	public String contactenos(ModelMap model) {
-		return CONTACTENOS;
+	public ModelAndView contactenos(ModelMap model) {
+		ModelAndView modelAndView = new ModelAndView(CONTACTENOS);
+		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
+		return modelAndView;
 	}
 	
 	/**
@@ -32,8 +34,10 @@ public class BaseController {
 	 * @return
 	 */
 	@RequestMapping(value = "/registro", method = RequestMethod.GET)
-	public String registrarse(ModelMap model) {
-		return REGISTRO;
+	public ModelAndView registrarse(ModelMap model) {
+		ModelAndView modelAndView = new ModelAndView(REGISTRO);
+		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
+		return modelAndView;
 	}
 	
 	@RequestMapping(value = "/registro", method = RequestMethod.POST)
@@ -58,6 +62,7 @@ public class BaseController {
 
 		ModelAndView modelAndView = new ModelAndView(REGISTRO);
 		modelAndView.addObject("response", response);
+		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
 		return modelAndView;
 		
 	}
