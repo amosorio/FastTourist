@@ -14,8 +14,6 @@
 		</section>
 		<section class="header_text sub">
 
-
-	<div class="row">
 		<section class="span3 col">
 			<div class="block" style="text-align: left !important">
 				<h4 class="title">
@@ -56,20 +54,19 @@
 			</div>
 		</section>
 
-		<div class="span8">
-			<h4 class="title">
-				<span class="text">
-					<strong>Paseos </strong> Ecológicos más solicitados
-				</span>
-			</h4>
-		</div>
-	</div>
-
 <!-- Aqui van algunos paseos de la BD -->
-
+<section class="span0 col" style="margin-left:60px">
+</section>
 <section class="span4 col">
 	<div class="row">
 		<div class="span8">
+			<!--  div class="span8">
+				<h4 class="title">
+					<span class="text">
+						<strong>Paseos </strong> Ecológicos más solicitados
+					</span>
+				</h4>
+			</div-->
 			<ul class="thumbnails listing-products">
 				<c:forEach items="${servicios}" var="servicio" begin="0" end="1"> 
 					<li class="span4">
@@ -85,7 +82,7 @@
 							<p><b>Descuento $${servicio.descuento}</b></p>
 							<p class="category">${servicio.paseosecologico.lugar}</p>
 							<p class="buttons center">	
-								<a href="/presentacion/paseos/getServicio/${servicio.idservicios}/" class="title">${servicio.paseosecologico.nombre}			
+								<a href="/presentacion/paseos/getServicio/${servicio.idservicios}/" class="title">			
 									<button class="btn" type="button" >Ver Detalle</button>
 								</a>
 							</p>
@@ -114,9 +111,9 @@
 							<p class="name">${servicio.paseosecologico.nombre}</p>
 							<p class="title">$${servicio.precio}</p>
 							<p><b>Descuento $${servicio.descuento}</b></p>
-							<p class="category">${servicio.paseosecologico.lugar}</p>
-							<p class="buttons center">	
-								<a href="/presentacion/paseos/getServicio/${servicio.idservicios}/" class="title">${servicio.paseosecologico.nombre}			
+							<p class="category">${servicio.paseosecologico.lugar}</p><br>
+							<p class="buttons center">
+								<a href="/presentacion/paseos/getServicio/${servicio.idservicios}/" class="title">	
 									<button class="btn" type="button" >Ver Detalle</button>
 								</a>
 							</p>

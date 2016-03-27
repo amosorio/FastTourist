@@ -75,7 +75,7 @@ public class PaseosController {
 		//Se obtienen los servicios de alojamineto que coincidan con los criterios de busqueda
 		String url="nombre="+nombre+",lugar="+lugar+",servicio="+servicio;
 
-		String result = restTemplate.getForObject("http://localhost:8080/logica/paseos/filtarPaseos/"+url, String.class);
+		String result = restTemplate.getForObject("http://localhost:8080/logica/paseos/filtrarPaseos/"+url, String.class);
 
 		try {
 			servicios = mapper.readValue(result, new TypeReference<List<ServicioVO>>(){});
@@ -90,7 +90,7 @@ public class PaseosController {
 	}
 	
 	
-	@RequestMapping(value="/paseos/getServicio/{id}/", method=RequestMethod.GET)
+	@RequestMapping(value="/getServicio/{id}/", method=RequestMethod.GET)
 	public ModelAndView darPaseoEcologico(@PathVariable("id")int id, ModelMap model) {		
 		
 		ServicioVO servicio=null;
@@ -121,9 +121,53 @@ public class PaseosController {
 			promCalificacion = (int) Math.ceil(promCalificacion/cont);
 			modelAndView.addObject("promCalificacion", promCalificacion);
 		}
+		
+		//Se debe revisar si hay usuario autenticado y tiene ha comprado el producto para habilitar el boton calificar
+		//Por ahora se quema que si
+		//TODO
+		String permisos = "ok";
+		modelAndView.addObject("permisos", permisos);
 
 		return modelAndView;
 	}
 
+	
+	/**
+	 * Controlador de la pantalla de ver informacion detallada de servicio de
+	 * paseo ecologico *
+	 * 
+	 * @param id
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/getServicio/{id}/", method = RequestMethod.POST)
+	public ModelAndView darPaseoEcologico(
+			@PathVariable("id")int id,
+			@RequestParam(value="inputPregunta", required=false) String pregunta,
+			@RequestParam(value="inputComentario", required=false) String inputComentario,
+			@RequestParam(value="valor", required=false) String valor){
+		
+		RestTemplate restTemplate = new RestTemplate();
+		String result = "";
+		
+		//TODO:Recuperar el id del usuario autenticado
+				//Temporal se carga por defecto Pedro Perez
+		int idUsuario =4;
+		
+		//Se almacena la pregunta relacionada al servicio
+		if(pregunta != null && !pregunta.isEmpty()){
+			pregunta = pregunta.replace("?", "");
+			result = restTemplate.getForObject("http://localhost:8080/logica/preguntas/set/" + pregunta + "/" + id, String.class);
+		}else if(valor != null && !valor.isEmpty()){
+			String comentario = (inputComentario.isEmpty() ? "Sin comentarios":inputComentario);
+			result = restTemplate.getForObject("http://localhost:8080/logica/calificaciones/set/"+ valor +"/" +comentario +"/" +id +"/" +idUsuario, String.class); 
+		}
+		
+		
+		
+		ModelAndView view=new ModelAndView("redirect:/paseos/getServicio/"+id+"/");
+		return view;
+
+	}
 	
 }
