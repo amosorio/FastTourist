@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -115,4 +116,24 @@ public class RestPagos {
 		return "El servicio se ha agregado a carrito";
 	}
 
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/validarCompra/{idServicio}/{idUser}", method = RequestMethod.GET, produces={MediaType.APPLICATION_JSON_VALUE +"; charset=UTF-8"})
+	public String validateCheckoutByUser(@PathVariable int idServicio,@PathVariable int idUser) {
+
+		EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
+		em.getTransaction().begin();
+
+		List<Carrito> carrito = em.createNamedQuery("Transacciones.getByUser").
+					setParameter("idUser", idUser).
+					setParameter("idServicio", idServicio).getResultList();
+		
+		if(carrito == null || carrito.isEmpty()){
+			return "Nok";
+		}else{
+			return "ok";
+		}
+
+		
+	}
 }
