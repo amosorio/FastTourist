@@ -20,7 +20,7 @@ public class RestPaseos {
 
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/getServiciosPaseos", consumes = "application/json", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/getServiciosPaseos", method = RequestMethod.GET, produces={MediaType.APPLICATION_JSON_VALUE +"; charset=UTF-8"})
 	public ResponseEntity<List<Servicio>> getAllServicios() {
 		
 		EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
@@ -33,8 +33,8 @@ public class RestPaseos {
 	}	
 	
 	@SuppressWarnings("unchecked")
-	@RequestMapping(value = "/paseos/filtrarPaseos/{filtros}", 
-	method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/filtrarPaseos/{filtros}", 
+	method = RequestMethod.GET, produces={MediaType.APPLICATION_JSON_VALUE +"; charset=UTF-8"})
 	public ResponseEntity <List<Servicio>> getServicioByFilter(@PathVariable String filtros) {
 		
 		EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
@@ -71,13 +71,13 @@ public class RestPaseos {
 		String query = "SELECT s FROM Servicio s WHERE s.activo=1 AND s.categoria=4 ";
 		
 		if (!nombre.isEmpty()){
-			query = query + "AND s.paseosecologico.nombre="+nombre+" ";
+			query = query + "AND UPPER(s.paseosecologico.nombre) like UPPER('%"+nombre+"%') ";
 		}
 		if(!lugar.isEmpty()){
-			query = query + "AND s.paseosecologico.lugar="+lugar+" ";
+			query = query + "AND UPPER(s.paseosecologico.lugar) like UPPER('%"+lugar+"%') ";
 		}
 		if(!servicio.isEmpty()){
-			query = query + "AND s.nombre = "+servicio+" ";
+			query = query + "AND UPPER(s.nombre) like UPPER('%"+servicio+"%') ";
 		}
 		
 		return query;
