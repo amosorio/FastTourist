@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import fabricas.entidades.Carrito;
 import fabricas.entidades.EstadoTransaccion;
+import fabricas.entidades.Servicio;
 import fabricas.entidades.Transacciones;
+import fabricas.entidades.Usuario;
 
 
 @RestController
@@ -92,5 +94,25 @@ public class RestPagos {
 		return "ok";
 	}
 
+
+	@RequestMapping(value = "/addCarrito/{idServicio}/{idUsuario}", method = RequestMethod.GET, produces={MediaType.APPLICATION_JSON_VALUE +"; charset=UTF-8"})
+	public String addCarito(@PathVariable int idServicio, @PathVariable int idUsuario) {
+
+		EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
+		em.getTransaction().begin();
+
+		Carrito carrito = new Carrito();
+		carrito.setFechaAnadido(new Date());
+		Servicio servicio = new Servicio();
+		servicio.setIdservicios(idServicio);
+		carrito.setServicio(servicio);
+		Usuario usuario= new Usuario();
+		usuario.setIdusuario(idUsuario);
+		carrito.setUsuario(usuario);
+		em.persist(carrito);
+		em.getTransaction().commit();
+		
+		return "El servicio se ha agregado a carrito";
+	}
 
 }
