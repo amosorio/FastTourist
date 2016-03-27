@@ -183,7 +183,8 @@ public class AlojamientoControlador {
 	public ModelAndView getAlojamiento(@PathVariable("id")int id,
 													@RequestParam(value="inputPregunta", required=false) String pregunta,
 													@RequestParam(value="inputComentario", required=false) String inputComentario,
-													@RequestParam(value="valor", required=false) String valor){
+													@RequestParam(value="valor", required=false) String valor,
+													@RequestParam(value="carrito", required=false) Integer carrito){
 
 		RestTemplate restTemplate = new RestTemplate();
 		String result = "";
@@ -192,13 +193,17 @@ public class AlojamientoControlador {
 				//Temporal se carga por defecto Pedro Perez
 		int idUsuario =4;
 		
-		//Se almacena la pregunta relacionada al servicio
+		//Si se envió a almacenar una pregunta
 		if(pregunta != null && !pregunta.isEmpty()){
 			pregunta = pregunta.replace("?", "");
 			result = restTemplate.getForObject("http://localhost:8080/logica/preguntas/set/" + pregunta + "/" + id, String.class);
+		//Si se envió a almacenar una calificacion
 		}else if(valor != null && !valor.isEmpty()){
 			String comentario = (inputComentario.isEmpty() ? "Sin comentarios":inputComentario);
 			result = restTemplate.getForObject("http://localhost:8080/logica/calificaciones/set/"+ valor +"/" +comentario +"/" +id +"/" +idUsuario, String.class); 
+		//Si se envió a agregar al carrito
+		}else if(carrito !=null){
+			result = restTemplate.getForObject("http://localhost:8080/logica/pagos/addCarrito/"+id+"/"+idUsuario, String.class);
 		}
 		
 		

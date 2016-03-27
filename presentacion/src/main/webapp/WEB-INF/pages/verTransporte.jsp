@@ -61,10 +61,10 @@
 						<br/>
 						<h4 class="title">Precio:<strong> $${servicio.precio}</strong></h4>	
 						<h4 class="title">Descuento:<strong> $${servicio.descuento}</strong></h4>
-						<form class="form-inline">
+						<form action="#" method="post" class="form-inline">
 								<p class="buttons center">
 								<label>Cantidad:</label>
-								<input type="number" class="input-mini" placeholder="1">
+								<input type="number" class="input-mini" placeholder="" name="carrito" max="1" min="1" required="required">
 								<br/><br/>
 								<button class="btn btn-inverse" type="submit">Agregar Al Carrito</button>
 								</p>
