@@ -1,6 +1,5 @@
 package fabricas.presentacion.controladores;
 
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,16 +8,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 @Controller
 public class BaseController {
 
 
 	private static final String CONTACTENOS = "contactenos";
 	private static final String REGISTRO = "registro";
-	private final static org.slf4j.Logger logger = LoggerFactory.getLogger(BaseController.class);
 
 	
 	/**
@@ -53,7 +48,6 @@ public class BaseController {
 		){
 		
 		String response = null;
-		ObjectMapper mapper = new ObjectMapper();
 		RestTemplate restTemplate = new RestTemplate();
 		
 		String urlBasico=nombre+","+apellido+","+email;

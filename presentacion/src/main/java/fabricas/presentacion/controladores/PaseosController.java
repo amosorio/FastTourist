@@ -15,9 +15,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fabricas.presentacion.VOs.CalificacionesVO;
-import fabricas.presentacion.VOs.PaseosecologicoVO;
 import fabricas.presentacion.VOs.ServicioVO;
-import fabricas.presentacion.VOs.UsuarioVO;
 
 @Controller
 @RequestMapping("/paseos")
