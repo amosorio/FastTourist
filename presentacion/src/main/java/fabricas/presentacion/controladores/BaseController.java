@@ -41,7 +41,7 @@ public class BaseController {
 		return REGISTRO;
 	}
 	
-	@RequestMapping(value = "/registro/", method = RequestMethod.POST)
+	@RequestMapping(value = "/registro", method = RequestMethod.POST)
 	public ModelAndView registro(
 		@RequestParam(value="nombre", required=true) String nombre, 
 		@RequestParam(value="apellido", required=true) String apellido,
@@ -56,15 +56,11 @@ public class BaseController {
 		ObjectMapper mapper = new ObjectMapper();
 		RestTemplate restTemplate = new RestTemplate();
 		
-		String url="nombre="+nombre+",apellido="+apellido+",email="+email+",password="+password+",direccion="+direccion+
-				",telefono="+telefono+",tipoUsuario="+tipoUsuario;
+		String urlBasico=nombre+","+apellido+","+email;
+		String urlAvanzado =password+","+direccion;
+		String urlAvanzado2 =telefono+","+tipoUsuario;
 
-		String result = restTemplate.getForObject("http://localhost:8080/logica/registro/nuevo/"+url, String.class);
-		try {
-			response = mapper.readValue(result, new TypeReference<String>(){});
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
+		response = restTemplate.getForObject("http://localhost:8080/logica/registro/"+urlBasico+"/"+urlAvanzado+"/"+urlAvanzado2, String.class);
 
 		ModelAndView modelAndView = new ModelAndView(REGISTRO);
 		modelAndView.addObject("response", response);
