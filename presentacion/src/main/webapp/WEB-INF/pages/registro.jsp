@@ -27,21 +27,21 @@
 				<span class="text"><strong>Formulario </strong> de
 					Autenticación</span>
 			</h4>
-			<form action="#" method="post">
+			<form action="registro/auth" method="post">
 				<input type="hidden" name="next" value="/">
 				<fieldset>
 					<div class="control-group">
 						<label class="control-label">Correo Electrónico</label>
 						<div class="controls">
 							<input type="text" placeholder="Ingresa tu email"
-								id="username" class="input-xlarge">
+								id="username" name="correo"class="input-xlarge" required="required">
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">Contraseña</label>
 						<div class="controls">
 							<input type="password" placeholder="Ingresa tu contraseña"
-								id="password" class="input-xlarge">
+								id="password" name="password" class="input-xlarge" required="required">
 						</div>
 					</div>
 					<div class="control-group">
@@ -61,7 +61,7 @@
 			<h4 class="title">
 				<span class="text"><strong>Formulario</strong> de Registro</span>
 			</h4>
-			<form action="#" method="post" class="form-stacked">
+			<form action="registro/registro" method="post" class="form-stacked">
 				<fieldset>
 					<div class="control-group">
 						<label class="control-label">* Usuario</label>

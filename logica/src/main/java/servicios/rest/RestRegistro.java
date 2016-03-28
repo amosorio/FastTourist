@@ -1,5 +1,5 @@
 package servicios.rest;
-
+ 
 import java.util.Date;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -75,4 +75,47 @@ public class RestRegistro {
 
 		return new ResponseEntity <String> ("Ya hay un usuario registrado con ese correo!", HttpStatus.OK);		
 	}
+	
+	@RequestMapping(value = "/auth/{filtros}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity <String> checkAuth(@PathVariable String filtros) {
+		EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
+		em.getTransaction().begin();
+
+		String correo="";
+		String password="";
+		String[]values = filtros.split(",");
+		correo=values[0];
+		password=values[1];
+
+		try{
+			Usuario usuario = (Usuario) em.createNamedQuery("Usuario.authenticate")
+					.setParameter("email", correo)
+					.setParameter("password",password)
+					.getSingleResult();
+			}catch(NoResultException e){
+			return new ResponseEntity <String> ("Error de autenticación. Revisa correo y/o contraseña", HttpStatus.OK);
+		}	
+
+		return new ResponseEntity <String> ("Te has autenticado correctamente", HttpStatus.OK);
+	}
+	
+	
+	@RequestMapping(value="/darUsuario/{email}")
+	public ResponseEntity <String> darUsuario(@PathVariable String email){
+		EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
+		em.getTransaction().begin();
+
+		
+		try{Usuario usr = (Usuario) em.createNamedQuery("Usuario.findByEmail")
+			.setParameter("email", email)
+			.getSingleResult();
+		
+		String resp = usr.getNombre()+":"+usr.getApellido()+":"+usr.getIdusuario()+":"+usr.getEmail();
+		return new ResponseEntity <String> (resp,HttpStatus.OK);
+		}
+		catch(NoResultException e){			
+			return new ResponseEntity <String> ("No encontrado",HttpStatus.OK);
+		}
+	}
+
 }
