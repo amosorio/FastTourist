@@ -20,6 +20,7 @@ public class BaseController {
 
 	private static final String CONTACTENOS = "contactenos";
 	private static final String REGISTRO = "registro";
+	private static final String INDEX = "indexAlojamiento";
 
 	
 	/**
@@ -116,4 +117,5 @@ public class BaseController {
 		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
 		return modelAndView;
 	}
+	
 }

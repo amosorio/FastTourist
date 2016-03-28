@@ -212,4 +212,14 @@ public class AlojamientoControlador {
 		return view;
 
 	}
+	
+	@RequestMapping(value="/index")
+	public ModelAndView cerrarSesion(){
+		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+		HttpSession session = attr.getRequest().getSession(true);
+		session.invalidate();
+		ModelAndView modelAndView = new ModelAndView(VIEW_BUSCAR_ALOJAMIENTO);
+		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
+		return modelAndView;
+	}
 }
