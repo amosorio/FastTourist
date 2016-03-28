@@ -63,6 +63,7 @@ public class PagosControlador {
 		modelAndView.addObject("valor", valor);
 		modelAndView.addObject("impuestos", impuestos);
 		modelAndView.addObject("total", total);
+		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
 		return modelAndView;
 
 	}
@@ -107,6 +108,7 @@ public class PagosControlador {
 		modelAndView.addObject("valor", valor);
 		modelAndView.addObject("impuestos", impuestos);
 		modelAndView.addObject("total", total);
+		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
 		return modelAndView;
 
 	}
@@ -134,6 +136,7 @@ public class PagosControlador {
 		ModelAndView modelAndView = new ModelAndView(PAGAR);
 		modelAndView.addObject("carrito", carrito);
 		modelAndView.addObject("pagoExitoso",result);
+		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
 		return modelAndView;
 
 	}

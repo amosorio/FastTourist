@@ -36,7 +36,7 @@
 					<c:forEach items="${carrito}" var="carrito">
 					<tr>
 						<td><input type="checkbox" value="${carrito.idCarrito}" name="checks"></td>
-						<td width="150px"><img alt="${carrito.servicio.nombre}" src="${carrito.servicio.rutaGaleria}" style="with:150px !important"></td>
+						<td width="150px"><img alt="${carrito.servicio.nombre}" src="${carrito.servicio.rutaGaleria}" width="150px" style="with:150px !important"></td>
 						<td>${carrito.servicio.nombre}</td>
 						<td>1</td>
 						<td>${carrito.servicio.precio}</td>
@@ -54,9 +54,16 @@
 			</p>
 			<hr />
 			<p class="buttons center">
-				<button class="btn" type="button" onclick="assign();">Remover</button>
-				<a href="/presentacion/pagar/checkout"><button
-						class="btn btn-inverse" type="submit" id="checkout">Comprar</button></a>
+				<c:if test="${not empty usuarioAutenticado}">
+					<button class="btn" type="button" onclick="assign();">Remover</button>
+					<a href="/presentacion/pagar/checkout"><button
+							class="btn btn-inverse" type="submit" id="checkout">Comprar</button></a>
+				</c:if>
+				<c:if test="${empty usuarioAutenticado}">
+					<button class="btn" type="button" onclick="assign();" disabled="disabled">Remover</button>
+					<a href="/presentacion/pagar/checkout"><button
+							class="btn btn-inverse" type="submit" id="checkout" disabled="disabled">Comprar</button></a>
+				</c:if>	
 			</p>
 		</div>
 	</div>

@@ -89,7 +89,12 @@
 								<label>Cantidad:</label>
 								<input type="number" class="input-mini" placeholder="" name="carrito" max="1" min="1" required="required">
 								<br/><br/>
-								<button class="btn btn-inverse" type="submit">Agregar Al Carrito</button>
+								<c:if test="${not empty usuarioAutenticado}">
+									<button class="btn btn-inverse" type="submit">Agregar Al Carrito</button>
+								</c:if>	
+								<c:if test="${empty usuarioAutenticado}">
+									<a href="/presentacion/registro"><button class="btn btn-inverse">Agregar Al Carrito</button></a>
+								</c:if>	
 								</p>
 						</form>
 						

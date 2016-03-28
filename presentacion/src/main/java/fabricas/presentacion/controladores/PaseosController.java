@@ -55,7 +55,7 @@ public class PaseosController {
 
 		ModelAndView modelAndView = new ModelAndView(VIEW_PASEOS);
 		modelAndView.addObject("servicios", servicios);
-//		modelAndView.addObject("paseos", paseos);
+		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
 
 		return modelAndView;
 	}
@@ -83,7 +83,7 @@ public class PaseosController {
 		
 		ModelAndView modelAndView = new ModelAndView(VIEW_PASEOS);
 		modelAndView.addObject("servicios", servicios);
-		
+		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
 		return modelAndView;
 	}
 	
@@ -120,12 +120,9 @@ public class PaseosController {
 			modelAndView.addObject("promCalificacion", promCalificacion);
 		}
 		
-		//Se debe revisar si hay usuario autenticado y tiene ha comprado el producto para habilitar el boton calificar
-		//Por ahora se quema que si
-		//TODO
-		String permisos = "ok";
-		modelAndView.addObject("permisos", permisos);
-
+		//Se verrifica si se debe habilitar el boton para calificar
+		modelAndView.addObject("permisos", utilidades.getPermisos(id));
+		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
 		return modelAndView;
 	}
 
@@ -149,9 +146,8 @@ public class PaseosController {
 		RestTemplate restTemplate = new RestTemplate();
 		String result = "";
 		
-		//TODO:Recuperar el id del usuario autenticado
-				//Temporal se carga por defecto Pedro Perez
-		int idUsuario =4;
+		//Se recupera el id del usuario autenticado
+		Integer idUsuario = utilidades.getSessionIdUser();
 		
 		//Se almacena la pregunta relacionada al servicio
 		if(pregunta != null && !pregunta.isEmpty()){

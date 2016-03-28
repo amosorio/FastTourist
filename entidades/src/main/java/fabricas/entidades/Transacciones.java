@@ -16,7 +16,8 @@ import java.util.Date;
 @Entity
 @NamedQueries({
 @NamedQuery(name="Transacciones.findAll", query="SELECT t FROM Transacciones t"),
-@NamedQuery(name="Transacciones.getMaxId", query="SELECT MAX(t.idtransacciones) FROM Transacciones t")
+@NamedQuery(name="Transacciones.getMaxId", query="SELECT MAX(t.idtransacciones) FROM Transacciones t"),
+@NamedQuery(name="Transacciones.getByUser", query="SELECT t FROM Transacciones t WHERE t.usuario.idusuario= :idUser AND t.servicio.idservicios = :idServicio")
 })
 public class Transacciones implements Serializable {
 	private static final long serialVersionUID = 1L;
