@@ -21,12 +21,15 @@ import java.util.List;
 @NamedQueries({
 	@NamedQuery(name="Servicio.findAll", query="SELECT s FROM Servicio s"),
 	@NamedQuery(name="Servicio.findById", query="SELECT s FROM Servicio s where s.idservicios = :id"),
+	@NamedQuery(name="Servicio.findAlimentacionById",query="SELECT s FROM Servicio s WHERE s.categoria=2 AND s.idservicios = :id"), 
+	@NamedQuery(name="Servicio.findAlimentacion", query="SELECT s FROM Servicio s WHERE s.activo=1 AND s.categoria=2"),
 	@NamedQuery(name="Servicio.findAlojamiento", query="SELECT s FROM Servicio s WHERE s.activo=1 AND s.categoria=1 ORDER BY s.alojamiento.fechaEntrada desc"),
 	@NamedQuery(name="Servicio.findTransporte", query="SELECT s FROM Servicio s WHERE s.activo=1 AND s.categoria=3 ORDER BY s.transporte.fechaSalida desc"),
+	@NamedQuery(name="Servicio.findProveedoresByAlimentacion", query="SELECT DISTINCT(s.usuario)FROM Servicio s WHERE UPPER(s.categoria.nombre) LIKE UPPER('%alimentacion%')"),
 	@NamedQuery(name="Servicio.findProveedoresByAlojamiento", query="SELECT DISTINCT(s.usuario)FROM Servicio s WHERE UPPER(s.categoria.nombre) LIKE UPPER('%alojamiento%')"),
 	@NamedQuery(name="Servicio.findProveedoresByTransporte", query="SELECT DISTINCT(s.usuario)FROM Servicio s WHERE UPPER(s.categoria.nombre) LIKE UPPER('%transporte%')"),
-	@NamedQuery(name="Servicio.findServicioPaseos",query="SELECT s FROM Servicio s WHERE s.categoria=4")
-
+	@NamedQuery(name="Servicio.findServicioPaseos",query="SELECT s FROM Servicio s WHERE s.categoria=4"),
+	@NamedQuery(name="Servicio.findPaquetes",query="SELECT s FROM Servicio s inner join s.paquetes paquete WHERE paquete.idpaquetes = :id")
 }) 
 
 public class Servicio implements Serializable {
@@ -70,6 +73,7 @@ public class Servicio implements Serializable {
 
 	//bi-directional many-to-one association to Categoria
 	@ManyToOne
+	@JsonManagedReference
 	@JoinColumn(name="categoria")
 	private Categoria categoria;
 

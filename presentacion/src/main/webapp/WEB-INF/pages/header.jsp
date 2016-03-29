@@ -5,6 +5,8 @@
 <head>
 		<meta charset="utf-8">
 		<title>FastTourist</title>
+		<link rel="SHORT CUT" href="${pageContext.request.contextPath}/resources/themes/images/Aircraft.ico">
+		<link rel="icon" href="${pageContext.request.contextPath}/resources/themes/images/Aircraft.ico" type="image/ico">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<!--[if ie]><meta content='IE=8' http-equiv='X-UA-Compatible'/><![endif]-->
@@ -50,7 +52,7 @@
 	<div id="top-bar" class="container">
 		<div class="row">
 			<div class="span4">
-				<a href="index.html" class="logo pull-left"><img src="${pageContext.request.contextPath}/resources/themes/images/logo.png" class="site_logo" alt="" height="37px"></a>
+				<a href="/presentacion" class="logo pull-left"><img src="${pageContext.request.contextPath}/resources/themes/images/logo.png" class="site_logo" alt="" height="37px"></a>
 			</div>
 			<div class="span8">
 				<div class="account pull-right">

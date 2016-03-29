@@ -33,6 +33,7 @@ public class Calificaciones implements Serializable {
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne
 	@JoinColumn(name="cliente")
+	@JsonBackReference
 	private Usuario usuario;
 
 	//bi-directional many-to-one association to Servicio

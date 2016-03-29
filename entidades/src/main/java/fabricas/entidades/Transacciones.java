@@ -31,6 +31,7 @@ public class Transacciones implements Serializable {
 	//bi-directional many-to-one association to EstadoTransaccion
 	@ManyToOne
 	@JoinColumn(name="estadoTransaccion")
+	@JsonManagedReference
 	private EstadoTransaccion estadoTransaccion;
 
 	//bi-directional many-to-one association to Servicio

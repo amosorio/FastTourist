@@ -1,10 +1,9 @@
 package fabricas.entidades;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.Date;
 import java.util.List;
@@ -16,7 +15,12 @@ import java.util.List;
  */
 @Entity
 @Table(name="paquetes")
-@NamedQuery(name="Paquete.findAll", query="SELECT p FROM Paquete p")
+@NamedQueries({
+	@NamedQuery(name="Paquete.findById", query="SELECT p FROM Paquete p where p.idpaquetes = :id"),
+	@NamedQuery(name="Paquete.findAll", query="SELECT p FROM Paquete p"),
+	
+}) 
+//@NamedQuery(name="Paquete.findServicios",query="SELECT p FROM Paquete p WHERE p.categoria=4")
 public class Paquete implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -37,7 +41,7 @@ public class Paquete implements Serializable {
 
 	//bi-directional many-to-many association to Servicio
 	@ManyToMany(mappedBy="paquetes")
-	@JsonBackReference
+	@JsonIgnore
 	private List<Servicio> servicios;
 
 	public Paquete() {

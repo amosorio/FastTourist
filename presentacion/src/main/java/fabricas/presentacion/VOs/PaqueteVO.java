@@ -1,7 +1,7 @@
 package fabricas.presentacion.VOs;
 
 import java.io.Serializable;
-
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -18,16 +18,13 @@ public class PaqueteVO implements Serializable {
 
 	private String descripcion;
 
-	
-	
-	private Date fechaCreacion;
-
-	
+	private BigDecimal precio;
+		
+	private Date fechaCreacion;	
 	
 	private Date fechaExpiracion;
 
 	private String nombre;
-
 	
 	private List<ServicioVO> servicios;
 
@@ -65,6 +62,14 @@ public class PaqueteVO implements Serializable {
 
 	public void setFechaExpiracion(Date fechaExpiracion) {
 		this.fechaExpiracion = fechaExpiracion;
+	}
+	
+	public BigDecimal getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(BigDecimal precio) {
+		this.precio = precio;
 	}
 
 	public String getNombre() {

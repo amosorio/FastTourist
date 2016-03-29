@@ -5,9 +5,9 @@
 			<ul>
 				<li><a href="/presentacion/">Alojamiento</a></li>
 				<li><a href="/presentacion/transporte/">Transporte</a>
-				<li><a href="./products.html" >Alimentacion</a></li>
-				<li><a href="/presentacion/paseos/paseos" class="paginaActiva">Paseos Turisticos</a></li>
-				<li><a href="./products.html">Paquetes</a></li>
+				<li><a href="/presentacion/alimentacion/">Alimentación</a></li>
+				<li><a href="/presentacion/paseos/paseos" class="paginaActiva">Paseos Turísticos</a></li>
+				<li><a href="/presentacion/paquetes/">Paquetes</a></li>
 			</ul>
 		</nav>
 	</div>
