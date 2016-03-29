@@ -61,7 +61,7 @@
 			<h4 class="title">
 				<span class="text"><strong>Formulario</strong> de Registro</span>
 			</h4>
-			<form action="registro/registro" method="post" class="form-stacked">
+			<form action="#" method="post" class="form-stacked">
 				<fieldset>
 					<div class="control-group">
 						<label class="control-label">* Usuario</label>

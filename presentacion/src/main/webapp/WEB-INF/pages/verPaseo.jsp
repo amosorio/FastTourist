@@ -100,7 +100,7 @@
 									<button class="btn btn-inverse" type="submit">Agregar Al Carrito</button>
 								</c:if>	
 								<c:if test="${empty usuarioAutenticado}">
-									<a href="/presentacion/registro"><button class="btn btn-inverse">Agregar Al Carrito</button></a>
+									<a href="/presentacion/registro"><button class="btn btn-inverse" type="button">Agregar Al Carrito</button></a>
 								</c:if>	
 								</p>
 						</form>

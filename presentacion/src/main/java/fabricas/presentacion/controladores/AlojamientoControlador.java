@@ -191,7 +191,11 @@ public class AlojamientoControlador {
 		String result = "";
 		
 		//Se recupera el id del usuario autenticado
-		Integer idUsuario = utilidades.getSessionIdUser();
+		Integer idUsuario = null;
+		if(utilidades.isUserAutenticado()){
+			idUsuario = utilidades.getSessionIdUser();
+		}
+		
 
 		//Si se envió a almacenar una pregunta
 		if(pregunta != null && !pregunta.isEmpty()){
@@ -218,8 +222,7 @@ public class AlojamientoControlador {
 		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 		HttpSession session = attr.getRequest().getSession(true);
 		session.invalidate();
-		ModelAndView modelAndView = new ModelAndView(VIEW_BUSCAR_ALOJAMIENTO);
-		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
-		return modelAndView;
+		ModelAndView view=new ModelAndView("redirect:/");
+		return view;
 	}
 }

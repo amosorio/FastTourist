@@ -2,6 +2,7 @@ package fabricas.presentacion.controladores;
 
 import javax.servlet.http.HttpSession;
 
+import org.hamcrest.core.IsInstanceOf;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -21,7 +22,7 @@ public class utilidades {
 	public static Integer getSessionIdUser(){
 		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 		HttpSession session = attr.getRequest().getSession(true);
-		Integer id = (Integer) session.getAttribute("userId");
+		Integer id = new Integer( session.getAttribute("userId").toString());
 		return id;
 	}
 	/** Retorna si hay un usuario Autenticado*/

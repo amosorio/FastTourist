@@ -69,13 +69,13 @@ public class BaseController {
 
 		if(response.startsWith("Se ha registrado"))
 		{
-			String response2 = restTemplate.getForObject("http://localhost:8080/logica/registro/darUsuario/"+email, String.class);
+			String response2 = restTemplate.getForObject("http://localhost:8080/logica/registro/darUsuario/"+email+"/", String.class);
 			String msj[] = response2.split(":");
 			
 			ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 			HttpSession session = attr.getRequest().getSession(true);
 			session.setAttribute("user", msj[0]+" "+msj[1]);
-			session.setAttribute("userId", msj[2]);
+			session.setAttribute("userId", msj[2].toString());
 			session.setAttribute("userCorreo", msj[3]);
 		}
 		
@@ -108,7 +108,7 @@ public class BaseController {
 			ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 			HttpSession session = attr.getRequest().getSession(true);
 			session.setAttribute("user", msj[0]+" "+msj[1]);
-			session.setAttribute("userId", msj[2]);
+			session.setAttribute("userId", msj[2].toString());
 			session.setAttribute("userCorreo", msj[3]);
 		}
 		

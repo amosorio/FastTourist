@@ -59,13 +59,12 @@
 						<li>Bienvenido <span style="color:#eb4800">${usuarioAutenticado}</span></li>
 						</c:if>		
 						<li><a href="/presentacion/pagar/carrito">Mi Carrito</a></li>
-						<li><a href="/presentacion/ingresar">Ingresar</a></li>
 						<c:choose>
 							<c:when test="${not empty usuarioAutenticado}">
 						<li><a href="/presentacion/index">Salir</a></li>
     						</c:when>
 							<c:otherwise>
-						<li><a href="/presentacion/registro">Registrarse</a></li>		
+						<li><a href="/presentacion/registro">Registrarse/Ingresar</a></li>		
 
 							</c:otherwise>
 						</c:choose>

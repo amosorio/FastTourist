@@ -147,7 +147,10 @@ public class PaseosController {
 		String result = "";
 		
 		//Se recupera el id del usuario autenticado
-		Integer idUsuario = utilidades.getSessionIdUser();
+		Integer idUsuario = null;
+		if(utilidades.isUserAutenticado()){
+			idUsuario = utilidades.getSessionIdUser();
+		}
 		
 		//Se almacena la pregunta relacionada al servicio
 		if(pregunta != null && !pregunta.isEmpty()){
