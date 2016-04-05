@@ -155,11 +155,14 @@ public class RestPaseos {
 		EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
 		em.getTransaction().begin();
 		
-		Paseosecologico producto = (Paseosecologico) em.createNamedQuery("Paseosecologico.findById")
+		Servicio servicio = (Servicio) em.createNamedQuery("Servicio.findById")
 				.setParameter("id", id)
 				.getSingleResult();
 		
+		Paseosecologico producto = servicio.getPaseosecologico();
+		
 		try {
+			em.remove(servicio);
 			em.remove(producto);
 			em.getTransaction().commit();
 		} catch (Exception e) {
@@ -168,7 +171,6 @@ public class RestPaseos {
 			return new ResponseEntity<String>("No se ha podido eliminar el paseo.", HttpStatus.OK);
 		}
 		
-		System.out.println(producto.getNombre()+": "+producto.getLugar()+": "+producto.getIdPaseosEcologicos()+" borrados");			
 		return new ResponseEntity<String>("Se ha eliminado el evento", HttpStatus.OK);
 	}
 	
