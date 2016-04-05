@@ -52,7 +52,23 @@
 
 				</form>
 			</div>
-		</section>
+
+		<c:if test="${not empty perfilUsuario}">
+
+			<div class="block" style="text-align: left !important">
+				<h4 class="title">
+					<span class="text"><strong>Administrador</strong></span>
+				</h4>
+					<div class="control-group">
+						<a href="paseos/crear">Crear Paseo</a>
+					</div>	
+			</div>
+		</c:if>
+		
+	</section>
+		
+		
+<c:if test="${empty nuevoPaseo}">
 
 <!-- Aqui van algunos paseos de la BD -->
 <section class="span0 col" style="margin-left:60px">
@@ -85,6 +101,9 @@
 								<a href="/presentacion/paseos/getServicio/${servicio.idservicios}/" class="title">			
 									<button class="btn" type="button" >Ver Detalle</button>
 								</a>
+								<a href="/presentacion/paseos/eliminar/${servicio.idservicios}/" class="title">			
+									<button class="btn" type="button" >Eliminar</button>
+								</a>
 							</p>
 						</div>
 					</li>
@@ -94,6 +113,8 @@
 	</div>
 	</section>
 </section>
+
+
 
 <section class="main-content">
 	<div class="row">
@@ -116,6 +137,9 @@
 								<a href="/presentacion/paseos/getServicio/${servicio.idservicios}/" class="title">	
 									<button class="btn" type="button" >Ver Detalle</button>
 								</a>
+								<a href="/presentacion/paseos/eliminar/${servicio.idservicios}/" class="title">			
+									<button class="btn" type="button" >Eliminar</button>
+								</a>
 							</p>
 						</div>
 					</li>
@@ -124,5 +148,73 @@
 		</div>
 	</div>
 </section>
+
+</c:if>
+
+<c:if test= "${not empty nuevoPaseo}">
+
+<form action="recibir" method="post" class="form-stacked">
+				<fieldset>
+					<div class="control-group">
+						<label class="control-label">* Descripcion</label>
+						<div class="controls">
+							<input type="text" name="descripcion"
+								placeholder="Ingresa breve descripcion" class="input-xlarge" required="required">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">* Duración</label>
+						<div class="controls">
+							<input type="text" name="duracion" class="input-xlarge"
+								placeholder="Duración aproximada del paseo" required="required">
+						</div>
+						<div class="control-group">
+							<label class="control-label">* Fotos:</label>
+							<div class="controls">
+								<input type="text" name="fotos" placeholder="Ingresa links de fotos que te interesen"
+									class="input-xlarge" required="required">
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label">* Lugar:</label>
+							<div class="controls">
+								<input type="text" name="lugar"
+									placeholder="Ciudad" class="input-xlarge" required="required">
+							</div>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">* Nombre</label>
+						<div class="controls">
+							<input type="text" name="nombre" class="input-xlarge"
+								placeholder="Nombre del paseo" required="required">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">* Precio</label>
+						<div class="controls">
+							<input type="text" name="precio" class="input-xlarge"
+								placeholder="Precio" required="required">
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label">* Requerimientos</label>
+						<div class="controls">
+							<input type="text" name="requerimientos" class="input-xlarge"
+								placeholder="Requerimientos del paseo" required="required">
+						</div>
+					</div>
+
+					<hr>
+					<div class="actions">
+						<input tabindex="9" class="btn btn-inverse large" type="submit"
+							value="Crear">
+					</div>
+				</fieldset>
+			</form>
+
+
+
+</c:if>
 
 <%@include file="footer.jsp"%>			

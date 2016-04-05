@@ -56,6 +56,11 @@ public class PaseosController {
 		ModelAndView modelAndView = new ModelAndView(VIEW_PASEOS);
 		modelAndView.addObject("servicios", servicios);
 		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
+		if(utilidades.getSessionUserRole() != null){
+			if(utilidades.getSessionUserRole().startsWith("Proveedor"))
+				modelAndView.addObject("perfilUsuario",utilidades.getSessionUserRole());
+		}
+		System.out.println("PerfilUser: "+utilidades.getSessionUserRole());
 
 		return modelAndView;
 	}
@@ -168,5 +173,69 @@ public class PaseosController {
 		return view;
 
 	}
+	
+	
+	
+	//-----CRUD-----
+	
+	
+	@RequestMapping(value="/paseos/crear", method = RequestMethod.GET)
+	public ModelAndView redirigirCreate(){
+		
+		ModelAndView modelAndView = new ModelAndView(VIEW_PASEOS);
+		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
+		modelAndView.addObject("nuevoPaseo","nuevoPaseo");
+		return modelAndView;
+	}
+	
+	@RequestMapping(value="/paseos/recibir", method = RequestMethod.POST)
+	public ModelAndView createPaseo(
+			@RequestParam(value="descripcion",required=true)String descrip,
+			@RequestParam(value="duracion",required=true)int duracion,
+			@RequestParam(value="fotos",required=true)String fotos,
+			@RequestParam(value="lugar",required=true)String lugar,
+			@RequestParam(value="nombre",required=true)String nombre,
+			@RequestParam(value="precio",required=true)String precio,
+			@RequestParam(value="requerimientos",required=true)String req){
+		
+		RestTemplate restTemplate = new RestTemplate();
+		String result = "";
+
+		String url = descrip+","+duracion+","+fotos+","+lugar+","+nombre+","+precio+","+req;
+		//Crear Servicio
+		
+		result = restTemplate.getForObject("http://localhost:8080/logica/paseos/crear/"+url, String.class);
+		
+		
+		ModelAndView modelAndView = new ModelAndView(VIEW_PASEOS);
+		modelAndView.addObject("response",result);
+		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
+		
+		return modelAndView;
+	}
+	
+	
+	@RequestMapping(value="/eliminar/{id}/", method = RequestMethod.GET)
+	public ModelAndView eliminarPaseo(
+			@PathVariable("id")String id){
+		
+		RestTemplate restTemplate = new RestTemplate();
+		String result = "";
+		
+		result = restTemplate.getForObject("http://localhost:8080/logica/paseos/eliminar/"+id, String.class);
+		
+		
+		ModelAndView view = new ModelAndView(VIEW_PASEOS);
+		view.addObject("response",result);
+		view.addObject("usuarioAutenticado",utilidades.getSessionUser());
+		
+		
+		return view;
+
+	}	
+	
+	
+	
+	
 	
 }

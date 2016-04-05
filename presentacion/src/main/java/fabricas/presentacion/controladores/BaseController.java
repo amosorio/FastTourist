@@ -77,6 +77,7 @@ public class BaseController {
 			session.setAttribute("user", msj[0]+" "+msj[1]);
 			session.setAttribute("userId", msj[2].toString());
 			session.setAttribute("userCorreo", msj[3]);
+			session.setAttribute("perfil", msj[4]);
 		}
 		
 		ModelAndView modelAndView = new ModelAndView(REGISTRO);
@@ -110,6 +111,8 @@ public class BaseController {
 			session.setAttribute("user", msj[0]+" "+msj[1]);
 			session.setAttribute("userId", msj[2].toString());
 			session.setAttribute("userCorreo", msj[3]);
+			session.setAttribute("perfil", msj[4]);
+			System.out.println(msj[4]);
 		}
 		
 		ModelAndView modelAndView = new ModelAndView(REGISTRO);

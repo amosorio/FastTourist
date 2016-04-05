@@ -110,7 +110,7 @@ public class RestRegistro {
 			.setParameter("email", email)
 			.getSingleResult();
 		
-		String resp = usr.getNombre()+":"+usr.getApellido()+":"+usr.getIdusuario()+":"+usr.getEmail();
+		String resp = usr.getNombre()+":"+usr.getApellido()+":"+usr.getIdusuario()+":"+usr.getEmail()+":"+usr.getPerfil().getNombre();
 		return new ResponseEntity <String> (resp,HttpStatus.OK);
 		}
 		catch(NoResultException e){			

@@ -1,5 +1,8 @@
 package servicios.rest;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -12,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import fabricas.entidades.Categoria;
+import fabricas.entidades.Paseosecologico;
 import fabricas.entidades.Servicio;
 
 @RestController
@@ -85,7 +90,87 @@ public class RestPaseos {
 	}
 	
 	
+	//---------CRUD---------------
 	
+	@RequestMapping(value="/crear/{condiciones}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> crearPaseo(@PathVariable String condiciones){
+		
+		String descripcion = "";
+		int duracion = -1;
+		String fotos = "";
+		String lugar = "";
+		String nombre = "";
+		int precio = -1;
+		String requerimientos = "";
+		
+		String[]values = condiciones.split(",");
+		descripcion = values[0];
+		duracion = Integer.parseInt(values[1]);
+		fotos = values[2];
+		lugar = values[3];
+		nombre = values[4];
+		precio = Integer.parseInt(values[5]);
+		requerimientos = values[6];
+		
+		Paseosecologico paseo = new Paseosecologico();
+		paseo.setDescripcion(descripcion);
+		paseo.setDuracion(duracion);
+		paseo.setFotos(fotos);
+		paseo.setLugar(lugar);
+		paseo.setNombre(nombre);
+		paseo.setPrecio(precio);
+		paseo.setRequerimientos(requerimientos);
+		
+		Servicio serv = new Servicio();
+		serv.setActivo(true);
+		serv.setDescripcion(descripcion);
+		serv.setFechaCreacion(new Date());
+		serv.setNombre(nombre);
+		BigDecimal big = new BigDecimal(precio);
+		serv.setPrecio(big);
+		serv.setDescuento(new BigDecimal(0));
+		serv.setRutaGaleria(fotos);
+		
+		EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
+		em.getTransaction().begin();
+		
+		
+		try {
+			em.persist(paseo);
+			em.persist(serv);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new ResponseEntity <String> ("Ha ocurrido un error. ¡No se ha podido crear el paseo!", HttpStatus.OK);		
+		}
+		
+		return new ResponseEntity <String> ("Creación de paseo satisfactoria", HttpStatus.OK);		
+	}
+	
+	
+	@RequestMapping(value = "/eliminar/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> getById(@PathVariable int id) {
+		
+		EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
+		em.getTransaction().begin();
+		
+		Paseosecologico producto = (Paseosecologico) em.createNamedQuery("Paseosecologico.findById")
+				.setParameter("id", id)
+				.getSingleResult();
+		
+		try {
+			em.remove(producto);
+			em.getTransaction().commit();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return new ResponseEntity<String>("No se ha podido eliminar el paseo.", HttpStatus.OK);
+		}
+		
+		System.out.println(producto.getNombre()+": "+producto.getLugar()+": "+producto.getIdPaseosEcologicos()+" borrados");			
+		return new ResponseEntity<String>("Se ha eliminado el evento", HttpStatus.OK);
+	}
 	
 	
 	
@@ -106,20 +191,6 @@ public class RestPaseos {
 //	}	
 	
 		
-//		@RequestMapping(value = "/filtrar-id", consumes = "application/json", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-//		public ResponseEntity<Paseosecologico> getById(@PathVariable int id) {
-//
-//			EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
-//			em.getTransaction().begin();
-//			
-//			Paseosecologico producto = (Paseosecologico) em.createNamedQuery("Paseosecologico.findById")
-//					.setParameter("id", id)
-//					.getSingleResult();
-//
-//			System.out.println(producto.getNombre()+": "+producto.getLugar()+": "+producto.getIdPaseosEcologicos());			
-//			System.out.println("Pero a veces también salir");
-//			return new ResponseEntity<Paseosecologico>(producto, HttpStatus.OK);
-//		}
 //		
 //		@RequestMapping(value = "/filtrar-nombre", consumes = "application/json", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 //		public ResponseEntity<ArrayList<Paseosecologico>> getByNombre(@PathVariable String nombre) {

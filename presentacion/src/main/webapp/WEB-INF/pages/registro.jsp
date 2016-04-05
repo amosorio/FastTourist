@@ -27,7 +27,7 @@
 				<span class="text"><strong>Formulario </strong> de
 					Autenticación</span>
 			</h4>
-			<form action="/registro/auth" method="post">
+			<form action="registro/auth" method="post">
 				<input type="hidden" name="next" value="/">
 				<fieldset>
 					<div class="control-group">

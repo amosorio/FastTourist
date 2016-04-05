@@ -25,6 +25,18 @@ public class utilidades {
 		Integer id = new Integer( session.getAttribute("userId").toString());
 		return id;
 	}
+	
+	/**Recupera el id del usuario autenticado*/
+	public static String getSessionUserRole(){
+		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+		HttpSession session = attr.getRequest().getSession(true);
+		String perfil = (String) session.getAttribute("perfil");
+		return perfil;
+	}
+	
+	
+	
+	
 	/** Retorna si hay un usuario Autenticado*/
 	public static Boolean isUserAutenticado(){
 		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
