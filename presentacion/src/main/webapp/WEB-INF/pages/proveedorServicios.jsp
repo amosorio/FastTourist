@@ -22,19 +22,19 @@
 	<div class="row">
 		<%@include file="menuProveedor.jsp"%>
 		<div class="span9 col">
-			<table class="table table-striped">
+			<h4 style="text-align: center;color:#eb4800;">SERVICIOS</h4>
+			<table class="table table-striped" id="tablaServicios">
 				<thead>
-					<tr
-						style="font-size: 11px; color: #eb4800; text-transform: uppercase;">
-						<th width="10%" align="center">Foto</th>
-						<th width="10%" align="center">Creación</th>
-						<th width="10%" align="center">Categoría</th>
-						<th width="30%" align="center">Detalle</th>
-						<th width="10%" align="center">Precio</th>
-						<th width="10%" align="center">Descuento</th>
-						<th width="10%" align="center">Estado</th>
-						<th width="5%" align="center">Editar</th>
-						<th width="5%" align="center">Eliminar</th>
+					<tr>
+						<th width="10%">Foto</th>
+						<th width="10%">Creación</th>
+						<th width="10%">Categoría</th>
+						<th width="30%">Nombre</th>
+						<th width="10%">Precio</th>
+						<th width="10%">Descuento</th>
+						<th width="10%">Estado</th>
+						<th width="5%">Ver/Editar</th>
+						<th width="5%">Eliminar</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -45,7 +45,7 @@
 							<td><fmt:formatDate type="both"
 									value="${servicio.fechaCreacion}" /></td>
 							<td><span>${servicio.categoria.nombre}</span></td>
-							<td><span>${servicio.nombre}</span> - <span>${servicio.alojamiento.nombre}</span></td>
+							<td style="text-align: center"><span>${servicio.nombre}</span></td>
 							<td><span>${servicio.precio}</span></td>
 							<td><span>${servicio.descuento}</span></td>
 							<c:choose>

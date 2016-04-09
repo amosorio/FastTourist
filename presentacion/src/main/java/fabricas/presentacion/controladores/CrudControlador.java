@@ -165,7 +165,6 @@ public class CrudControlador {
 		restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 		restTemplate.getMessageConverters().add(new StringHttpMessageConverter());
 
-		//Temporal, se debe capturar el id del proveedor autenticado
 
 		UsuarioVO usuarioVO = new UsuarioVO();
 		usuarioVO.setIdusuario(utilidades.getSessionIdUser());

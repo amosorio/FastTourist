@@ -6168,3 +6168,15 @@ a.badge:focus {
 .affix {
   position: fixed;
 }
+
+
+/* Estilo propio */
+#tablaServicios td{
+	text-align: center;
+}
+#tablaServicios th{
+	text-align: center;
+	font-size: 11px; 
+	color: #eb4800; 
+	text-transform: uppercase;
+}

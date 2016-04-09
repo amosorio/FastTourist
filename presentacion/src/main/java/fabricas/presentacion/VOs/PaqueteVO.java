@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 /**
  * The persistent class for the paquetes database table.
@@ -19,14 +21,16 @@ public class PaqueteVO implements Serializable {
 	private String descripcion;
 
 	private BigDecimal precio;
-		
+	@DateTimeFormat(pattern = "dd-MM-yyyy")	
 	private Date fechaCreacion;	
-	
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date fechaExpiracion;
 
 	private String nombre;
 	
 	private List<ServicioVO> servicios;
+	
+	private UsuarioVO usuario;
 
 	
 	public PaqueteVO() {
@@ -86,5 +90,19 @@ public class PaqueteVO implements Serializable {
 
 	public void setServicios(List<ServicioVO> servicios) {
 		this.servicios = servicios;
+	}
+
+	/**
+	 * @return the usuario
+	 */
+	public UsuarioVO getUsuario() {
+		return usuario;
+	}
+
+	/**
+	 * @param usuario the usuario to set
+	 */
+	public void setUsuario(UsuarioVO usuario) {
+		this.usuario = usuario;
 	}	
 }

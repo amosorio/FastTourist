@@ -12,12 +12,12 @@
 					<li><a href="/presentacion/adminProveedor/crear/">Crear
 							Servicio</a></li>
 				</ul></li>
-			<li class="dropdown"><a href="/presentacion/adminProveedor/"
+			<li class="dropdown"><a href="/presentacion/adminProveedor/paquetes/"
 				data-toggle="dropdown" class="dropdown-toggle">Paquetes de
 					Servicios <b class="caret"></b>
 			</a>
 				<ul class="dropdown-menu">
-					<li><a href="#">Ver Paquetes</a></li>
+					<li><a href="/presentacion/adminProveedor/paquetes/">Ver Paquetes</a></li>
 					<li class="divider"></li>
 					<li><a href="#">Armar Paquete</a></li>
 				</ul></li>

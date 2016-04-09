@@ -210,5 +210,14 @@ public class ServicioVO implements Serializable {
 		this.transacciones = transacciones;
 	}
 
-	
-}
+
+	public boolean equals(Object obj) {
+		if (obj instanceof ServicioVO){
+			if(((ServicioVO)obj).idservicios == this.getIdservicios()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	}
