@@ -79,17 +79,8 @@ public class Servicio implements Serializable {
 	private Categoria categoria;
 
 	//bi-directional many-to-many association to Paquete
-	@ManyToMany
-	@JoinTable(
-			name="servicios_por_paquete"
-			, joinColumns={
-					@JoinColumn(name="servicio")
-			}
-			, inverseJoinColumns={
-					@JoinColumn(name="paquete")
-			}
-			)
-	@JsonManagedReference
+	@ManyToMany(mappedBy="servicios")
+	@JsonBackReference
 	private List<Paquete> paquetes;
 
 	//bi-directional many-to-one association to Usuario

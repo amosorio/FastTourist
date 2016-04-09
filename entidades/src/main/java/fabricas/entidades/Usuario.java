@@ -80,6 +80,11 @@ public class Usuario implements Serializable {
 	@OneToMany(mappedBy="usuario")
 	@JsonBackReference
 	private List<Servicio> servicios;
+	
+	//bi-directional many-to-one association to Servicio
+	@OneToMany(mappedBy="usuario")
+	@JsonBackReference
+	private List<Paquete> paquetes;
 
 	//bi-directional many-to-one association to Perfile
 	@ManyToOne
@@ -243,6 +248,14 @@ public class Usuario implements Serializable {
 
 	public void setPerfil(Perfiles perfil) {
 		this.perfil = perfil;
+	}
+
+	public List<Paquete> getPaquetes() {
+		return paquetes;
+	}
+
+	public void setPaquetes(List<Paquete> paquetes) {
+		this.paquetes = paquetes;
 	}
 
 }
