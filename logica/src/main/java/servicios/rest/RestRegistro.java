@@ -1,22 +1,22 @@
 package servicios.rest;
  
 import java.util.Date;
-import java.util.concurrent.ThreadLocalRandom;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
-import org.hibernate.metamodel.source.hbm.Helper.ValueSourcesAdapter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import VOs.ServicioVO;
+import VOs.UsuarioVO;
 import fabricas.entidades.Perfiles;
-import fabricas.entidades.Servicio;
 import fabricas.entidades.Usuario;
 
 @RestController
@@ -24,79 +24,54 @@ import fabricas.entidades.Usuario;
 public class RestRegistro {
 
 
-	@RequestMapping(value = "/{filtrosBasicos}/{filtrosAvanzados}/{filtrosAvanzados2}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity <String> getAlojamientoByFilter(@PathVariable String filtrosBasicos,@PathVariable String filtrosAvanzados,@PathVariable String filtrosAvanzados2) {
+	@RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity <Usuario> getAlojamientoByFilter(@RequestBody  UsuarioVO usuarioVO) {
 
 		EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
 		em.getTransaction().begin();
-		String nombre="";
-		String apellido="";
-		String email="";
-		String direccion="";
-		String telefono="";
-		Date fecha= new Date();
-		String password="";
-		String perfil="";
-
-		String[]values = filtrosBasicos.split(",");
-		nombre=values[0];
-		apellido=values[1];
-		email=values[2];
-		
-		values = filtrosAvanzados.split(",");
-		password = values[0];
-		direccion=values[1];
-		
-		values = filtrosAvanzados2.split(",");
-		telefono=values[0];
-		perfil=values[1];
 	
-
 		try{
-			Usuario usuario = (Usuario) em.createNamedQuery("Usuario.findByEmail").setParameter("email", email).getSingleResult();
+			em.createNamedQuery("Usuario.findByEmail").setParameter("email", usuarioVO.getEmail()).getSingleResult();
 		}catch(NoResultException e){
 			Usuario usuario = new Usuario();
-			usuario.setNombre(nombre);
-			usuario.setApellido(apellido);
-			usuario.setEmail(email);
-			usuario.setPassword(password);
-			usuario.setDireccion(direccion);
-			usuario.setTelefono(telefono);
-			usuario.setFechaCreacion(fecha);
+			usuario.setNombre(usuarioVO.getNombre());
+			usuario.setApellido(usuarioVO.getApellido());
+			usuario.setEmail(usuarioVO.getEmail());
+			usuario.setPassword(usuarioVO.getPassword());
+			usuario.setDireccion(usuarioVO.getDireccion());
+			usuario.setTelefono(usuarioVO.getTelefono());
+			usuario.setFechaCreacion(new Date());
 			usuario.setLogin("1");
-			usuario.setActivo(true);
+			usuario.setActivo(usuarioVO.isActivo());
 			Perfiles perfiles = new Perfiles();
-			perfiles.setIdperfil(new Integer(perfil));
+			perfiles.setIdperfil(usuarioVO.getPerfil().getIdperfil());
 			usuario.setPerfil(perfiles);
 			em.persist(usuario);
+			em.flush();
 			em.getTransaction().commit();
-			return new ResponseEntity <String> ("Se ha registrado con éxito", HttpStatus.OK);
+			return new ResponseEntity <Usuario> (usuario, HttpStatus.OK);
 		}
 
-		return new ResponseEntity <String> ("Ya hay un usuario registrado con ese correo!", HttpStatus.OK);		
+		return new ResponseEntity <Usuario> (new Usuario(), HttpStatus.OK);		
 	}
 	
 	@RequestMapping(value = "/auth/{filtros}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity <String> checkAuth(@PathVariable String filtros) {
+	public ResponseEntity <Usuario> checkAuth(@PathVariable String filtros) {
 		EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
 		em.getTransaction().begin();
 
-		String correo="";
-		String password="";
 		String[]values = filtros.split(",");
-		correo=values[0];
-		password=values[1];
-
+		Usuario usuario = null;
 		try{
-			Usuario usuario = (Usuario) em.createNamedQuery("Usuario.authenticate")
-					.setParameter("email", correo)
-					.setParameter("password",password)
+			usuario = (Usuario) em.createNamedQuery("Usuario.authenticate")
+					.setParameter("email", values[0])
+					.setParameter("password",values[1])
 					.getSingleResult();
 			}catch(NoResultException e){
-			return new ResponseEntity <String> ("Error de autenticación. Revisa correo y/o contraseña", HttpStatus.OK);
+			return new ResponseEntity <Usuario> (new Usuario(), HttpStatus.OK);
 		}	
 
-		return new ResponseEntity <String> ("Te has autenticado correctamente", HttpStatus.OK);
+		return new ResponseEntity <Usuario> (usuario, HttpStatus.OK);
 	}
 	
 	
@@ -110,7 +85,7 @@ public class RestRegistro {
 			.setParameter("email", email)
 			.getSingleResult();
 		
-		String resp = usr.getNombre()+":"+usr.getApellido()+":"+usr.getIdusuario()+":"+usr.getEmail()+":"+usr.getPerfil().getNombre();
+		String resp = usr.getNombre()+":"+usr.getApellido()+":"+usr.getIdusuario()+":"+usr.getEmail();
 		return new ResponseEntity <String> (resp,HttpStatus.OK);
 		}
 		catch(NoResultException e){			

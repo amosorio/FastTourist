@@ -1,6 +1,8 @@
 package servicios.rest;
 
 
+import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,10 +11,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import utilidades.EnumCategorias;
+import VOs.ServicioVO;
+import fabricas.entidades.Alojamiento;
+import fabricas.entidades.Categoria;
 import fabricas.entidades.Servicio;
 import fabricas.entidades.Usuario;
 
@@ -36,7 +43,7 @@ public class RestAlojamiento {
 		return new ResponseEntity <List<Usuario>> (proveedores, HttpStatus.OK);
 
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value = "/", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity <List<Servicio>> getAlojamiento() {
@@ -73,14 +80,14 @@ public class RestAlojamiento {
 
 		EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
 		em.getTransaction().begin();
-		
+
 		Servicio alojamiento = (Servicio) em.createNamedQuery("Servicio.findById")
 				.setParameter("id", id)
 				.getSingleResult();
 
 		return new ResponseEntity<Servicio>(alojamiento, HttpStatus.OK);
 	}
-	
+
 	/**
 	 * Metodo encargado de generar el query a partir 
 	 * de la lista de parametros recibidos
@@ -115,7 +122,7 @@ public class RestAlojamiento {
 				}
 			}
 		}
-		
+
 		String query = "SELECT s FROM Servicio s WHERE s.activo=1 AND s.categoria=1 ";
 
 		if (!ciudad.isEmpty()){
