@@ -1,6 +1,7 @@
 package servicios.rest;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -9,11 +10,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
+import VOs.PaqueteVO;
+import VOs.ServicioVO;
 import fabricas.entidades.Paquete;
 import fabricas.entidades.Servicio;
 
@@ -82,6 +85,58 @@ public class RestPaquetes {
 		return new ResponseEntity<Paquete>(paquete, HttpStatus.OK);
 	}
 	
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/getByProvider/{idProveedor}/", method = RequestMethod.GET, 
+	produces = {MediaType.APPLICATION_JSON_VALUE +"; charset=UTF-8"})
+	public ResponseEntity <List<Paquete>> getPaquetesByProveedor(@PathVariable int idProveedor) {
+
+		EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
+		em.getTransaction().begin();
+
+		List<Paquete> paquetes;
+
+		paquetes = (List<Paquete>) em.createNamedQuery("Paquete.findByProvider").setParameter("idProveedor", idProveedor).
+				getResultList();
+
+		return new ResponseEntity <List<Paquete>> (paquetes, HttpStatus.OK);
+
+	}
+	
+	
+	
+	@RequestMapping(value = "/edit/", method = RequestMethod.POST,produces={MediaType.APPLICATION_JSON_VALUE +"; charset=UTF-8"})
+	public ResponseEntity<Paquete> updatePaquete(@RequestBody  PaqueteVO paqueteVO){
+
+		EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
+
+		Paquete paquete = em.find(Paquete.class, paqueteVO.getIdpaquetes());
+
+		em.getTransaction().begin();
+		
+		paquete.setDescripcion(paqueteVO.getDescripcion().replaceAll("\\P{Print}", ""));
+		paquete.setFechaCreacion(paqueteVO.getFechaCreacion());
+		paquete.setFechaExpiracion(paqueteVO.getFechaExpiracion());
+		paquete.setNombre(paqueteVO.getNombre());
+		
+		paquete.getServicios().clear();
+		
+		List <Servicio> servicios = new ArrayList<Servicio>();
+		if(paqueteVO.getServicios() != null){
+			for (ServicioVO servicioVO : paqueteVO.getServicios()) {
+				Servicio s = new Servicio();
+				s.setIdservicios(servicioVO.getIdservicios());
+				servicios.add(s);
+			}
+		}
+		
+		paquete.setServicios(servicios);
+		
+		em.persist(paquete);
+		
+		em.getTransaction().commit();
+		return new ResponseEntity<Paquete>(paquete, HttpStatus.OK);
+	}
 	/**
 	 * Metodo encargado de generar el query a partir 
 	 * de la lista de parametros recibidos

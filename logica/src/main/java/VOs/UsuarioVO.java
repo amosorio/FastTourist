@@ -48,6 +48,8 @@ public class UsuarioVO implements Serializable {
 	private List<PreguntasVO> preguntas;
 	
 	private List<CarritoVO> carrito;
+	
+	private List<PaqueteVO> paquetes;
 
 	public UsuarioVO() {
 	}
@@ -198,5 +200,19 @@ public class UsuarioVO implements Serializable {
 	 */
 	public void setCarrito(List<CarritoVO> carrito) {
 		this.carrito = carrito;
+	}
+
+	/**
+	 * @return the paquetes
+	 */
+	public List<PaqueteVO> getPaquetes() {
+		return paquetes;
+	}
+
+	/**
+	 * @param paquetes the paquetes to set
+	 */
+	public void setPaquetes(List<PaqueteVO> paquetes) {
+		this.paquetes = paquetes;
 	}
 }

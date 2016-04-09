@@ -27,6 +27,8 @@ public class PaqueteVO implements Serializable {
 	private String nombre;
 	
 	private List<ServicioVO> servicios;
+	
+	private UsuarioVO usuario;
 
 	
 	public PaqueteVO() {
@@ -86,5 +88,19 @@ public class PaqueteVO implements Serializable {
 
 	public void setServicios(List<ServicioVO> servicios) {
 		this.servicios = servicios;
+	}
+
+	/**
+	 * @return the usuario
+	 */
+	public UsuarioVO getUsuario() {
+		return usuario;
+	}
+
+	/**
+	 * @param usuario the usuario to set
+	 */
+	public void setUsuario(UsuarioVO usuario) {
+		this.usuario = usuario;
 	}	
 }
