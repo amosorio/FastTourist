@@ -29,7 +29,8 @@ import java.util.List;
 	@NamedQuery(name="Servicio.findProveedoresByAlojamiento", query="SELECT DISTINCT(s.usuario)FROM Servicio s WHERE UPPER(s.categoria.nombre) LIKE UPPER('%alojamiento%')"),
 	@NamedQuery(name="Servicio.findProveedoresByTransporte", query="SELECT DISTINCT(s.usuario)FROM Servicio s WHERE UPPER(s.categoria.nombre) LIKE UPPER('%transporte%')"),
 	@NamedQuery(name="Servicio.findServicioPaseos",query="SELECT s FROM Servicio s WHERE s.categoria=4"),
-	@NamedQuery(name="Servicio.findPaquetes",query="SELECT s FROM Servicio s inner join s.paquetes paquete WHERE paquete.idpaquetes = :id")
+	@NamedQuery(name="Servicio.findPaquetes",query="SELECT s FROM Servicio s inner join s.paquetes paquete WHERE paquete.idpaquetes = :id"),
+	@NamedQuery(name="Servicio.findByProveedor",query="SELECT s FROM Servicio s WHERE s.usuario.idusuario = :idProveedor ORDER BY fechaCreacion desc")
 }) 
 
 public class Servicio implements Serializable {
@@ -56,18 +57,18 @@ public class Servicio implements Serializable {
 	private String rutaGaleria;
 
 	//bi-directional many-to-one association to Calificacione
-	@OneToMany(mappedBy="servicio")
+	@OneToMany(mappedBy="servicio",cascade=CascadeType.REMOVE)
 	@JsonManagedReference
 	private List<Calificaciones> calificaciones;
 
 
 	//bi-directional many-to-one association to Pregunta
-	@OneToMany(mappedBy="servicio")
+	@OneToMany(mappedBy="servicio",cascade=CascadeType.REMOVE)
 	@JsonManagedReference
 	private List<Preguntas> preguntas;
 	
 	//bi-directional many-to-one association to Carrito
-	@OneToMany(mappedBy="servicio")
+	@OneToMany(mappedBy="servicio",cascade=CascadeType.REMOVE)
 	@JsonBackReference
 	private List<Carrito> carrito;
 
@@ -122,7 +123,7 @@ public class Servicio implements Serializable {
 	private Transporte transporte;
 
 	//bi-directional many-to-one association to Transacciones
-	@OneToMany(mappedBy="servicio")
+	@OneToMany(mappedBy="servicio",cascade=CascadeType.REMOVE)
 	@JsonBackReference
 	private List<Transacciones> transacciones;
 	

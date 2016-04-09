@@ -26,7 +26,7 @@ import java.util.List;
 	})
 public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	@GeneratedValue
 	@Id
 	private int idusuario;
 

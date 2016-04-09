@@ -15,13 +15,10 @@ import java.util.List;
  */
 @Entity
 @Table(name="paseosecologicos")
-@NamedQueries({
-	@NamedQuery(name="Paseosecologico.findAll", query="SELECT p FROM Paseosecologico p"),	
-	@NamedQuery(name="Paseosecologico.findById", query="SELECT p FROM Paseosecologico p where p.idPaseosEcologicos=:id")
-})
+@NamedQuery(name="Paseosecologico.findAll", query="SELECT p FROM Paseosecologico p")
 public class Paseosecologico implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	@GeneratedValue
 	@Id
 	private int idPaseosEcologicos;
 
@@ -37,7 +34,7 @@ public class Paseosecologico implements Serializable {
 
 
 	//bi-directional many-to-one association to Servicio
-	@OneToMany(mappedBy="paseosecologico")
+	@OneToMany(mappedBy="paseosecologico",cascade=CascadeType.REMOVE)
 	@JsonBackReference
 	private List<Servicio> servicios;
 

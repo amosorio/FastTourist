@@ -18,7 +18,7 @@ import java.util.List;
 @NamedQuery(name="Alimentacion.findAll", query="SELECT a FROM Alimentacion a")
 public class Alimentacion implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	@GeneratedValue
 	@Id
 	private int idalimentacion;
 
@@ -30,7 +30,7 @@ public class Alimentacion implements Serializable {
 	private Tipoalimentacion tipoalimentacion;
 
 	//bi-directional many-to-one association to Servicio
-	@OneToMany(mappedBy="alimentacion")
+	@OneToMany(mappedBy="alimentacion",cascade=CascadeType.REMOVE)
 	@JsonBackReference
 	private List<Servicio> servicios;
 

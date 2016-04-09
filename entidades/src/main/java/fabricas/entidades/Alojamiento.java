@@ -16,10 +16,13 @@ import java.util.List;
  */
 @Entity
 @Table(name="alojamiento")
-@NamedQuery(name="Alojamiento.findAll", query="SELECT a FROM Alojamiento a")
+@NamedQueries({
+	@NamedQuery(name="Alojamiento.findAll", query="SELECT a FROM Alojamiento a"),
+	@NamedQuery(name="Alojamiento.getLast", query="SELECT MAX(a.idalojamiento) FROM Alojamiento a")
+})
 public class Alojamiento implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	@GeneratedValue
 	@Id
 	private int idalojamiento;
 
@@ -42,18 +45,18 @@ public class Alojamiento implements Serializable {
 	private String nombre;
 
 	private String telefono;
-	
+
 	private Boolean piscina;
-	
+
 	private Boolean wifi;
-	
+
 	private Boolean aire_acondicionado;
 
 	//bi-directional many-to-one association to Servicio
-	@OneToMany(mappedBy="alojamiento")
+	@OneToMany(mappedBy="alojamiento",cascade=CascadeType.REMOVE)
 	@JsonBackReference
 	private List<Servicio> servicios;
-	
+
 
 	public Alojamiento() {
 	}
