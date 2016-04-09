@@ -50,7 +50,7 @@ public class ServicioVO implements Serializable {
 		this.idservicios = idservicios;
 	}
 
-	public Boolean isActivo() {
+	public Boolean getActivo() {
 		return activo;
 	}
 

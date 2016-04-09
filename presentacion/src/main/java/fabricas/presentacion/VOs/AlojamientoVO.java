@@ -1,9 +1,10 @@
 package fabricas.presentacion.VOs;
 
 import java.io.Serializable;
-
 import java.util.Date;
 import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 
 public class AlojamientoVO implements Serializable {
@@ -16,8 +17,9 @@ public class AlojamientoVO implements Serializable {
 	private String ciudad;
 
 	private String direccion;
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date fechaEntrada;
-	
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date fechaSalida;
 
 	private int habitaciones;

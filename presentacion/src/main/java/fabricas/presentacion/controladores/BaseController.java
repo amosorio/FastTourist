@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -12,7 +13,13 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import utilidades.EnumPerfiles;
+import utilidades.utilidades;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import fabricas.presentacion.VOs.PerfilesVO;
+import fabricas.presentacion.VOs.UsuarioVO;
 
 @Controller
 public class BaseController {
@@ -20,7 +27,6 @@ public class BaseController {
 
 	private static final String CONTACTENOS = "contactenos";
 	private static final String REGISTRO = "registro";
-	private static final String INDEX = "indexAlojamiento";
 
 	
 	/**
@@ -43,45 +49,48 @@ public class BaseController {
 	@RequestMapping(value = "/registro", method = RequestMethod.GET)
 	public ModelAndView registrarse(ModelMap model) {
 		ModelAndView modelAndView = new ModelAndView(REGISTRO);
+		modelAndView.addObject("usuario", new UsuarioVO());
 		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
 		return modelAndView;
 	}
 	
 	@RequestMapping(value = "/registro", method = RequestMethod.POST)
-	public ModelAndView registro(
-		@RequestParam(value="nombre", required=true) String nombre, 
-		@RequestParam(value="apellido", required=true) String apellido,
-		@RequestParam(value="email", required=true) String email, 
-		@RequestParam(value="password", required=true) String password,
-		@RequestParam(value="direccion", required=true) String direccion,
-		@RequestParam(value="telefono", required=true) String telefono,
-		@RequestParam(value="tipoUsuario", required=true) String tipoUsuario
-		){
+	public ModelAndView registro(@ModelAttribute("usuario") UsuarioVO usuario){
 		
 		String response = null;
 		RestTemplate restTemplate = new RestTemplate();
+		ObjectMapper mapper = new ObjectMapper();
 		
-		String urlBasico=nombre+","+apellido+","+email;
-		String urlAvanzado =password+","+direccion;
-		String urlAvanzado2 =telefono+","+tipoUsuario;
+		//se setea por defecto el perfil de cliente
+		PerfilesVO perfil = new PerfilesVO();
+		perfil.setIdperfil(EnumPerfiles.CLIENTE.getValue());
+		usuario.setPerfil(perfil);
+		usuario.setActivo(true);
+		
+		response = restTemplate.postForObject("http://localhost:8080/logica/registro/",usuario,String.class);
+		
+		try {
+			usuario = mapper.readValue(response, UsuarioVO.class);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 
-		response = restTemplate.getForObject("http://localhost:8080/logica/registro/"+urlBasico+"/"+urlAvanzado+"/"+urlAvanzado2, String.class);
-
-		if(response.startsWith("Se ha registrado"))
+		if(usuario.getEmail()!=null && !usuario.getEmail().isEmpty())
 		{
-			String response2 = restTemplate.getForObject("http://localhost:8080/logica/registro/darUsuario/"+email+"/", String.class);
-			String msj[] = response2.split(":");
-			
 			ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 			HttpSession session = attr.getRequest().getSession(true);
-			session.setAttribute("user", msj[0]+" "+msj[1]);
-			session.setAttribute("userId", msj[2].toString());
-			session.setAttribute("userCorreo", msj[3]);
-			session.setAttribute("perfil", msj[4]);
+			session.setAttribute("user", usuario.getNombre() + " " + usuario.getApellido());
+			session.setAttribute("userId", usuario.getIdusuario());
+			session.setAttribute("userCorreo", usuario.getEmail());
+			session.setAttribute("userPerfil", usuario.getPerfil().getIdperfil());
+			response= "Se ha registrado con éxito";
+		}else{
+			response= "Ya hay un usuario registrado con ese correo!";
 		}
-		
+				
 		ModelAndView modelAndView = new ModelAndView(REGISTRO);
 		modelAndView.addObject("response", response);
+		modelAndView.addObject("usuario", usuario);
 		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
 		return modelAndView;
 		
@@ -96,27 +105,40 @@ public class BaseController {
 		String response = null;
 		ObjectMapper mapper = new ObjectMapper();
 		RestTemplate restTemplate = new RestTemplate();
+		UsuarioVO usuario=null;
 		
 		String url = correo+","+password;
-		
 		response = restTemplate.getForObject("http://localhost:8080/logica/registro/auth/"+url+"/", String.class);
 		
-		if(response.startsWith("Te has autenticado"))
-		{
-			String response2 = restTemplate.getForObject("http://localhost:8080/logica/registro/darUsuario/"+correo+"/", String.class);
-			String msj[] = response2.split(":");
-			
+		try {
+			usuario = mapper.readValue(response, UsuarioVO.class);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		if(usuario.getEmail()!=null && !usuario.getEmail().isEmpty())
+		{			
 			ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
 			HttpSession session = attr.getRequest().getSession(true);
-			session.setAttribute("user", msj[0]+" "+msj[1]);
-			session.setAttribute("userId", msj[2].toString());
-			session.setAttribute("userCorreo", msj[3]);
-			session.setAttribute("perfil", msj[4]);
-			System.out.println(msj[4]);
+			session.setAttribute("user", usuario.getNombre() + " " + usuario.getApellido());
+			session.setAttribute("userId", usuario.getIdusuario());
+			session.setAttribute("userCorreo", usuario.getEmail());
+			session.setAttribute("userPerfil", usuario.getPerfil().getIdperfil());
+			response= "Te has autenticado correctamente";
+			
+			//Si se autenticó un proveedor, se redirecciona a index del proveedor
+			if(usuario.getPerfil().getIdperfil()==EnumPerfiles.PROVEEDOR.getValue()){
+				ModelAndView view=new ModelAndView("redirect:/adminProveedor/");
+				return view;
+			}
+			
+		}else{
+			response= "Error de autenticación. Revisa correo y/o contraseña";
 		}
 		
 		ModelAndView modelAndView = new ModelAndView(REGISTRO);
 		modelAndView.addObject("response", response);
+		modelAndView.addObject("usuario", new UsuarioVO());
 		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
 		return modelAndView;
 	}

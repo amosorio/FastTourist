@@ -27,14 +27,14 @@
 				<span class="text"><strong>Formulario </strong> de
 					Autenticación</span>
 			</h4>
-			<form action="registro/auth" method="post">
+			<form action="/presentacion/registro/auth" method="post">
 				<input type="hidden" name="next" value="/">
 				<fieldset>
 					<div class="control-group">
 						<label class="control-label">Correo Electrónico</label>
 						<div class="controls">
 							<input type="text" placeholder="Ingresa tu email"
-								id="username" name="correo"class="input-xlarge" required="required">
+								id="username" name="correo" class="input-xlarge" required="required">
 						</div>
 					</div>
 					<div class="control-group">
@@ -61,73 +61,59 @@
 			<h4 class="title">
 				<span class="text"><strong>Formulario</strong> de Registro</span>
 			</h4>
-			<form action="#" method="post" class="form-stacked">
+			
+			<form:form action="#" method="post" class="form-stacked" commandName="usuario">
+
 				<fieldset>
 					<div class="control-group">
 						<label class="control-label">* Usuario</label>
 						<div class="controls">
-							<input type="text" name="nombre"
-								placeholder="Ingresa tu nombre" class="input-xlarge" required="required">
+							<form:input type="text" path="nombre"
+								placeholder="Ingresa tu nombre" class="input-xlarge" required="required"/>
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">* Apellidos</label>
 						<div class="controls">
-							<input type="text" name="apellido" class="input-xlarge"
-								placeholder="Ingresa tus apellidos" required="required">
+							<form:input type="text" path="apellido" class="input-xlarge"
+								placeholder="Ingresa tus apellidos" required="required"/>
 						</div>
 						<div class="control-group">
 							<label class="control-label">* Email:</label>
 							<div class="controls">
-								<input type="text" name="email" placeholder="Ingresa tu email"
-									class="input-xlarge" required="required">
+								<form:input type="text" path="email" placeholder="Ingresa tu email"
+									class="input-xlarge" required="required"/>
 							</div>
 						</div>
 						<div class="control-group">
 							<label class="control-label">* Contraseña:</label>
 							<div class="controls">
-								<input type="password" name="password"
-									placeholder="Ingresa tu contraseña" class="input-xlarge" required="required">
+								<form:input type="password" path="password"
+									placeholder="Ingresa tu contraseña" class="input-xlarge" required="required"/>
 							</div>
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">* Dirección</label>
 						<div class="controls">
-							<input type="text" name="direccion" class="input-medium"
-								placeholder="Ingresa tu direccion" required="required">
+							<form:input type="text" path="direccion" class="input-medium"
+								placeholder="Ingresa tu direccion" required="required"/>
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label">* Teléfono</label>
 						<div class="controls">
-							<input type="text" name="telefono" class="input-medium"
-								placeholder="Ingresa tu número telefónico" required="required">
+							<form:input type="text" path="telefono" class="input-medium"
+								placeholder="Ingresa tu número telefónico" required="required"/>
 						</div>
 					</div>
-
-					<div class="control-group">
-						<table>
-							<tr>
-								<td width="100px"><label class="control-label">* Tipo
-										Usuario</label></td>
-							</tr>
-							<tr>
-								<td><select class="input-medium" name="tipoUsuario">
-										<option value="2">Cliente</option>
-										<option value="1">Proveedor</option>
-								</select></td>
-							</tr>
-						</table>
-					</div>
-
 					<hr>
 					<div class="actions">
 						<input tabindex="9" class="btn btn-inverse large" type="submit"
 							value="Crear tu cuenta">
 					</div>
 				</fieldset>
-			</form>
+			</form:form>
 		</div>
 	</div>
 </section>
@@ -155,8 +141,7 @@
 				<h5><strong style="color:#eb4800;">${response}</h5>
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal"
-					onclick="$('.modal').hide()">Aceptar</button>
+				<a href="/presentacion/registro"><button class="btn btn-inverse" type="button">Aceptar</button></a>
 			</div>
 		</div>
 

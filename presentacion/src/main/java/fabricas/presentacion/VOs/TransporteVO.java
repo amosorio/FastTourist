@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class TransporteVO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -12,7 +14,7 @@ public class TransporteVO implements Serializable {
 	private int cantPersonas;
 
 	private String destino;
-	
+	@DateTimeFormat(pattern = "dd-MM-yyyy")
 	private Date fechaSalida;
 
 	private String nombre;

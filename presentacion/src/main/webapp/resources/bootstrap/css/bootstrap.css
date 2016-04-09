@@ -2288,7 +2288,10 @@ table th[class*="span"],
 }
 
 /* White icons with optional class, or on hover/focus/active states of certain elements */
-
+#menu > ul > li > a:hover > [class^="icon-"],
+#menu > ul > li > a:hover > [class*=" icon-"],
+.paginaActiva  > [class^="icon-"],
+.paginaActiva  > [class*=" icon-"],
 .icon-white,
 .nav-pills > .active > a > [class^="icon-"],
 .nav-pills > .active > a > [class*=" icon-"],

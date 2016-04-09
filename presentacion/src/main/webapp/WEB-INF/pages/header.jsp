@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,6 +40,9 @@
 		$(function(){
 			$('#dp1').datepicker();
 			$('#dp2').datepicker();
+			$('#dp3').datepicker();
+			$('#dp4').datepicker();
+			$('#dp5').datepicker();
 		});
 		</script>
 
@@ -58,7 +62,7 @@
 				<div class="account pull-right">
 					<ul class="user-menu">	
 						<c:if test="${not empty usuarioAutenticado}">
-						<li>Bienvenido <span style="color:#eb4800">${usuarioAutenticado}</span></li>
+						<li>Bienvenido  <span class="icon-user"></span><span style="color:#eb4800">${usuarioAutenticado}</span></li>
 						</c:if>		
 						<li><a href="/presentacion/pagar/carrito">Mi Carrito</a></li>
 						<c:choose>
