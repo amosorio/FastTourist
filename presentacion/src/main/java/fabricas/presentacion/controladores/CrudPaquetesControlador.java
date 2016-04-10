@@ -21,6 +21,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import fabricas.presentacion.VOs.PaqueteVO;
 import fabricas.presentacion.VOs.ServicioVO;
+import fabricas.presentacion.VOs.UsuarioVO;
 
 @Controller
 @RequestMapping(value = "/adminProveedor/paquetes")
@@ -28,7 +29,7 @@ public class CrudPaquetesControlador {
 
 	private static final String VIEW_PROVEEDOR_PAQUETES = "proveedorPaquetes";
 	private static final String VIEW_PROVEEDOR_EDITAR_PAQUETES = "editarPaquete";
-	private static final String VIEW_PROVEEDOR_ARMAR_PAQUETES = "armarPaquete";
+	private static final String VIEW_PROVEEDOR_CREAR_PAQUETES = "crearPaquete";
 
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -98,10 +99,14 @@ public class CrudPaquetesControlador {
 			System.out.println(e.getMessage());
 		}
 
+		//Se ponen los servicios del paquete en true, y se agregan el resto de servicios del proveedor
 		for (ServicioVO servicioVO : paquete.getServicios()) {
+			servicioVO.setCheckPaquete(true);
 			servicios.remove(servicioVO);
 		}
-
+		paquete.getServicios().addAll(servicios);
+		
+		
 
 		ModelAndView modelAndView= new ModelAndView(VIEW_PROVEEDOR_EDITAR_PAQUETES);
 		modelAndView.addObject("paquete", paquete);
@@ -136,6 +141,13 @@ public class CrudPaquetesControlador {
 			System.out.println(e.getMessage());
 		}
 		
+		//Se ponen los servicios del paquete en true, y se agregan el resto de servicios del proveedor
+		for (ServicioVO servicioVO : paquete.getServicios()) {
+			servicioVO.setCheckPaquete(true);
+			servicios.remove(servicioVO);
+		}
+		paquete.getServicios().addAll(servicios);
+		
 		ModelAndView modelAndView= new ModelAndView(VIEW_PROVEEDOR_EDITAR_PAQUETES);
 		modelAndView.addObject("paquete", paquete);
 		modelAndView.addObject("servicios", servicios);
@@ -143,10 +155,10 @@ public class CrudPaquetesControlador {
 		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
 		return modelAndView;
 	}
-/*
+
 	@RequestMapping(value = "/crear/", method = RequestMethod.GET)
-	public ModelAndView crearAlojamiento(ModelMap model) {
-		ServicioVO servicio = new ServicioVO();
+	public ModelAndView crearPaquete(ModelMap model) {
+		PaqueteVO paquete = new PaqueteVO();
 		List<ServicioVO> servicios=null;
 		ObjectMapper mapper = new ObjectMapper();
 		RestTemplate restTemplate = new RestTemplate();
@@ -165,15 +177,17 @@ public class CrudPaquetesControlador {
 			System.out.println(e.getMessage());
 		}
 
-		ModelAndView modelAndView = new ModelAndView(VIEW_PROVEEDOR_CREAR_SERVICIOS);
-		modelAndView.addObject("servicio", servicio);
+		paquete.setServicios(servicios);
+		
+		ModelAndView modelAndView = new ModelAndView(VIEW_PROVEEDOR_CREAR_PAQUETES);
+		modelAndView.addObject("paquete", paquete);
 		modelAndView.addObject("servicios", servicios);
 		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
 		return modelAndView;
 	}
 
 	@RequestMapping(value = "/crear/", method = RequestMethod.POST)
-	public ModelAndView crearAlojamiento(@ModelAttribute("servicio") ServicioVO servicio) {
+	public ModelAndView crearPaquete(@ModelAttribute("paquete") PaqueteVO paquete) {
 
 		List<ServicioVO> servicios=null;
 		ObjectMapper mapper = new ObjectMapper();
@@ -184,13 +198,13 @@ public class CrudPaquetesControlador {
 
 		UsuarioVO usuarioVO = new UsuarioVO();
 		usuarioVO.setIdusuario(utilidades.getSessionIdUser());
-		servicio.setUsuario(usuarioVO);
+		paquete.setUsuario(usuarioVO);
 
 
-		String uri = "http://localhost:8080/logica/servicios/create/";
-		String result = (String) restTemplate.postForObject(uri,servicio,String.class);
+		String uri = "http://localhost:8080/logica/paquetes/create/";
+		String result = (String) restTemplate.postForObject(uri,paquete,String.class);
 		try {
-			servicio = mapper.readValue(result, ServicioVO.class);
+			paquete = mapper.readValue(result, PaqueteVO.class);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
@@ -202,8 +216,8 @@ public class CrudPaquetesControlador {
 			System.out.println(e.getMessage());
 		}
 
-		ModelAndView modelAndView = new ModelAndView(VIEW_PROVEEDOR_CREAR_SERVICIOS);
-		modelAndView.addObject("servicio", servicio);
+		ModelAndView modelAndView = new ModelAndView(VIEW_PROVEEDOR_CREAR_PAQUETES);
+		modelAndView.addObject("paquete", paquete);
 		modelAndView.addObject("servicios", servicios);
 		modelAndView.addObject("crearExitoso",true);
 		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
@@ -211,12 +225,12 @@ public class CrudPaquetesControlador {
 	}
 
 	@RequestMapping(value = "/delete/{id}/", method = RequestMethod.GET)
-	public ModelAndView eliminarAlojamiento(@PathVariable("id")int id) {
+	public ModelAndView eliminarPaquete(@PathVariable("id")int id) {
 
 
 		RestTemplate restTemplate = new RestTemplate();
 
-		String url = "http://localhost:8080/logica/servicios/delete/"+id +"/";
+		String url = "http://localhost:8080/logica/paquetes/delete/"+id +"/";
 
 		try {
 			restTemplate.delete(url);
@@ -224,8 +238,8 @@ public class CrudPaquetesControlador {
 			System.out.println(e.getMessage());
 		}
 
-		ModelAndView view=new ModelAndView("redirect:/adminProveedor/");
+		ModelAndView view=new ModelAndView("redirect:/adminProveedor/paquetes/");
 		return view;
 
-	}	*/
+	}
 }

@@ -25,19 +25,13 @@
 		<div class="span9 col">
 
 			<form:form action="#" method="post" class="form-stacked"
-				commandName="servicio">
+				commandName="paquete">
 				<table style="width: 80%; margin: 0px auto !important;">
-					<tr>
-						<td colspan="3">
-							<h5>Servicio De ${servicio.categoria.nombre}</h5>
-
-						</td>
-					</tr>
 					<tr>
 						<td colspan="3">
 							<div class="control-group">
 								<label class="control-label"><span class="required">*</span>Nombre
-									Servicio</label>
+									Paquete</label>
 								<form:input type="text" class="input-xxlarge"
 									required="required" path="nombre"
 									style="width: 680px !important;" />
@@ -57,73 +51,76 @@
 					<tr>
 						<td>
 							<div class="control-group">
-								<label class="control-label"><span class="required">*</span>Precio</label>
-								<form:input type="number" class="input-small"
-									required="required" path="precio" />
+								<label class="control-label"><span class="required">*</span>Fecha
+									de Creación</label>
+								<fmt:formatDate value="${paquete.fechaCreacion}" type="date"
+									pattern="dd-MM-yyyy" var="theFormattedDateIn" />
+								<div class="input-append date" id="dp3"
+									data-date="<fmt:formatDate pattern="dd-MM-yyyy" value="${paquete.fechaCreacion}"/>"
+									data-date-format="dd-mm-yyyy">
+									<form:input class="input-small" size="16" type="text"
+										path="fechaCreacion" />
+									<span class="add-on"><i class="icon-calendar"></i></span>
+								</div>
 							</div>
 						</td>
 						<td>
 							<div class="control-group">
-								<label class="control-label"><span class="required">*</span>Descuento</label>
-								<form:input type="number" class="input-small"
-									required="required" path="descuento" />
-							</div>
-						</td>
-						<td>
-							<div class="control-group">
-								<label class="control-label"><span class="required">*</span>Estado</label>
-								<form:select class="input-medium" path="activo">
-
-									<option value="0"
-										<c:if test="${servicio.activo != 'true'}">selected</c:if>>Inactivo</option>
-									<option value="1"
-										<c:if test="${servicio.activo == 'true'}">selected</c:if>>Activo</option>
-								</form:select>
+								<label class="control-label"><span class="required">*</span>Fecha
+									de Expiración</label>
+								<fmt:formatDate value="${paquete.fechaExpiracion}" type="date"
+									pattern="dd-MM-yyyy" var="theFormattedDateOut" />
+								<div class="input-append date" id="dp4"
+									data-date="<fmt:formatDate pattern="dd-MM-yyyy" value="${paquete.fechaExpiracion}"/>"
+									data-date-format="dd-mm-yyyy">
+									<form:input class="input-small" size="16" type="text"
+										path="fechaExpiracion" />
+									<span class="add-on"><i class="icon-calendar"></i></span>
+								</div>
 							</div>
 						</td>
 					</tr>
 				</table>
-				<c:if test="${servicio.categoria.idcategorias == '1'}">
-					<span id="alojamiento"> <%@include
-							file="camposAlojamiento.jsp"%></span>
-				</c:if>
-				<c:if test="${servicio.categoria.idcategorias == '2'}">
-					<span id="alimentacion"> <%@include
-							file="camposAlimentacion.jsp"%></span>
-				</c:if>
-				<c:if test="${servicio.categoria.idcategorias == '3'}">
-					<span id="transporte"> <%@include
-							file="camposTransporte.jsp"%></span>
-				</c:if>
-				<c:if test="${servicio.categoria.idcategorias == '4'}">
-					<span id="paseo"> <%@include file="camposPaseo.jsp"%></span>
-				</c:if>
+
+
 
 				<table style="width: 80%; margin: 0px auto !important;">
 					<tr>
-						<td colspan="3">
-							<div class="control-group">
-								<label class="control-label" style="color: #eb4800 !important;"><span
-									class="required"></span>Imagenes</label> <img
-									alt="${servicio.rutaGaleria}" src="${servicio.rutaGaleria}"
-									style="height: 100px; max-with: 100px"> <img
-									alt="${servicio.paseosecologico.fotos}"
-									src="${servicio.paseosecologico.fotos}"
-									style="height: 100px; max-with: 100px">
-
-							</div>
-						</td>
+						<td colspan="4"><h5 style="text-align: left; color: #eb4800;">Agregar Servicios</h5></td>
 					</tr>
-					<tr>
-						<td colspan="3"><form:input type="text" class="input-xxlarge"
-								style="width: 680px !important;" required="required"
-								path="rutaGaleria" /></td>
-
+					<tr style="text-align: left">
+						<th width="10%">Item</th>
+						<th width="40%">Nombre</th>
+						<th width="20%">Categoria</th>
 					</tr>
+					<c:forEach items="${paquete.servicios}" var="servicio"
+						varStatus="status">
+						<tr>
+							<td><form:checkbox
+									path="servicios[${status.index}].checkPaquete"
+									value="${servicio.checkPaquete}" /> 
+								<form:hidden
+									path="servicios[${status.index}].idservicios"
+									value="${servicio.idservicios}" />
+							</td>
+							<td>${servicio.nombre}
+								<form:hidden
+									path="servicios[${status.index}].nombre"
+									value="${servicio.nombre}" />
+							</td>
+							<td>${servicio.categoria.nombre}
+								<form:hidden
+									path="servicios[${status.index}].categoria.nombre"
+									value="${servicio.categoria.nombre}" />
+							</td>
+						</tr>
+					</c:forEach>
+
+
 					<tr>
 						<td colspan="3" align="center"><form:button
 								class="btn btn-info pull-center" id="crearButton"
-								disabled="false">Actualizar Servicio</form:button></td>
+								disabled="false">Crear Paquete</form:button></td>
 					</tr>
 				</table>
 
@@ -131,15 +128,13 @@
 		</div>
 	</div>
 </section>
-
-<c:if test="${editExitoso}">
-	<script type="text/javascript">
+<c:if test="${crearExitoso}">
+<script type="text/javascript">
 		$(window).load(function() {
 			$('#myModal').modal('show');
 		});
 	</script>
-</c:if>
-<!-- Modal -->
+</c:if> <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
 	<div class="modal-dialog">
 
@@ -152,15 +147,16 @@
 			</div>
 			<div class="modal-body">
 				<h5>
-					<strong style="color: #eb4800;">El servicio se ha
-						actualizado exitosamente! 
+					<strong style="color: #eb4800;">El Paquete se ha
+						creado exitosamente! 
 				</h5>
 			</div>
 			<div class="modal-footer">
-				<a href="/presentacion/adminProveedor/"><button class="btn btn-inverse" type="button">Aceptar</button></a>
+				<a href="/presentacion/adminProveedor/paquetes/"><button
+						class="btn btn-inverse" type="button">Aceptar</button></a>
 			</div>
 		</div>
 
 	</div>
-</div>
+</div> 
 <%@include file="footer.jsp"%>

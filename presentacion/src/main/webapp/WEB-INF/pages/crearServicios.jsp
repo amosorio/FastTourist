@@ -58,12 +58,16 @@
 	<div class="navbar-inner main-menu">
 		<nav id="menu" class="pull-left">
 			<ul>
-				<li><a href="/presentacion/adminAlojamiento/"
-					class="paginaActiva">Servicios</a></li>
-				<li><a href="/presentacion/transporte/">Respuestas</a>
-				<li><a href="/presentacion/alimentacion/">Historicos</a></li>
-				<li><a href="/presentacion/paseos/paseos">Transacciones</a></li>
-				<li><a href="/presentacion/paquetes/">Solicitar Baja</a></li>
+				<li><a href="/presentacion/adminProveedor/"
+					class="paginaActiva"><span class="icon-home"></span> Servicios</a></li>
+				<li><a href="/presentacion/transporte/"><span
+						class="question-sign"></span> Respuestas</a>
+				<li><a href="/presentacion/alimentacion/"><span
+						class="icon-file"></span> Historicos</a></li>
+				<li><a href="/presentacion/paseos/paseos"><span
+						class="icon-refresh"></span> Transacciones</a></li>
+				<li><a href="/presentacion/paquetes/"><span
+						class="icon-ban-circle"></span> Solicitar Baja</a></li>
 			</ul>
 		</nav>
 	</div>

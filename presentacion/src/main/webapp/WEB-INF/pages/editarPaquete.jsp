@@ -3,12 +3,16 @@
 	<div class="navbar-inner main-menu">
 		<nav id="menu" class="pull-left">
 			<ul>
-				<li><a href="/presentacion/adminAlojamiento/"
-					class="paginaActiva">Servicios</a></li>
-				<li><a href="/presentacion/transporte/">Respuestas</a>
-				<li><a href="/presentacion/alimentacion/">Historicos</a></li>
-				<li><a href="/presentacion/paseos/paseos">Transacciones</a></li>
-				<li><a href="/presentacion/paquetes/">Solicitar Baja</a></li>
+				<li><a href="/presentacion/adminProveedor/"
+					class="paginaActiva"><span class="icon-home"></span> Servicios</a></li>
+				<li><a href="/presentacion/transporte/"><span
+						class="question-sign"></span> Respuestas</a>
+				<li><a href="/presentacion/alimentacion/"><span
+						class="icon-file"></span> Historicos</a></li>
+				<li><a href="/presentacion/paseos/paseos"><span
+						class="icon-refresh"></span> Transacciones</a></li>
+				<li><a href="/presentacion/paquetes/"><span
+						class="icon-ban-circle"></span> Solicitar Baja</a></li>
 			</ul>
 		</nav>
 	</div>
@@ -88,31 +92,22 @@
 							<th width="10%">Item</th>
 							<th width="40%">Nombre</th>
 							<th width="20%">Categoria</th>
-							<th width="20%">Fecha Creación</th>
-							<th width="10%">Precio</th>
 						</tr>
-					<c:forEach items="${paquete.servicios}" var="servicio">
+					<c:forEach items="${paquete.servicios}" var="servicio" varStatus="status">
 						<tr>
-							<td><input type="checkbox" value="${servicio.idservicios}" checked="checked"  name="checks" ></td>
-							<td>${servicio.nombre}</td>
-							<td>${servicio.categoria.nombre}</td>
-							<td><fmt:formatDate type="both"
-									value="${paquete.fechaCreacion}"/></td>
-							<td>${servicio.precio}</td>
+							<td><form:checkbox path="servicios[${status.index}].checkPaquete" value="${servicio.checkPaquete}"/>
+								<form:hidden path="servicios[${status.index}].idservicios" value="${servicio.idservicios}"/>
+							</td>
+							<td>${servicio.nombre} 
+								<form:hidden path="servicios[${status.index}].nombre" value="${servicio.nombre}"/>
+							</td>
+							<td>${servicio.categoria.nombre} 
+								<form:hidden path="servicios[${status.index}].categoria.nombre" value="${servicio.categoria.nombre}"/>
+							</td>
 						</tr>
 					</c:forEach>
 					
-					<c:forEach items="${servicios}" var="servicio" >
-						<tr>
-							<td><input type="checkbox" value="${servicio.idservicios}" name="checks"></td>
-							<td>${servicio.nombre}</td>
-							<td>${servicio.categoria.nombre}</td>
-							<td><fmt:formatDate type="both"
-									value="${paquete.fechaCreacion}"/></td>
-							<td>${servicio.precio}</td>
-						</tr>
-					</c:forEach>
-
+					
 					<tr>
 						<td colspan="3" align="center"><form:button
 								class="btn btn-info pull-center" id="crearButton"
@@ -138,6 +133,7 @@
 		window.location = 'http://localhost:8080/presentacion/pagar/carrito/' + values;
 		
 	}
+</script>
 <c:if test="${editExitoso}">
 	<script type="text/javascript">
 		$(window).load(function() {

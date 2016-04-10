@@ -19,7 +19,7 @@
 				<ul class="dropdown-menu">
 					<li><a href="/presentacion/adminProveedor/paquetes/">Ver Paquetes</a></li>
 					<li class="divider"></li>
-					<li><a href="#">Armar Paquete</a></li>
+					<li><a href="/presentacion/adminProveedor/paquetes/crear/">Armar Paquete</a></li>
 				</ul></li>
 		</ul>
 	</div>
