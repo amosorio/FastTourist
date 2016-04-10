@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -34,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 //@NamedQuery(name="Paquete.findServicios",query="SELECT p FROM Paquete p WHERE p.categoria=4")
 public class Paquete implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	@GeneratedValue
 	@Id
 	private int idpaquetes;
 

@@ -35,7 +35,7 @@ import java.util.List;
 
 public class Servicio implements Serializable {
 	private static final long serialVersionUID = 1L;
-
+	@GeneratedValue
 	@Id
 	private int idservicios;
 
