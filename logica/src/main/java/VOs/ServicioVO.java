@@ -32,6 +32,7 @@ public class ServicioVO implements Serializable {
 	private List<PreguntasVO> preguntas;
 	private List<CarritoVO> carrito;
 	private List<TransaccionesVO> transacciones;
+	private Boolean checkPaquete;
 
 	public ServicioVO() {
 	}
@@ -208,6 +209,20 @@ public class ServicioVO implements Serializable {
 
 	public void setTransacciones(List<TransaccionesVO> transacciones) {
 		this.transacciones = transacciones;
+	}
+
+	/**
+	 * @return the checkPaquete
+	 */
+	public Boolean getCheckPaquete() {
+		return checkPaquete;
+	}
+
+	/**
+	 * @param checkPaquete the checkPaquete to set
+	 */
+	public void setCheckPaquete(Boolean checkPaquete) {
+		this.checkPaquete = checkPaquete;
 	}
 
 	

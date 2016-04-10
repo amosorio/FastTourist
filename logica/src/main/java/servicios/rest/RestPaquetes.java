@@ -15,10 +15,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import utilidades.EnumCategorias;
 import VOs.PaqueteVO;
 import VOs.ServicioVO;
+import fabricas.entidades.Alimentacion;
+import fabricas.entidades.Alojamiento;
+import fabricas.entidades.Categoria;
 import fabricas.entidades.Paquete;
+import fabricas.entidades.Paseosecologico;
 import fabricas.entidades.Servicio;
+import fabricas.entidades.Transporte;
+import fabricas.entidades.Usuario;
 
 
 @RestController
@@ -124,9 +131,15 @@ public class RestPaquetes {
 		List <Servicio> servicios = new ArrayList<Servicio>();
 		if(paqueteVO.getServicios() != null){
 			for (ServicioVO servicioVO : paqueteVO.getServicios()) {
-				Servicio s = new Servicio();
-				s.setIdservicios(servicioVO.getIdservicios());
-				servicios.add(s);
+				if(servicioVO.getCheckPaquete()){
+					Categoria c = new Categoria();
+					c.setNombre(servicioVO.getCategoria().getNombre());
+					Servicio s = new Servicio();
+					s.setNombre(servicioVO.getNombre());
+					s.setCategoria(c);
+					s.setIdservicios(servicioVO.getIdservicios());
+					servicios.add(s);
+				}
 			}
 		}
 		
@@ -137,6 +150,61 @@ public class RestPaquetes {
 		em.getTransaction().commit();
 		return new ResponseEntity<Paquete>(paquete, HttpStatus.OK);
 	}
+	
+	
+	@RequestMapping(value = "/create/", method = RequestMethod.POST,produces={MediaType.APPLICATION_JSON_VALUE +"; charset=UTF-8"})
+	public ResponseEntity<Paquete> createPaquete(@RequestBody  PaqueteVO paqueteVO){
+
+		EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
+
+		Paquete paquete = new Paquete();
+
+		
+		em.getTransaction().begin();
+		
+		paquete.setDescripcion(paqueteVO.getDescripcion().replaceAll("\\P{Print}", ""));
+		paquete.setFechaCreacion(paqueteVO.getFechaCreacion());
+		paquete.setFechaExpiracion(paqueteVO.getFechaExpiracion());
+		paquete.setNombre(paqueteVO.getNombre());
+		Usuario proveedor = new Usuario();
+		proveedor.setIdusuario(paqueteVO.getUsuario().getIdusuario());
+		paquete.setUsuario(proveedor);
+		
+		List <Servicio> servicios = new ArrayList<Servicio>();
+		if(paqueteVO.getServicios() != null){
+			for (ServicioVO servicioVO : paqueteVO.getServicios()) {
+				if(servicioVO.getCheckPaquete()){
+					Categoria c = new Categoria();
+					c.setNombre(servicioVO.getCategoria().getNombre());
+					Servicio s = new Servicio();
+					s.setNombre(servicioVO.getNombre());
+					s.setCategoria(c);
+					s.setIdservicios(servicioVO.getIdservicios());
+					servicios.add(s);
+				}
+			}
+		}
+		
+		paquete.setServicios(servicios);
+		
+		em.persist(paquete);
+		
+		em.getTransaction().commit();
+		return new ResponseEntity<Paquete>(paquete, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/delete/{id}/", method = RequestMethod.DELETE)
+	public String deletePaquete(@PathVariable("id") int id) {
+		EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
+		em.getTransaction().begin();
+
+		Paquete paquete = em.find(Paquete.class, id);
+		em.remove(paquete);
+
+		em.getTransaction().commit();
+		return "ok";
+	}
+	
 	/**
 	 * Metodo encargado de generar el query a partir 
 	 * de la lista de parametros recibidos
