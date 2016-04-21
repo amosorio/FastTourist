@@ -1,5 +1,5 @@
 package servicios.rest;
- 
+
 import java.util.Date;
 
 import javax.persistence.EntityManager;

@@ -50,6 +50,8 @@ public class UsuarioVO implements Serializable {
 	private List<CarritoVO> carrito;
 	
 	private List<PaqueteVO> paquetes;
+	
+	private byte baja;
 
 	public UsuarioVO() {
 	}
@@ -214,5 +216,13 @@ public class UsuarioVO implements Serializable {
 	 */
 	public void setPaquetes(List<PaqueteVO> paquetes) {
 		this.paquetes = paquetes;
+	}
+	
+	public byte getBaja() {
+		return baja;
+	}
+
+	public void setBaja(byte baja) {
+		this.baja = baja;
 	}
 }

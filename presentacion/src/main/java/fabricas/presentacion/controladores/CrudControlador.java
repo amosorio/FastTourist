@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,6 +30,7 @@ public class CrudControlador {
 	private static final String VIEW_PROVEEDOR_SERVICIOS = "proveedorServicios";
 	private static final String VIEW_PROVEEDOR_EDITAR_SERVICIO = "editarServicio";
 	private static final String VIEW_PROVEEDOR_CREAR_SERVICIOS = "crearServicios";
+	private static final String CATEGORIAS = "categorias";
 
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -212,4 +214,33 @@ public class CrudControlador {
 		return view;
 
 	}
+	
+	@RequestMapping(value = "/editar-info/", method = RequestMethod.GET)
+	public ModelAndView editarProveedor() {
+		
+		ModelAndView view=new ModelAndView("redirect:/admin/editar/"+utilidades.getSessionIdUser()+"/");
+		return view;
+	}
+	
+	
+	@RequestMapping(value = "/categorias/", method = RequestMethod.GET)
+	public ModelAndView categorias() {
+		ModelAndView modelAndView = new ModelAndView(CATEGORIAS);
+		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
+		return modelAndView;
+
+	}
+	
+	@RequestMapping(value = "/categorias/", method = RequestMethod.POST)
+	public ModelAndView categoriasPOST(){
+//			@RequestParam(value="atributo", required=true) String atributo, 
+//			@RequestParam(value="valor", required=true) String valor) {
+		
+		
+		ModelAndView modelAndView = new ModelAndView(CATEGORIAS);
+		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
+		return modelAndView;
+		
+	}
+	
 }

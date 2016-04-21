@@ -67,11 +67,10 @@
 						<li><a href="/presentacion/pagar/carrito">Mi Carrito</a></li>
 						<c:choose>
 							<c:when test="${not empty usuarioAutenticado}">
-						<li><a href="/presentacion/index">Salir</a></li>
-    						</c:when>
+								<li><a href="/presentacion/index">Salir</a></li>
+							</c:when>
 							<c:otherwise>
-						<li><a href="/presentacion/registro">Registrarse/Ingresar</a></li>		
-
+								<li><a href="/presentacion/registro">Registrarse/Ingresar</a></li>
 							</c:otherwise>
 						</c:choose>
 					</ul>

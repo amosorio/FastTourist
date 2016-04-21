@@ -132,6 +132,13 @@ public class BaseController {
 				return view;
 			}
 			
+			//Si es Administrador
+			if(usuario.getPerfil().getIdperfil()==EnumPerfiles.ADMINISTRADOR.getValue()){
+				ModelAndView view=new ModelAndView("redirect:/admin/");
+				return view;
+			}
+			
+			
 		}else{
 			response= "Error de autenticación. Revisa correo y/o contraseña";
 		}
