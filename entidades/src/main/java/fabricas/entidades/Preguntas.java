@@ -16,7 +16,10 @@ import java.util.Date;
  */
 @Entity
 @Table(name="preguntas")
-@NamedQuery(name="Preguntas.findAll", query="SELECT p FROM Preguntas p")
+@NamedQueries({
+	@NamedQuery(name="Preguntas.findAll", query="SELECT p FROM Preguntas p"),
+	@NamedQuery(name="Preguntas.findAllByUserId", query="SELECT p FROM Preguntas p WHERE p.servicio.usuario.idusuario = :id")
+})
 public class Preguntas implements Serializable {
 	private static final long serialVersionUID = 1L;
 

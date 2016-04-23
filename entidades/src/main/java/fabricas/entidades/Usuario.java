@@ -53,7 +53,7 @@ public class Usuario implements Serializable {
 
 	private String telefono;
 	
-	private byte baja;
+	private boolean baja;
 	
 	//bi-directional many-to-one association to Calificaciones
 	@OneToMany(mappedBy="usuario")
@@ -273,11 +273,11 @@ public class Usuario implements Serializable {
 		this.paquetes = paquetes;
 	}
 
-	public byte getBaja() {
+	public boolean getBaja() {
 		return baja;
 	}
 
-	public void setBaja(byte baja) {
+	public void setBaja(boolean baja) {
 		this.baja = baja;
 	}
 	

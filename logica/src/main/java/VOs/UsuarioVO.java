@@ -51,7 +51,7 @@ public class UsuarioVO implements Serializable {
 	
 	private List<PaqueteVO> paquetes;
 	
-	private byte baja;
+	private boolean baja;
 	
 	private List<MensajeriaVO> mensajeDestinatario;
 
@@ -222,11 +222,11 @@ public class UsuarioVO implements Serializable {
 		this.paquetes = paquetes;
 	}
 	
-	public byte getBaja() {
+	public boolean getBaja() {
 		return baja;
 	}
 
-	public void setBaja(byte baja) {
+	public void setBaja(boolean baja) {
 		this.baja = baja;
 	}
 	

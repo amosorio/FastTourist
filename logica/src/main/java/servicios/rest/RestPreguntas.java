@@ -2,10 +2,13 @@ package servicios.rest;
 
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,5 +41,40 @@ public class RestPreguntas {
 		em.getTransaction().commit();
 		
 		return "ok";
+	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Preguntas>> getAllByUserId(@PathVariable int id) {
+
+		EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
+		em.getTransaction().begin();
+		
+		List<Preguntas> preguntas = (List<Preguntas>) em.createNamedQuery("Preguntas.findByUserId")
+				.setParameter("id", id)
+				.getResultList();
+
+		return new ResponseEntity<List<Preguntas>>(preguntas, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/set/{respuesta}/{id}", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> setRespuesta(@PathVariable int id, @PathVariable String respuesta) {
+
+		EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
+		em.getTransaction().begin();
+		
+		Preguntas pregunta = em.find(Preguntas.class, id);
+		
+		if(pregunta == null)
+		{
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		
+		pregunta.setRespuesta(respuesta);
+		
+		em.persist(pregunta);
+		em.getTransaction().commit();
+		
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 }

@@ -1,6 +1,7 @@
 package servicios.rest;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import VOs.ServicioVO;
 import VOs.UsuarioVO;
 import fabricas.entidades.Perfiles;
 import fabricas.entidades.Usuario;
@@ -91,6 +91,61 @@ public class RestRegistro {
 		catch(NoResultException e){			
 			return new ResponseEntity <String> ("No encontrado",HttpStatus.OK);
 		}
+	}
+	
+	@RequestMapping(value = "/solicitarBaja/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> solicitarBaja(@PathVariable int id) {
+
+		EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
+		em.getTransaction().begin();
+		
+		Usuario usuario = em.find(Usuario.class, id);
+		
+		if(usuario == null)
+		{
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		
+		usuario.setBaja(true);
+		
+		em.persist(usuario);
+		em.getTransaction().commit();
+		
+		return new ResponseEntity<Void>(HttpStatus.OK);
+	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/solicitarUsuariosBaja/", method = RequestMethod.GET, produces={MediaType.APPLICATION_JSON_VALUE +"; charset=UTF-8"})
+	public ResponseEntity<List<Usuario>> getTransacciones() {
+
+		EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
+		em.getTransaction().begin();
+
+		List<Usuario> usuarios = (List<Usuario>) em.createNamedQuery("Usuario.findByBaja")				
+				.getResultList();
+
+		return new ResponseEntity<List<Usuario>>(usuarios, HttpStatus.OK);
+	} 
+	
+	@RequestMapping(value = "/desactivar/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Void> desactivar(@PathVariable int id) {
+
+		EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
+		em.getTransaction().begin();
+		
+		Usuario usuario = em.find(Usuario.class, id);
+		
+		if(usuario == null)
+		{
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		}
+		
+		usuario.setActivo(false);
+				
+		em.persist(usuario);
+		em.getTransaction().commit();
+		
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
 }
