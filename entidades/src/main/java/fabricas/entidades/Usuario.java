@@ -96,6 +96,16 @@ public class Usuario implements Serializable {
 	@JoinColumn(name="perfil")
 	@JsonManagedReference
 	private Perfiles perfil;
+	
+	//bi-directional many-to-one association to Mensajeria
+		@JsonBackReference
+		@OneToMany(mappedBy="destinatario")
+		private List<Mensajeria> mensajeDestinatario;
+
+		//bi-directional many-to-one association to Mensajeria
+		@JsonBackReference
+		@OneToMany(mappedBy="remitente")
+		private List<Mensajeria> mensajeRemitente;
 
 	public Usuario() {
 	}
@@ -270,5 +280,22 @@ public class Usuario implements Serializable {
 	public void setBaja(byte baja) {
 		this.baja = baja;
 	}
+	
+	public List<Mensajeria> getMensajeRemitente() {
+		return mensajeRemitente;
+	}
+
+	public void setMensajeRemitente(List<Mensajeria> mensajeRemitente) {
+		this.mensajeRemitente = mensajeRemitente;
+	}
+
+	public List<Mensajeria> getMensajeDestinatario() {
+		return mensajeDestinatario;
+	}
+
+	public void setMensajeDestinatario(List<Mensajeria> mensajeDestinatario) {
+		this.mensajeDestinatario = mensajeDestinatario;
+	}
+
 
 }
