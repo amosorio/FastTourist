@@ -2,8 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>fabricas</groupId>
-  <artifactId>derivado</artifactId>
-  <packaging>war</packaging>
+  <artifactId>derivador</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>derivado Maven Webapp</name>
   <url>http://maven.apache.org</url>
@@ -18,4 +17,5 @@
   <build>
     <finalName>derivado</finalName>
   </build>
+  <packaging>war</packaging>
 </project>
