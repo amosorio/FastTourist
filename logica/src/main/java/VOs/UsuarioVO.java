@@ -52,6 +52,10 @@ public class UsuarioVO implements Serializable {
 	private List<PaqueteVO> paquetes;
 	
 	private byte baja;
+	
+	private List<MensajeriaVO> mensajeDestinatario;
+
+	private List<MensajeriaVO> mensajeRemitente;
 
 	public UsuarioVO() {
 	}
@@ -224,5 +228,33 @@ public class UsuarioVO implements Serializable {
 
 	public void setBaja(byte baja) {
 		this.baja = baja;
+	}
+	
+	/**
+	 * @return the mensajeDestinatario
+	 */
+	public List<MensajeriaVO> getMensajeDestinatario() {
+		return mensajeDestinatario;
+	}
+
+	/**
+	 * @param mensajeDestinatario the mensajeDestinatario to set
+	 */
+	public void setMensajeDestinatario(List<MensajeriaVO> mensajeDestinatario) {
+		this.mensajeDestinatario = mensajeDestinatario;
+	}
+
+	/**
+	 * @return the mensajeRemitente
+	 */
+	public List<MensajeriaVO> getMensajeRemitente() {
+		return mensajeRemitente;
+	}
+
+	/**
+	 * @param mensajeRemitente the mensajeRemitente to set
+	 */
+	public void setMensajeRemitente(List<MensajeriaVO> mensajeRemitente) {
+		this.mensajeRemitente = mensajeRemitente;
 	}
 }
