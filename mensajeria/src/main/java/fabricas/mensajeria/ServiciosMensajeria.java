@@ -1,20 +1,31 @@
 package fabricas.mensajeria;
 
+import java.util.List;
+
+import fabricas.entidades.Mensajeria;
+import fabricas.persistencia.MensajeriaDao;
+
 public class ServiciosMensajeria {
+	private MensajeriaDao dao;
 
-	public void crearMensaje(){
-
+	public ServiciosMensajeria() {
+		dao = new MensajeriaDao();
 	}
 
-	public void cargarMensajes(){
-
+	public Mensajeria enviarMensaje(Mensajeria mensaje) {
+		return dao.crearMensaje(mensaje);
 	}
 
-	public void editarMensaje(){
-
+	public List<Mensajeria> cargarMensajesRecibidos(int id) {
+		return dao.getMensajesRecibidosUsuario(id);
 	}
 
-	public void cargarMensaje(){
-
+	public List<Mensajeria> cargarMensajesEnviados(int id) {
+		return dao.getMensajesEnviadosUsuario(id);
 	}
+
+	public Mensajeria getMensaje(int id) {
+		return dao.findById(id);
+	}
+
 }

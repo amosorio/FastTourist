@@ -17,6 +17,10 @@
 						class="icon-plus"></span> Categorías Adicionales</a></li>
 				<li><a href="/presentacion/adminProveedor/editar-info/"><span
 						class="icon-pencil"></span> Editar Info</a></li>
+				<c:if test="${not empty usuarioAutenticado}">	
+					<li><a href="/presentacion/mensajeria/">
+						<span class="icon-envelope"></span> Mensajeria</a></li>
+				</c:if>	
 			</ul>
 		</nav>
 	</div>

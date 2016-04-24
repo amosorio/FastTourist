@@ -68,6 +68,10 @@
 						class="icon-refresh"></span> Transacciones</a></li>
 				<li><a href="/presentacion/paquetes/"><span
 						class="icon-ban-circle"></span> Solicitar Baja</a></li>
+				<c:if test="${not empty usuarioAutenticado}">	
+					<li><a href="/presentacion/mensajeria/">
+						<span class="icon-envelope"></span> Mensajeria</a></li>
+				</c:if>		
 			</ul>
 		</nav>
 	</div>

@@ -13,8 +13,7 @@
 								class="icon-home"></span> Proveedores</a></li>
 					</c:otherwise>
 				</c:choose>
-				<li><a href="/presentacion/transporte/"><span
-						class="question-sign"></span> Respuestas</a>
+				
 				<li><a href="/presentacion/alimentacion/"><span
 						class="icon-file"></span> Historicos</a></li>
 				<li><a href="/presentacion/admin/transacciones"><span
@@ -30,6 +29,10 @@
 								class="icon-ban-circle"></span> Solicitudes de Baja</a></li>
 					</c:otherwise>
 				</c:choose>
+				<c:if test="${not empty usuarioAutenticado}">	
+					<li><a href="/presentacion/mensajeria/">
+						<span class="icon-envelope"></span> Mensajeria</a></li>
+				</c:if>		
 			</ul>
 		</nav>
 	</div>

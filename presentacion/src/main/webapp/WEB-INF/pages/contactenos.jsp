@@ -7,7 +7,11 @@
 						<li><a href="/presentacion/transporte/">Transporte</a>
 						<li><a href="/presentacion/alimentacion/" class="paginaActiva">Alimentacion</a></li>
 						<li><a href="/presentacion/paseos/paseos">Paseos Turisticos</a></li>
-						<li><a href="/presentacion/paquetes/">Paquetes</a></li>																				
+						<li><a href="/presentacion/paquetes/">Paquetes</a></li>		
+						<c:if test="${not empty usuarioAutenticado}">	
+							<li><a href="/presentacion/mensajeria/">
+								<span class="icon-envelope"></span> Mensajeria</a></li>
+						</c:if>																			
 					</ul>
 				</nav>
 			</div>

@@ -147,5 +147,16 @@ public class RestRegistro {
 		
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
+	
+	@SuppressWarnings("unchecked")
+	@RequestMapping(value = "/usuarios", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Usuario>> getUsuarios() {
 
+		EntityManager em = PersistenceManager.INSTANCE.getEntityManager();
+		em.getTransaction().begin();
+		
+		List<Usuario> usuarios = (List<Usuario>) em.createNamedQuery("Usuario.findAll").getResultList();
+		
+		return new ResponseEntity<List<Usuario>>(usuarios,HttpStatus.OK);
+	}
 }

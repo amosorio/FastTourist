@@ -19,6 +19,10 @@
 								class="icon-plus"></span> Categorías Adicionales</a></li>
 						<li><a href="/presentacion/adminProveedor/editar-info/"
 							class="paginaActiva"><span class="icon-pencil"></span> Editar Info</a></li>
+						<c:if test="${not empty usuarioAutenticado}">	
+							<li><a href="/presentacion/mensajeria/">
+								<span class="icon-envelope"></span> Mensajeria</a></li>
+						</c:if>	
 					</ul>
 
 				</c:when>
@@ -35,6 +39,10 @@
 								class="icon-refresh"></span> Transacciones</a></li>
 						<li><a href="/presentacion/admin/solicitudes-baja"><span
 								class="icon-ban-circle"></span> Solicitudes de Baja</a></li>
+						<c:if test="${not empty usuarioAutenticado}">	
+							<li><a href="/presentacion/mensajeria/">
+								<span class="icon-envelope"></span> Mensajeria</a></li>
+						</c:if>	
 					</ul>
 				</c:otherwise>
 			</c:choose>

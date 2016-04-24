@@ -103,6 +103,14 @@
 			<scope>compile</scope>
 		</dependency>
 		
+		<!-- Mensajeria -->
+		<dependency>
+			<groupId>fabricas</groupId>
+			<artifactId>mensajeria</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<scope>compile</scope>
+		</dependency>
+		
 	</dependencies>
 	<build>
 		<finalName>logica</finalName>

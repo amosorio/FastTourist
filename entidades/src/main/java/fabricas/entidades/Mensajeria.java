@@ -4,7 +4,6 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.util.Date;
@@ -15,7 +14,12 @@ import java.util.Date;
  * 
  */
 @Entity
-@NamedQuery(name="Mensajeria.findAll", query="SELECT m FROM Mensajeria m")
+@NamedQueries({
+	@NamedQuery(name="Mensajeria.findByDestinatario", query="SELECT m FROM Mensajeria m WHERE m.destinatario.idusuario = :id ORDER BY fecha desc"),
+	@NamedQuery(name="Mensajeria.findByRemitente", query="SELECT m FROM Mensajeria m WHERE m.remitente.idusuario = :id ORDER BY fecha desc"),
+	@NamedQuery(name="Mensajeria.findById", query="SELECT m FROM Mensajeria m WHERE m.id = :id"),
+})
+
 public class Mensajeria implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@GeneratedValue

@@ -8,6 +8,10 @@
 				<li><a href="/presentacion/alimentacion/">Alimentación</a></li>
 				<li><a href="/presentacion/paseos/paseos">Paseos Turísticos</a></li>
 				<li><a href="/presentacion/paquetes/">Paquetes</a></li>
+				<c:if test="${not empty usuarioAutenticado}">	
+					<li><a href="/presentacion/mensajeria/">
+						<span class="icon-envelope"></span> Mensajeria</a></li>
+				</c:if>
 			</ul>
 		</nav>
 	</div>

@@ -3,6 +3,8 @@ package fabricas.presentacion.VOs;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class MensajeriaVO implements Serializable{
 
 
@@ -13,7 +15,7 @@ public class MensajeriaVO implements Serializable{
 	private String asunto;
 
 	private Boolean estado;
-
+	@DateTimeFormat(pattern = "dd-MM-yyyy hh:mm:ss")
 	private Date fecha;
 
 	private String mensaje;

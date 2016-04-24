@@ -7,7 +7,11 @@
 				<li><a href="/presentacion/transporte/">Transporte</a>
 				<li><a href="/presentacion/alimentacion/" class="paginaActiva">Alimentacion</a></li>
 				<li><a href="/presentacion/paseos/paseos">Paseos Turisticos</a></li>
-				<li><a href="/presentacion/paquetes/">Paquetes</a></li>																				
+				<li><a href="/presentacion/paquetes/">Paquetes</a></li>
+				<c:if test="${not empty usuarioAutenticado}">	
+					<li><a href="/presentacion/mensajeria/">
+						<span class="icon-envelope"></span> Mensajeria</a></li>
+				</c:if>																				
 			</ul>
 		</nav>
 	</div>
@@ -78,7 +82,7 @@
 								<img alt="${servicio.nombre}" src="${servicio.rutaGaleria}" style="height:230px; max-with:342px">
 							</a>
 							<br /> 
-							<a href="/presentacion/getAlimentacion/${servicio.idservicios}/" class="title">${servicio.nombre}</a>
+							<a href="/presentacion/alimentacion/getAlimentacion/${servicio.idservicios}/" class="title">${servicio.nombre}</a>
 							<p class="name">${servicio.alimentacion.nombre}</p>
 							<p class="title">$${servicio.precio}</p>
 							<p><b>Descuento $${servicio.descuento}</b></p>											
