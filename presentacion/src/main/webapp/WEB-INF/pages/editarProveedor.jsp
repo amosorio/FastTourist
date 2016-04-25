@@ -15,8 +15,6 @@
 								class="icon-refresh"></span> Transacciones</a></li>
 						<li><a href="/presentacion/paquetes/"><span
 								class="icon-ban-circle"></span> Solicitar Baja</a></li>
-						<li><a href="/presentacion/adminProveedor/categorias/"><span
-								class="icon-plus"></span> Categorías Adicionales</a></li>
 						<li><a href="/presentacion/adminProveedor/editar-info/"
 							class="paginaActiva"><span class="icon-pencil"></span> Editar Info</a></li>
 						<c:if test="${not empty usuarioAutenticado}">	

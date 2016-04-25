@@ -6,7 +6,7 @@
 				<td><input type="text" class="input-xxlarge" placeholder="Ingresa tu comentario" name="inputComentario"></td>
 				<td>&nbsp &nbsp</td>
 				<td>
-					<labe>Calificación:</labe>
+					<label>Calificación:</label>
 					<select class="input-medium" name=valor required="required">
 										<option value="">Seleccione....</option>
 										<option value="1">1</option>

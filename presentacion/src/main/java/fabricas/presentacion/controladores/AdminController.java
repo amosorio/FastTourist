@@ -31,6 +31,7 @@ public class AdminController {
 	private static final String EDITPROOV = "editarProveedor";
 	private static final String NUEVOPROV = "crearProveedor";
 	private static final String TRANSACCIONES = "transacciones";
+	private static final String CATEGORIAS = "categorias";
 	
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -211,5 +212,27 @@ public class AdminController {
 		return modelAndView;	
 	}
 	
+	
+	
+	
+	@RequestMapping(value = "/categorias/", method = RequestMethod.GET)
+	public ModelAndView categorias() {
+		ModelAndView modelAndView = new ModelAndView(CATEGORIAS);
+		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
+		return modelAndView;
+
+	}
+	
+	@RequestMapping(value = "/categorias/", method = RequestMethod.POST)
+	public ModelAndView categoriasPOST(){
+//			@RequestParam(value="atributo", required=true) String atributo, 
+//			@RequestParam(value="valor", required=true) String valor) {
+		
+		
+		ModelAndView modelAndView = new ModelAndView(CATEGORIAS);
+		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
+		return modelAndView;
+		
+	}
 	
 }

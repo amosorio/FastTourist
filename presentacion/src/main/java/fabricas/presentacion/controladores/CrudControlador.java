@@ -30,7 +30,6 @@ public class CrudControlador {
 	private static final String VIEW_PROVEEDOR_SERVICIOS = "proveedorServicios";
 	private static final String VIEW_PROVEEDOR_EDITAR_SERVICIO = "editarServicio";
 	private static final String VIEW_PROVEEDOR_CREAR_SERVICIOS = "crearServicios";
-	private static final String CATEGORIAS = "categorias";
 
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
@@ -222,25 +221,5 @@ public class CrudControlador {
 		return view;
 	}
 	
-	
-	@RequestMapping(value = "/categorias/", method = RequestMethod.GET)
-	public ModelAndView categorias() {
-		ModelAndView modelAndView = new ModelAndView(CATEGORIAS);
-		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
-		return modelAndView;
-
-	}
-	
-	@RequestMapping(value = "/categorias/", method = RequestMethod.POST)
-	public ModelAndView categoriasPOST(){
-//			@RequestParam(value="atributo", required=true) String atributo, 
-//			@RequestParam(value="valor", required=true) String valor) {
-		
-		
-		ModelAndView modelAndView = new ModelAndView(CATEGORIAS);
-		modelAndView.addObject("usuarioAutenticado",utilidades.getSessionUser());
-		return modelAndView;
-		
-	}
 	
 }

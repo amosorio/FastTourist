@@ -29,6 +29,8 @@
 								class="icon-ban-circle"></span> Solicitudes de Baja</a></li>
 					</c:otherwise>
 				</c:choose>
+				<li><a href="/presentacion/admin/categorias/"><span
+						class="icon-plus"></span> Categorías Adicionales</a></li>
 				<c:if test="${not empty usuarioAutenticado}">	
 					<li><a href="/presentacion/mensajeria/">
 						<span class="icon-envelope"></span> Mensajeria</a></li>
