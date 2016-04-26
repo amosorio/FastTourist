@@ -5,7 +5,7 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoaderConfig {
+public class ConfigLoader {
 
 	public List<String> cargarConfiguracion() {
 		String line = null;
