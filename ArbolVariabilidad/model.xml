@@ -75,12 +75,6 @@
 			</rule>
 			<rule>
 				<imp>
-					<var>CargarBusquedasRecientes</var>
-					<var>AlmacenarBusquedasRecientes</var>
-				</imp>
-			</rule>
-			<rule>
-				<imp>
 					<var>AutenticacionFacebook</var>
 					<var>RegistroFacebook</var>
 				</imp>
@@ -101,6 +95,27 @@
 				<imp>
 					<var>PublicarTwitter</var>
 					<var>AutenticacionTwitter</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>ModuloBusquedaPersonalizada</var>
+					<conj>
+						<var>CargarBusquedasRecientes</var>
+						<var>AlmacenarBusquedasRecientes</var>
+					</conj>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>ModuloReportes</var>
+					<conj>
+						<var>ReporteBusquedas</var>
+						<conj>
+							<var>ReporteConsultas</var>
+							<var>ReporteVentas</var>
+						</conj>
+					</conj>
 				</imp>
 			</rule>
 		</constraints>

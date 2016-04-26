@@ -1,43 +1,88 @@
 package derivador;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+public class PropertiesUtil {
+
+	private static Properties properties;
+	private static PropertiesUtil instance;
+
+
+	public static PropertiesUtil getInstance() {
+		if(instance == null){
+			instance = new PropertiesUtil();
+			properties = new Properties();
+			 try {
+					FileInputStream in = new FileInputStream(Constantes.RUTA_REPO_LOCAL+
+							Constantes.PROYECTO_LOGICA+"/properties/default.properties");
+					properties.load(in);
+					in.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+		}
+		return instance;
+	}
+
+	public String getProperty(String key){
+		return properties.getProperty(key);
+	}
+
+
+/*
+package derivador;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-public class PropertiesWriter {
+public class LoaderConfig {
 
 	private static Properties properties;
 	//Se debe poner la ruta del repositorio local de git
 
 
 
-	public PropertiesWriter() {
+	public LoaderConfig() {
 	}
 
-	public void generateProperties(){	
+	public void cargarConfiguracion(){	
 		String line = null;
 		properties = new Properties();
-		ArrayList<String> opcionales = cargarOpcionales();
+		//ArrayList<String> opcionales = cargarOpcionales();
+		List<String> features = new ArrayList<String>();
 
 		try{
 			// Carga el archivo que contiene la configuración seleccionada
 			FileReader fileReader = 
-					new FileReader(Constantes.RUTA_REPO_LOCAL+
-							Constantes.PROYECTO_VARIABILIDAD+"/configs/default.config");
+					new FileReader("configuracion/default.config");
 
 			BufferedReader bufferedReader = 
 					new BufferedReader(fileReader);
-
+			
+			
+			//Se leen cada uno de los features de la configuracion
+			while((line = bufferedReader.readLine()) != null) {
+				features.add(line);
+			}
+			
+			
 			//Se leen cada uno de los features de la configuracion y se pasan al archivo de propiedades
 			while((line = bufferedReader.readLine()) != null) {
 				properties.setProperty(line, "True");
 			}
-
+			
+			
+			
 			//Los features opcionales que no fueron seleccionados en la configuracion
 			//Se cargan en el archivo de propiedades con valor False
 			for (String key : opcionales) {
@@ -90,5 +135,5 @@ public class PropertiesWriter {
 		return vector;
 
 
-	}
+	}*/
 }

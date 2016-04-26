@@ -42,10 +42,10 @@
 11AutenticacionLocal
 21AutenticacionFacebook
 21AutenticacionTwitter
-11ModuloReportes
-12ReporteBusquedas
-12ReporteVentas
-12ReporteConsultas
-22ModuloBusquedaPersonalizada
-22CargarBusquedasRecientes
-22AlmacenarBusquedasRecientes
+12ModuloReportes
+21ReporteBusquedas
+21ReporteVentas
+21ReporteConsultas
+12ModuloBusquedaPersonalizada
+21CargarBusquedasRecientes
+21AlmacenarBusquedasRecientes

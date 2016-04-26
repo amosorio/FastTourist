@@ -7,4 +7,10 @@ public class Constantes {
 	public static final String PROYECTO_VARIABILIDAD="/ArbolVariabilidad";
 	public static final String PROYECTO_PRESENTACION="/presentacion";
 	public static final String PROYECTO_LOGICA="/logica";
+	
+	public static final String MODULO_BUSQUEDA_PERSONALIZADA ="ModuloBusquedaPersonalizada";
+	public static final String MODULO_MENSAJERIA ="Mensajeria";
+	public static final String MODULO_CALIFICACIONES ="CalificarServivio";
+	public static final String MODULO_REPORTES ="ModuloReportes";
+	
 }
