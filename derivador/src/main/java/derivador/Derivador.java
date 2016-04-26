@@ -3,6 +3,8 @@ package derivador;
 import java.util.List;
 import java.util.Properties;
 
+import org.aspectj.weaver.tools.WeavingAdaptor;
+
 public class Derivador {
 
 	static List<String> features = null;
@@ -48,6 +50,10 @@ public class Derivador {
 		// Metodo: Aspectos
 		if (features.contains(Constantes.MODULO_MENSAJERIA)) {
 			properties.setProperty(Constantes.MODULO_MENSAJERIA, "True");
+			
+			//WeavingAdaptor adaptor = new WeavingAdaptor();
+			//adaptador.
+			
 			/**
 			 * Tejer Aspecto
 			 */
