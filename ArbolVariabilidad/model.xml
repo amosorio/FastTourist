@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+	<featureModel chosenLayoutAlgorithm="4">
+		<struct>
+			<and abstract="true" mandatory="true" name="Marketplace">
+				<and mandatory="true" name="ModuloAdministracionDeProveedores">
+					<feature mandatory="true" name="RegistrarProveedor"/>
+					<feature mandatory="true" name="ActualizarProveedor"/>
+					<feature mandatory="true" name="SolicitarBaja"/>
+					<feature mandatory="true" name="EliminarProveedor"/>
+				</and>
+				<and mandatory="true" name="ModuloAdministracionDeServicios">
+					<and mandatory="true" name="PublicarServicios">
+						<feature mandatory="true" name="CrearSevicio"/>
+						<feature mandatory="true" name="EditarServicio"/>
+						<feature mandatory="true" name="EliminarServicio"/>
+					</and>
+					<and mandatory="true" name="PublicarPaquetes">
+						<feature mandatory="true" name="ArmarPaquete"/>
+						<feature mandatory="true" name="EditarPaquete"/>
+						<feature mandatory="true" name="EliminarPaquete"/>
+					</and>
+					<feature mandatory="true" name="ConfigurarCategoria"/>
+				</and>
+				<and mandatory="true" name="ModuloBusquedas">
+					<feature mandatory="true" name="BuscarServicios"/>
+					<and mandatory="true" name="ConsultarServicio">
+						<feature mandatory="true" name="VerPreguntas"/>
+						<feature mandatory="true" name="RealizarPreguntas"/>
+					</and>
+				</and>
+				<and mandatory="true" name="ModuloCompras">
+					<feature mandatory="true" name="AgregarCarrito"/>
+					<feature mandatory="true" name="ComprarServicio"/>
+					<or name="PublicarEnRedes">
+						<feature mandatory="true" name="PublicarFacebook"/>
+						<feature mandatory="true" name="PublicarTwitter"/>
+					</or>
+					<feature name="CalificarServivio"/>
+					<feature name="ComentarServicio"/>
+					<feature mandatory="true" name="ConsultarTransaccionesyVentas"/>
+				</and>
+				<and mandatory="true" name="ModuloComunicacion">
+					<feature mandatory="true" name="ResponderPreguntas"/>
+					<feature name="Mensajeria"/>
+				</and>
+				<and mandatory="true" name="ModuloRegistro">
+					<and mandatory="true" name="RegistrarCliente">
+						<feature mandatory="true" name="RegistroLocal"/>
+						<feature name="RegistroFacebook"/>
+						<feature name="RegistroTwitter"/>
+					</and>
+					<and mandatory="true" name="Autenticar">
+						<feature mandatory="true" name="AutenticacionLocal"/>
+						<feature name="AutenticacionFacebook"/>
+						<feature name="AutenticacionTwitter"/>
+					</and>
+				</and>
+				<or name="ModuloReportes">
+					<feature mandatory="true" name="ReporteBusquedas"/>
+					<feature mandatory="true" name="ReporteVentas"/>
+					<feature mandatory="true" name="ReporteConsultas"/>
+				</or>
+				<or name="ModuloBusquedaPersonalizada">
+					<feature mandatory="true" name="CargarBusquedasRecientes"/>
+					<feature mandatory="true" name="AlmacenarBusquedasRecientes"/>
+				</or>
+			</and>
+		</struct>
+		<constraints>
+			<rule>
+				<imp>
+					<var>CalificarServivio</var>
+					<var>ComentarServicio</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>AutenticacionFacebook</var>
+					<var>RegistroFacebook</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>AutenticacionTwitter</var>
+					<var>RegistroTwitter</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>PublicarFacebook</var>
+					<var>AutenticacionFacebook</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>PublicarTwitter</var>
+					<var>AutenticacionTwitter</var>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>ModuloBusquedaPersonalizada</var>
+					<conj>
+						<var>CargarBusquedasRecientes</var>
+						<var>AlmacenarBusquedasRecientes</var>
+					</conj>
+				</imp>
+			</rule>
+			<rule>
+				<imp>
+					<var>ModuloReportes</var>
+					<conj>
+						<var>ReporteBusquedas</var>
+						<conj>
+							<var>ReporteConsultas</var>
+							<var>ReporteVentas</var>
+						</conj>
+					</conj>
+				</imp>
+			</rule>
+		</constraints>
+		<calculations Auto="true" Constraints="true" Features="true" Redundant="true" Tautology="true"/>
+		<comments/>
+		<featureOrder userDefined="false"/>
+	</featureModel>
